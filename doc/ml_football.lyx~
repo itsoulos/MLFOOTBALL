@@ -1072,6 +1072,25 @@ Journal Abbreviation
  142–149.
 \end_layout
 
+\begin_layout Bibliography
+\labelwidthstring 999
+\begin_inset CommandInset bibitem
+LatexCommand bibitem
+label "Author2(year)"
+key "ref-book1"
+literal "false"
+
+\end_inset
+
+ Author
+\begin_inset space ~
+\end_inset
+
+2,
+ L.
+ 
+\end_layout
+
 \begin_layout Standard
 \begin_inset ERT
 status open
