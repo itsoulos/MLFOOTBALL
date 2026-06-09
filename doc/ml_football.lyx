@@ -437,6 +437,14 @@ In this research study,
 
 \series bold
 Why is important???
+\begin_inset CommandInset citation
+LatexCommand citep
+key "giannis"
+literal "false"
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -2038,6 +2046,18 @@ Rahman,
  SN Applied Sciences,
  2(2),
  165.
+\end_layout
+
+\begin_layout Bibliography
+\begin_inset CommandInset bibitem
+LatexCommand bibitem
+label "(1990)"
+key "giannis"
+literal "false"
+
+\end_inset
+
+xxxxxxxx
 \end_layout
 
 \begin_layout Standard
