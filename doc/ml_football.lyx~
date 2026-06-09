@@ -330,8 +330,286 @@ Machine learning;
 Introduction
 \end_layout
 
+\begin_layout Standard
+Many real world problems can be tackled by the so - called machine learning tools.
+ Among these problems one can find cases derived from various scientific fields,
+ such as physics 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "physics_ml1,physics_ml2"
+literal "false"
+
+\end_inset
+
+,
+ astronomy 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "astronomy_ml1,astronomy_ml2"
+literal "false"
+
+\end_inset
+
+,
+ chemistry 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "chemistry_ml1,chemistry_ml2"
+literal "false"
+
+\end_inset
+
+,
+ medicine 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "med_ml1,med_ml2"
+literal "false"
+
+\end_inset
+
+,
+ economics 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "econ_ml1,econ_ml2"
+literal "false"
+
+\end_inset
+
+,
+ image processing 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "nn_image"
+literal "false"
+
+\end_inset
+
+,
+ time series forecasting 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "nn_timeseries"
+literal "false"
+
+\end_inset
+
+ etc.
+ Common machine learning tools are artificial neural networks 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "nn1,nn2"
+literal "false"
+
+\end_inset
+
+,
+ decision trees 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "dt1,dt2"
+literal "false"
+
+\end_inset
+
+,
+ support vector machines (SVM) 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "svm1,svm2"
+literal "false"
+
+\end_inset
+
+ etc.
+ 
+\end_layout
+
+\begin_layout Standard
+In this research study,
+ we address the problem of predicting the outcome of a football match by examining it through a variety of machine learning techniques.
+ This problem was tackled by various researches during the past years.
+ 
+\end_layout
+
+\begin_layout Standard
+
+\series bold
+Why is important???
+\end_layout
+
+\begin_layout Standard
+For example,
+ Hvattum et al.
+ proposed the incorporation of ELO ratings for the prediction of match outcomes in their study 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "elo_football"
+literal "false"
+
+\end_inset
+
+.
+ Also,
+ Owramipur et al.
+ suggested the usage of Baysian networks 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "ml_bayesian"
+literal "false"
+
+\end_inset
+
+ to predict the outcomes for the Spanish League Barcelona team 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "bayesian_football"
+literal "false"
+
+\end_inset
+
+.
+ Similarly,
+ Presetio et al.
+ proposed the incorporation of logistic regression 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "ml_logistic"
+literal "false"
+
+\end_inset
+
+ to predict the outcomes of football matches 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "logistic_football"
+literal "false"
+
+\end_inset
+
+.
+ Moreover,
+ Martins et al.
+ used a polynomial classifier for the prediction of football outcomes 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "polynomial_football"
+literal "false"
+
+\end_inset
+
+.
+ Schauberger et al.
+ selected the method of random forests to predict the results of football matches in their study 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "rf_football"
+literal "false"
+
+\end_inset
+
+.
+ Various attributes of football players was studied by Danisk et al.
+ in order to predict the result of football matches in their related paper 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "attr_football"
+literal "false"
+
+\end_inset
+
+.
+ Constantinou proposed a new machine learning model,
+ named Dolores which is based on Hybrid Bayesian Networks,
+ to predict football match outcomes from datasets selected in a series of countries 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "dolores_football"
+literal "false"
+
+\end_inset
+
+.
+ Baboota et al.
+ applied gradient boosting 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "ml_boosting"
+literal "false"
+
+\end_inset
+
+ for English Premier League 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "boost_football"
+literal "false"
+
+\end_inset
+
+.
+ Additionally,
+ a deep learning framework was designed from Rahman to tackle the problem of prediction football results 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "deep_football"
+literal "false"
+
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Standard
+The remaining of this article is organized as follows:
+ in section 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sec:Materials-and-Methods"
+plural "false"
+caps "false"
+noprefix "false"
+nolink "false"
+
+\end_inset
+
+ the proposed datasets and the used methodology are fully described,
+ in section 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sec:Results"
+plural "false"
+caps "false"
+noprefix "false"
+nolink "false"
+
+\end_inset
+
+ the experimental results are outlined and finally in section 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sec:Conclusions"
+plural "false"
+caps "false"
+noprefix "false"
+nolink "false"
+
+\end_inset
+
+ a discussion is provided based on the experimental results.
+\end_layout
+
 \begin_layout Section
 Materials and Methods
+\begin_inset CommandInset label
+LatexCommand label
+name "sec:Materials-and-Methods"
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Subsection
@@ -868,10 +1146,24 @@ ProbAway
 
 \begin_layout Section
 Results
+\begin_inset CommandInset label
+LatexCommand label
+name "sec:Results"
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Section
 Conclusions
+\begin_inset CommandInset label
+LatexCommand label
+name "sec:Conclusions"
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -1039,56 +1331,706 @@ References
 \end_layout
 
 \begin_layout Bibliography
-\labelwidthstring 999
 \begin_inset CommandInset bibitem
 LatexCommand bibitem
-label "Author1(year)"
-key "ref-journal"
+label "(2006)"
+key "physics_ml1"
 literal "false"
 
 \end_inset
 
- Author
-\begin_inset space ~
-\end_inset
-
-1,
- T.
- The title of the cited article.
- 
-\emph on
-Journal Abbreviation
-\emph default
- 
-\series bold
-2008
-\series default
-,
- 
-\emph on
-10
-\emph default
-,
- 142–149.
+ Raissi,
+ M.,
+ & Karniadakis,
+ G.
+ E.
+ (2018).
+ Hidden physics models:
+ Machine learning of nonlinear partial differential equations.
+ Journal of Computational Physics,
+ 357,
+ 125-141.
 \end_layout
 
 \begin_layout Bibliography
-\labelwidthstring 999
 \begin_inset CommandInset bibitem
 LatexCommand bibitem
-label "Author2(year)"
-key "ref-book1"
+key "physics_ml2"
 literal "false"
 
 \end_inset
 
- Author
-\begin_inset space ~
+Kashinath,
+ K.,
+ Mustafa,
+ M.,
+ Albert,
+ A.,
+ Wu,
+ J.
+ L.,
+ Jiang,
+ C.,
+ Esmaeilzadeh,
+ S.,
+ ...
+ & Prabhat,
+ N.
+ (2021).
+ Physics-informed machine learning:
+ case studies for weather and climate modelling.
+ Philosophical Transactions of the Royal Society A,
+ 379(2194),
+ 20200093.
+\end_layout
+
+\begin_layout Bibliography
+\begin_inset CommandInset bibitem
+LatexCommand bibitem
+label "(2006)"
+key "astronomy_ml1"
+literal "false"
+
 \end_inset
 
-2,
+Viquar,
+ M.,
+ Basak,
+ S.,
+ Dasgupta,
+ A.,
+ Agrawal,
+ S.,
+ & Saha,
+ S.
+ (2019).
+ Machine learning in astronomy:
+ A case study in quasar-star classification.
+ Emerging Technologies in Data Mining and Information Security:
+ Proceedings of IEMIS 2018,
+ Volume 3,
+ 827-836.
+\end_layout
+
+\begin_layout Bibliography
+\begin_inset CommandInset bibitem
+LatexCommand bibitem
+label "(2006)"
+key "astronomy_ml2"
+literal "false"
+
+\end_inset
+
+Luo,
+ S.,
+ Leung,
+ A.
+ P.,
+ Hui,
+ C.
+ Y.,
+ & Li,
+ K.
  L.
+ (2020).
+ An investigation on the factors affecting machine learning classifications in gamma-ray astronomy.
+ Monthly Notices of the Royal Astronomical Society,
+ 492(4),
+ 5377-5390.
+\end_layout
+
+\begin_layout Bibliography
+\begin_inset CommandInset bibitem
+LatexCommand bibitem
+label "(2006)"
+key "chemistry_ml1"
+literal "false"
+
+\end_inset
+
+Meuwly,
+ M.
+ (2021).
+ Machine learning for chemical reactions.
+ Chemical Reviews,
+ 121(16),
+ 10218-10239.
+\end_layout
+
+\begin_layout Bibliography
+\begin_inset CommandInset bibitem
+LatexCommand bibitem
+key "chemistry_ml2"
+literal "false"
+
+\end_inset
+
+J.A.
+ Aguiar,
+ M.L.
+ Gong,
+ T.Tasdizen,
+ Crystallographic prediction from diffraction and chemistry data for higher throughput classification using machine learning,
+ Computational Materials Science 
+\series bold
+173
+\series default
+,
+ 109409,
+ 2020.
+\end_layout
+
+\begin_layout Bibliography
+\begin_inset CommandInset bibitem
+LatexCommand bibitem
+label "(2006)"
+key "med_ml1"
+literal "false"
+
+\end_inset
+
+S.S.
+ Yadav,
+ S.M.
+ Jadhav,
+ Deep convolutional neural network based medical image classification for disease diagnosis.
+ J Big Data 
+\series bold
+6
+\series default
+,
+ 113,
+ 2019.
+\end_layout
+
+\begin_layout Bibliography
+\begin_inset CommandInset bibitem
+LatexCommand bibitem
+key "med_ml2"
+literal "false"
+
+\end_inset
+
+L.
+ Qing,
+ W.
+ Linhong ,
+ D.
+ Xuehai,
+ A Novel Neural Network-Based Method for Medical Text Classification,
+ Future Internet 
+\series bold
+11
+\series default
+,
+ 255,
+ 2019.
  
+\end_layout
+
+\begin_layout Bibliography
+\begin_inset CommandInset bibitem
+LatexCommand bibitem
+label "(2006)"
+key "econ_ml1"
+literal "false"
+
+\end_inset
+
+Athey,
+ S.
+ (2018).
+ The impact of machine learning on economics.
+ In The economics of artificial intelligence:
+ An agenda (pp.
+ 507-547).
+ University of Chicago Press.
+\end_layout
+
+\begin_layout Bibliography
+\begin_inset CommandInset bibitem
+LatexCommand bibitem
+key "econ_ml2"
+literal "false"
+
+\end_inset
+
+R.
+ Hafezi,
+ J.
+ Shahrabi,
+ E.
+ Hadavandi,
+ A bat-neural network multi-agent system (BNNMAS) for stock price prediction:
+ Case study of DAX stock price,
+ Applied Soft Computing 
+\series bold
+29
+\series default
+,
+ pp.
+ 196-210,
+ 2015.
+\end_layout
+
+\begin_layout Bibliography
+\begin_inset CommandInset bibitem
+LatexCommand bibitem
+key "nn_image"
+literal "false"
+
+\end_inset
+
+Ghai,
+ D.,
+ Tripathi,
+ S.
+ L.,
+ Saxena,
+ S.,
+ Chanda,
+ M.,
+ & Alazab,
+ M.
+ (Eds.).
+ (2022).
+ Machine learning algorithms for signal and image processing.
+ John Wiley & Sons.
+\end_layout
+
+\begin_layout Bibliography
+\begin_inset CommandInset bibitem
+LatexCommand bibitem
+key "nn_timeseries"
+literal "false"
+
+\end_inset
+
+Ahmed,
+ N.
+ K.,
+ Atiya,
+ A.
+ F.,
+ Gayar,
+ N.
+ E.,
+ & El-Shishiny,
+ H.
+ (2010).
+ An empirical comparison of machine learning models for time series forecasting.
+ Econometric reviews,
+ 29(5-6),
+ 594-621.
+\end_layout
+
+\begin_layout Bibliography
+\begin_inset CommandInset bibitem
+LatexCommand bibitem
+label "(2009)"
+key "nn1"
+literal "false"
+
+\end_inset
+
+Zou,
+ J.,
+ Han,
+ Y.,
+ & So,
+ S.
+ S.
+ (2009).
+ Overview of artificial neural networks.
+ Artificial neural networks:
+ methods and applications,
+ 14-22.
+\end_layout
+
+\begin_layout Bibliography
+\begin_inset CommandInset bibitem
+LatexCommand bibitem
+label "(2009)"
+key "nn2"
+literal "false"
+
+\end_inset
+
+Abiodun,
+ O.
+ I.,
+ Jantan,
+ A.,
+ Omolara,
+ A.
+ E.,
+ Dada,
+ K.
+ V.,
+ Mohamed,
+ N.
+ A.,
+ & Arshad,
+ H.
+ (2018).
+ State-of-the-art in artificial neural network applications:
+ A survey.
+ Heliyon,
+ 4(11).
+\end_layout
+
+\begin_layout Bibliography
+\begin_inset CommandInset bibitem
+LatexCommand bibitem
+label "(2009)"
+key "dt1"
+literal "false"
+
+\end_inset
+
+De Ville,
+ B.
+ (2013).
+ Decision trees.
+ Wiley Interdisciplinary Reviews:
+ Computational Statistics,
+ 5(6),
+ 448-455.
+\end_layout
+
+\begin_layout Bibliography
+\begin_inset CommandInset bibitem
+LatexCommand bibitem
+label "(2009)"
+key "dt2"
+literal "false"
+
+\end_inset
+
+Kotsiantis,
+ S.
+ B.
+ (2013).
+ Decision trees:
+ a recent overview.
+ Artificial Intelligence Review,
+ 39(4),
+ 261-283.
+\end_layout
+
+\begin_layout Bibliography
+\begin_inset CommandInset bibitem
+LatexCommand bibitem
+label "(2009)"
+key "svm1"
+literal "false"
+
+\end_inset
+
+Pisner,
+ D.
+ A.,
+ & Schnyer,
+ D.
+ M.
+ (2020).
+ Support vector machine.
+ In Machine learning (pp.
+ 101-121).
+ Academic Press.
+\end_layout
+
+\begin_layout Bibliography
+\begin_inset CommandInset bibitem
+LatexCommand bibitem
+label "(2009)"
+key "svm2"
+literal "false"
+
+\end_inset
+
+Valkenborg,
+ D.,
+ Rousseau,
+ A.
+ J.,
+ Geubbelmans,
+ M.,
+ & Burzykowski,
+ T.
+ (2023).
+ Support vector machines.
+ American journal of orthodontics and dentofacial orthopedics,
+ 164(5),
+ 754-757.
+\end_layout
+
+\begin_layout Bibliography
+\begin_inset CommandInset bibitem
+LatexCommand bibitem
+label "(2009)"
+key "elo_football"
+literal "false"
+
+\end_inset
+
+Hvattum,
+ L.
+ M.,
+ & Arntzen,
+ H.
+ (2010).
+ Using ELO ratings for match result prediction in association football.
+ International Journal of forecasting,
+ 26(3),
+ 460-470.
+\end_layout
+
+\begin_layout Bibliography
+\begin_inset CommandInset bibitem
+LatexCommand bibitem
+label "(2009)"
+key "ml_bayesian"
+literal "false"
+
+\end_inset
+
+Marcot,
+ B.
+ G.,
+ & Penman,
+ T.
+ D.
+ (2019).
+ Advances in Bayesian network modelling:
+ Integration of modelling technologies.
+ Environmental modelling & software,
+ 111,
+ 386-393.
+\end_layout
+
+\begin_layout Bibliography
+\begin_inset CommandInset bibitem
+LatexCommand bibitem
+label "(2009)"
+key "bayesian_football"
+literal "false"
+
+\end_inset
+
+Owramipur,
+ F.,
+ Eskandarian,
+ P.,
+ & Mozneb,
+ F.
+ S.
+ (2013).
+ Football result prediction with Bayesian network in Spanish League-Barcelona team.
+ International Journal of Computer Theory and Engineering,
+ 5(5),
+ 812.
+\end_layout
+
+\begin_layout Bibliography
+\begin_inset CommandInset bibitem
+LatexCommand bibitem
+label "(2009)"
+key "ml_logistic"
+literal "false"
+
+\end_inset
+
+Stoltzfus,
+ J.
+ C.
+ (2011).
+ Logistic regression:
+ a brief primer.
+ Academic emergency medicine,
+ 18(10),
+ 1099-1104.
+\end_layout
+
+\begin_layout Bibliography
+\begin_inset CommandInset bibitem
+LatexCommand bibitem
+label "(2009)"
+key "logistic_football"
+literal "false"
+
+\end_inset
+
+D.
+ Prasetio and D.
+ Harlili,
+ "Predicting football match results with logistic regression," 2016 International Conference On Advanced Informatics:
+ Concepts,
+ Theory And Application (ICAICTA),
+ Penang,
+ Malaysia,
+ 2016,
+ pp.
+ 1-5,
+ doi:
+ 10.1109/ICAICTA.2016.7803111.
+\end_layout
+
+\begin_layout Bibliography
+\begin_inset CommandInset bibitem
+LatexCommand bibitem
+label "(2009)"
+key "polynomial_football"
+literal "false"
+
+\end_inset
+
+Martins,
+ R.
+ G.,
+ Martins,
+ A.
+ S.,
+ Neves,
+ L.
+ A.,
+ Lima,
+ L.
+ V.,
+ Flores,
+ E.
+ L.,
+ & do Nascimento,
+ M.
+ Z.
+ (2017).
+ Exploring polynomial classifier to predict match results in football championships.
+ Expert Systems with Applications,
+ 83,
+ 79-93.
+\end_layout
+
+\begin_layout Bibliography
+\begin_inset CommandInset bibitem
+LatexCommand bibitem
+label "(2009)"
+key "rf_football"
+literal "false"
+
+\end_inset
+
+Schauberger,
+ G.,
+ & Groll,
+ A.
+ (2018).
+ Predicting matches in international football tournaments with random forests.
+ Statistical Modelling,
+ 18(5-6),
+ 460-482.
+\end_layout
+
+\begin_layout Bibliography
+\begin_inset CommandInset bibitem
+LatexCommand bibitem
+label "(2009)"
+key "attr_football"
+literal "false"
+
+\end_inset
+
+Danisik,
+ N.,
+ Lacko,
+ P.,
+ & Farkas,
+ M.
+ (2018,
+ August).
+ Football match prediction using players attributes.
+ In 2018 World symposium on digital intelligence for systems and machines (DISA) (pp.
+ 201-206).
+ IEEE.
+\end_layout
+
+\begin_layout Bibliography
+\begin_inset CommandInset bibitem
+LatexCommand bibitem
+label "(2009)"
+key "dolores_football"
+literal "false"
+
+\end_inset
+
+Constantinou,
+ A.
+ C.
+ (2019).
+ Dolores:
+ a model that predicts football match outcomes from all over the world.
+ Machine learning,
+ 108(1),
+ 49-75.
+\end_layout
+
+\begin_layout Bibliography
+\begin_inset CommandInset bibitem
+LatexCommand bibitem
+label "(2009)"
+key "ml_boosting"
+literal "false"
+
+\end_inset
+
+Natekin,
+ A.,
+ & Knoll,
+ A.
+ (2013).
+ Gradient boosting machines,
+ a tutorial.
+ Frontiers in neurorobotics,
+ 7,
+ 63623.
+\end_layout
+
+\begin_layout Bibliography
+\begin_inset CommandInset bibitem
+LatexCommand bibitem
+label "(2009)"
+key "boost_football"
+literal "false"
+
+\end_inset
+
+Baboota,
+ R.,
+ & Kaur,
+ H.
+ (2019).
+ Predictive analysis and modelling football results using machine learning approach for English Premier League.
+ International Journal of Forecasting,
+ 35(2),
+ 741-755.
+\end_layout
+
+\begin_layout Bibliography
+\begin_inset CommandInset bibitem
+LatexCommand bibitem
+label "(2009)"
+key "deep_football"
+literal "false"
+
+\end_inset
+
+Rahman,
+ M.
+ A.
+ (2020).
+ A deep learning framework for football match prediction.
+ SN Applied Sciences,
+ 2(2),
+ 165.
 \end_layout
 
 \begin_layout Standard
