@@ -306,18 +306,23 @@ Correspondence:
 \end_layout
 
 \begin_layout Abstract
-Football match results depend on a complex interaction between team performance and competitive dynamics.
+Football match outcomes are influenced by a complex interplay of dynamic team strategies and stochastic match events,
+ posing a significant challenge for predictive analytics.
  In this paper,
- we apply a series of machine learning methods and Isotonic Calibration to predict match outcomes using a dataset of around 230,000 football matches.
- Bookmaker odds were adjusted with the Newton–Raphson method to account for bookmaker margin effects,
- while additional calibration procedures were used to improve probability estimation.
- The proposed machine learning models achieved an AUC of 70.71% in predicting final match outcomes (1-X-2),
- with particularly strong performance in away-win predictions,
- reaching an accuracy of 72.02%.
- Compared to traditional scoring approaches such as Over/Under goals,
- the proposed method produced more consistent results across different leagues.
- The analysis also showed that combining statistical match features with calibrated machine learning methods can improve prediction reliability in highly competitive environments.
- 
+ we propose a unified benchmarking and calibration framework for football forecasting,
+ utilizing a dataset of approximately 230,000 matches.
+ We systematically compare diverse learning paradigms—
+ranging from linear models (Logistic Regression) and generalized additive frameworks (GAM) to tree structures (FastTree,
+ LightGBM,
+ Random Forest) and Neural Network models (MLP).
+ To enhance the reliability of our predictions,
+ we implement the Newton–Raphson method to strip away bookmaker margins and incorporate an Isotonic Calibration layer for the subsequent derivation of robust betting signals.
+ Our empirical results demonstrate that while methods like Random Forest excel in overall Precision (reaching 65.11% for "Assos" and 69.07% for "Diplo"),
+ the Multi-Layer Perceptron (MLP) yields superior non-linear feature interaction mapping,
+ achieving the highest Recall across both markets (63.94% and 60.25% respectively).
+ Our findings show that by combining advanced feature engineering with probability calibration,
+ we can create more reliable models,
+ helping to manage risk and identify betting value more effectively than standard statistical methods.
 \end_layout
 
 \begin_layout Keywords
@@ -436,15 +441,41 @@ In this research study,
 \begin_layout Standard
 
 \series bold
-Why is important???
-\begin_inset CommandInset citation
-LatexCommand citep
-key "giannis"
-literal "false"
-
-\end_inset
-
-
+Predicting football match outcomes is difficult because of the high levels of noise,
+ changing team strategies,
+ and unpredictable match events.
+ Standard predictive models often struggle in these volatile environments.
+ This research is important for three main reasons:
+ First,
+ it addresses the core issue of probability calibration in sports analytics.
+ Machine learning models often produce raw scores that do not reflect real-world probabilities,
+ especially when the data is noisy.
+ By implementing methods like Isotonic Calibration and using the Newton–Raphson approach to remove bookmaker margins,
+ we provide a framework that transforms biased model outputs into reliable,
+ objective probabilities.
+ Second,
+ we conduct a rigorous comparative analysis under strictly uniform conditions.
+ Instead of focusing on just one algorithm,
+ we test fundamentally different models—
+including linear models,
+ GAM,
+ tree structures (FastTree,
+ LightGBM,
+ Random Forest),
+ and Neural Network models (MLP)—
+using the exact same input features.
+ This provides an unbiased look at how each model handles the non-linearity and volatility of sports data.
+ Finally,
+ from a practical standpoint,
+ this research highlights the important trade-off between Precision and Recall in different betting markets.
+ Whether we are analyzing "Assos" (Match Winner) or "Diplo" (Double Chance) markets,
+ finding the right balance is essential.
+ Our results show that the Multi-Layer Perceptron (MLP),
+ when integrated into our calibrated framework,
+ consistently maximizes the recovery of hidden value (Recall) without sacrificing overall predictive accuracy.
+ Ultimately,
+ this work helps bridge the gap between simple statistical forecasting and more practical,
+ value-driven risk management in sports betting.
 \end_layout
 
 \begin_layout Standard
@@ -573,8 +604,74 @@ literal "false"
 \begin_layout Standard
 
 \series bold
-What we proposed here??
- With references!
+To address the limitations of individual algorithms and the common issue of probability distortion in sports forecasting,
+ we propose a unified benchmarking and calibration framework.
+ Our methodology focuses on three core contributions:
+\end_layout
+
+\begin_layout Itemize
+
+\series bold
+A Consistent Feature Engineering Pipeline:
+ We build a predictive feature vector that combines dynamic team performance indicators—
+such as Elo ratings,
+ Home Clean Sheet,
+ and Away Fail-To-Score ratios—
+with raw bookmaker market odds.
+ These odds are systematically adjusted using the Newton–Raphson method to isolate the intrinsic probabilities and remove market margins.
+\end_layout
+
+\begin_layout Itemize
+
+\series bold
+Comprehensive Architectural Benchmarking:
+ We conduct a comparative evaluation of different learning paradigms under strictly uniform conditions.
+ By testing models ranging from linear approaches (Logistic Regression) and generalized additive frameworks (GAM) to tree structures (FastTree,
+ LightGBM,
+ Random Forest) and connectionist architectures (MLP),
+ we provide an unbiased look at how different models handle the high-dimensional volatility of football data.
+\end_layout
+
+\begin_layout Itemize
+
+\series bold
+Framework for Robust Betting Signals:
+ To bridge the gap between model scores and actionable betting decisions,
+ our framework incorporates an Isotonic Calibration layer.
+ As our next research phase,
+ we apply this stabilization layer to transform raw output scores into mathematically objective probabilities,
+ enabling the derivation of robust betting signals.
+ As empirical results demonstrate,
+ this process highlights clear performance trends across both the "Assos" and "Diplo" markets:
+\end_layout
+
+\begin_layout Itemize
+
+\series bold
+Performance Stability:
+ Linear models and methods,
+ such as Logistic Regression and Random Forest,
+ provide high structural stability and competitive Precision (e.g.,
+ 65.11% for "Assos" and 69.07% for "Diplo").
+\end_layout
+
+\begin_layout Itemize
+
+\series bold
+Non-Linear Interaction Mapping:
+ The Multi-Layer Perceptron (MLP) acts as the most balanced model,
+ consistently achieving the highest Recall in both markets (63.94% for "Assos" and 60.25% for "Diplo").
+ This suggests that the MLP is better at mapping complex feature interactions and identifying "hidden value" opportunities that traditional statistical models often miss.
+\end_layout
+
+\begin_layout Standard
+
+\series bold
+Ultimately,
+ this work helps bridge the gap between simple statistical forecasting and more practical,
+ value-driven risk management.
+ By showing that the MLP maintains structural integrity while maximizing the recovery of betting value,
+ we provide a reliable roadmap for building scalable and calibrated predictive systems in sports analytics.
 \end_layout
 
 \begin_layout Standard
@@ -2046,18 +2143,6 @@ Rahman,
  SN Applied Sciences,
  2(2),
  165.
-\end_layout
-
-\begin_layout Bibliography
-\begin_inset CommandInset bibitem
-LatexCommand bibitem
-label "(1990)"
-key "giannis"
-literal "false"
-
-\end_inset
-
-xxxxxxxx
 \end_layout
 
 \begin_layout Standard
