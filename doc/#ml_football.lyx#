@@ -1870,7 +1870,7 @@ Regression
 \begin_inset Text
 
 \begin_layout Plain Layout
-0.682
+
 \end_layout
 
 \end_inset
@@ -1879,7 +1879,7 @@ Regression
 \begin_inset Text
 
 \begin_layout Plain Layout
-0.597
+
 \end_layout
 
 \end_inset
@@ -1899,7 +1899,7 @@ MLP
 \begin_inset Text
 
 \begin_layout Plain Layout
-27.90%
+
 \end_layout
 
 \end_inset
@@ -1908,7 +1908,7 @@ MLP
 \begin_inset Text
 
 \begin_layout Plain Layout
-0.676
+
 \end_layout
 
 \end_inset
@@ -1917,7 +1917,7 @@ MLP
 \begin_inset Text
 
 \begin_layout Plain Layout
-0.603
+
 \end_layout
 
 \end_inset
@@ -1941,7 +1941,7 @@ Forest
 \begin_inset Text
 
 \begin_layout Plain Layout
-27.96%
+
 \end_layout
 
 \end_inset
@@ -1950,7 +1950,7 @@ Forest
 \begin_inset Text
 
 \begin_layout Plain Layout
-0.691
+
 \end_layout
 
 \end_inset
@@ -1959,7 +1959,7 @@ Forest
 \begin_inset Text
 
 \begin_layout Plain Layout
-0.584
+
 \end_layout
 
 \end_inset

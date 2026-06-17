@@ -428,19 +428,13 @@ literal "false"
 \end_inset
 
  etc.
- 
-\end_layout
-
-\begin_layout Standard
-In this research study,
+ In this research study,
  we address the problem of predicting the outcome of a football match by examining it through a variety of machine learning techniques.
  This problem was tackled by various researches during the past years.
  
 \end_layout
 
 \begin_layout Standard
-
-\series bold
 Predicting football match outcomes is difficult because of the high levels of noise,
  changing team strategies,
  and unpredictable match events.
@@ -450,7 +444,15 @@ Predicting football match outcomes is difficult because of the high levels of no
  it addresses the core issue of probability calibration in sports analytics.
  Machine learning models often produce raw scores that do not reflect real-world probabilities,
  especially when the data is noisy.
- By implementing methods like Isotonic Calibration and using the Newton–Raphson approach to remove bookmaker margins,
+ By implementing methods like Isotonic Calibration and using the Newton–Raphson 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "power"
+literal "false"
+
+\end_inset
+
+ approach to remove bookmaker margins,
  we provide a framework that transforms biased model outputs into reliable,
  objective probabilities.
  Second,
@@ -458,17 +460,49 @@ Predicting football match outcomes is difficult because of the high levels of no
  Instead of focusing on just one algorithm,
  we test fundamentally different models—
 including linear models,
- GAM,
- tree structures (FastTree,
- LightGBM,
- Random Forest),
+ GAM 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "gam"
+literal "false"
+
+\end_inset
+
+,
+ tree structures (FastTree 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "fasttree"
+literal "false"
+
+\end_inset
+
+,
+ LightGBM 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "lightgbm"
+literal "false"
+
+\end_inset
+
+,
+ Random Forest 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "randomForest"
+literal "false"
+
+\end_inset
+
+),
  and Neural Network models (MLP)—
 using the exact same input features.
  This provides an unbiased look at how each model handles the non-linearity and volatility of sports data.
  Finally,
  from a practical standpoint,
  this research highlights the important trade-off between Precision and Recall in different betting markets.
- Whether we are analyzing "Assos" (Match Winner) or "Diplo" (Double Chance) markets,
+ Whether we are analyzing Home Win and Away Win markets,
  finding the right balance is essential.
  Our results show that the Multi-Layer Perceptron (MLP),
  when integrated into our calibrated framework,
@@ -602,19 +636,23 @@ literal "false"
 \end_layout
 
 \begin_layout Standard
-
-\series bold
 To address the limitations of individual algorithms and the common issue of probability distortion in sports forecasting,
  we propose a unified benchmarking and calibration framework.
  Our methodology focuses on three core contributions:
 \end_layout
 
 \begin_layout Itemize
-
-\series bold
 A Consistent Feature Engineering Pipeline:
  We build a predictive feature vector that combines dynamic team performance indicators—
-such as Elo ratings,
+such as Elo ratings 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "elo_football"
+literal "false"
+
+\end_inset
+
+,
  Home Clean Sheet,
  and Away Fail-To-Score ratios—
 with raw bookmaker market odds.
@@ -622,19 +660,15 @@ with raw bookmaker market odds.
 \end_layout
 
 \begin_layout Itemize
-
-\series bold
 Comprehensive Architectural Benchmarking:
  We conduct a comparative evaluation of different learning paradigms under strictly uniform conditions.
- By testing models ranging from linear approaches (Logistic Regression) and generalized additive frameworks (GAM) to tree structures (FastTree,
+ By testing models ranging from linear approaches (Logistic Regression) and generalized additive frameworks (GAM) to tree structures (FastTree ,
  LightGBM,
- Random Forest) and connectionist architectures (MLP),
+ Random Forest) and Neural Network models (MLP),
  we provide an unbiased look at how different models handle the high-dimensional volatility of football data.
 \end_layout
 
 \begin_layout Itemize
-
-\series bold
 Framework for Robust Betting Signals:
  To bridge the gap between model scores and actionable betting decisions,
  our framework incorporates an Isotonic Calibration layer.
@@ -642,31 +676,24 @@ Framework for Robust Betting Signals:
  we apply this stabilization layer to transform raw output scores into mathematically objective probabilities,
  enabling the derivation of robust betting signals.
  As empirical results demonstrate,
- this process highlights clear performance trends across both the "Assos" and "Diplo" markets:
+ this process highlights clear performance trends across both the Home Win and Away Win markets:
 \end_layout
 
 \begin_layout Itemize
-
-\series bold
 Performance Stability:
  Linear models and methods,
- such as Logistic Regression and Random Forest,
- provide high structural stability and competitive Precision (e.g.,
- 65.11% for "Assos" and 69.07% for "Diplo").
+ such as Logistic Regression and Random Forest provide high structural stability and competitive Precision (e.g.,
+ 65.11% for Home Win and 69.07% for Away Win).
 \end_layout
 
 \begin_layout Itemize
-
-\series bold
 Non-Linear Interaction Mapping:
  The Multi-Layer Perceptron (MLP) acts as the most balanced model,
- consistently achieving the highest Recall in both markets (63.94% for "Assos" and 60.25% for "Diplo").
+ consistently achieving the highest Recall in both markets (63.94% for Home Win and 60.25% for Away Win).
  This suggests that the MLP is better at mapping complex feature interactions and identifying "hidden value" opportunities that traditional statistical models often miss.
 \end_layout
 
 \begin_layout Standard
-
-\series bold
 Ultimately,
  this work helps bridge the gap between simple statistical forecasting and more practical,
  value-driven risk management.
@@ -773,7 +800,7 @@ placement H
 alignment document
 wide false
 sideways false
-status open
+status collapsed
 
 \begin_layout Plain Layout
 \align center
@@ -1261,6 +1288,727 @@ Results
 \begin_inset CommandInset label
 LatexCommand label
 name "sec:Results"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float table
+placement H
+alignment document
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Home win experimental results.
+\begin_inset CommandInset label
+LatexCommand label
+name "tab:Home-win-experimental"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Tabular
+<lyxtabular version="3" rows="8" columns="4">
+<features tabularvalignment="middle">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<row>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+MODEL
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+ERROR
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+PRECISION
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+RECALL
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+FastTree
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+34.63%
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+0.649
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+0.633
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+GAM
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+34.89%
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+0.648
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+0.628
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+LightGBM
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+34.91%
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+0.646
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+0.63
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Logistic 
+\begin_inset Newline newline
+\end_inset
+
+Regression
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+34.51%
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+0.65
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+0.634
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+MLP
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+35.05%
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+64.21%
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+63.94%
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Random
+\begin_inset Newline newline
+\end_inset
+
+Forest
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+34.71%
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+0.651
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+0.629
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+RBF
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+44.31%
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+0.548
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+0.547
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset Float table
+placement H
+alignment document
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Away win experimental results.
+\begin_inset CommandInset label
+LatexCommand label
+name "tab:Away-win-experimental"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Tabular
+<lyxtabular version="3" rows="8" columns="4">
+<features tabularvalignment="middle">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<row>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+MODEL
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+ERROR
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+PRECISION
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+RECALL
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+FastTree
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+27.97%
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+0.68
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+0.593
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+GAM
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+28.07%
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+0.686
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+0.584
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+LightGBM
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+27.96%
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+0.681
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+0.593
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Logistic 
+\begin_inset Newline newline
+\end_inset
+
+Regression
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+27.82%
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+0.682
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+0.597
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+MLP
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+27.90%
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+0.676
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+0.603
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Random
+\begin_inset Newline newline
+\end_inset
+
+Forest
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+27.96%
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+0.691
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+0.584
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+RBF
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+32.62%
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+0.567
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+0.529
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\end_layout
 
 \end_inset
 
@@ -1875,6 +2623,113 @@ Valkenborg,
  American journal of orthodontics and dentofacial orthopedics,
  164(5),
  754-757.
+\end_layout
+
+\begin_layout Bibliography
+\begin_inset CommandInset bibitem
+LatexCommand bibitem
+key "power"
+literal "false"
+
+\end_inset
+
+Clarke,
+ S.
+ (2016).
+ A review of methods for deriving probability estimates from betting odds.
+\end_layout
+
+\begin_layout Bibliography
+\begin_inset CommandInset bibitem
+LatexCommand bibitem
+key "gam"
+literal "false"
+
+\end_inset
+
+Wood,
+ S.
+ N.
+ (2017).
+ Generalized Additive Models:
+ An Introduction with R (2nd ed.).
+ Chapman and Hall/CRC.
+\end_layout
+
+\begin_layout Bibliography
+\begin_inset CommandInset bibitem
+LatexCommand bibitem
+label "(2017)"
+key "fasttree"
+literal "false"
+
+\end_inset
+
+Price,
+ M.
+ N.,
+ Dehal,
+ P.
+ S.,
+ & Arkin,
+ A.
+ P.
+ (2010).
+ FastTree 2–approximately maximum-likelihood trees for large alignments.
+ PloS one,
+ 5(3),
+ e9490.
+\end_layout
+
+\begin_layout Bibliography
+\begin_inset CommandInset bibitem
+LatexCommand bibitem
+label "(2017)"
+key "lightgbm"
+literal "false"
+
+\end_inset
+
+Ke,
+ G.,
+ Meng,
+ Q.,
+ Finley,
+ T.,
+ Wang,
+ T.,
+ Chen,
+ W.,
+ Ma,
+ W.,
+ ...
+ & Liu,
+ T.
+ Y.
+ (2017).
+ Lightgbm:
+ A highly efficient gradient boosting decision tree.
+ Advances in neural information processing systems,
+ 30.
+\end_layout
+
+\begin_layout Bibliography
+\begin_inset CommandInset bibitem
+LatexCommand bibitem
+key "randomForest"
+literal "false"
+
+\end_inset
+
+Liaw,
+ A.,
+ & Wiener,
+ M.
+ (2002).
+ Classification and regression by randomForest.
+ R News,
+ 2(3),
+ 18-22.s
 \end_layout
 
 \begin_layout Bibliography
