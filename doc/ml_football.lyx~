@@ -317,7 +317,7 @@ ranging from linear models (Logistic Regression) and generalized additive framew
  Random Forest) and Neural Network models (MLP).
  To enhance the reliability of our predictions,
  we implement the Newton–Raphson method to strip away bookmaker margins and incorporate an Isotonic Calibration layer for the subsequent derivation of robust betting signals.
- Our empirical results demonstrate that while methods like Random Forest excel in overall Precision (reaching 65.11% for "Assos" and 69.07% for "Diplo"),
+ Our empirical results demonstrate that while methods like Random Forest excel in overall Precision (reaching 65.11% for Home Win and 69.07% for Away Win),
  the Multi-Layer Perceptron (MLP) yields superior non-linear feature interaction mapping,
  achieving the highest Recall across both markets (63.94% and 60.25% respectively).
  Our findings show that by combining advanced feature engineering with probability calibration,
@@ -1245,7 +1245,11 @@ Feature Importance Motivation
 \begin_layout Standard
 The generated feature space is explicitly designed to satisfy three essential,
  complementary operational criteria:
- (i) long-term structural team performance using rating systems (
+ 
+\end_layout
+
+\begin_layout Enumerate
+Long-term structural team performance using rating systems (
 \shape italic
 EloDiff
 \shape default
@@ -1254,8 +1258,12 @@ EloDiff
 \shape italic
 RankDifference
 \shape default
-),
- (ii) granular tactical interaction effects (
+).
+ 
+\end_layout
+
+\begin_layout Enumerate
+Granular tactical interaction effects (
 \shape italic
 AttackVsDefense
 \shape default
@@ -1264,8 +1272,11 @@ AttackVsDefense
 \shape italic
 DefenseVsAttack
 \shape default
-),
- and (iii) distribution-based prior probabilities derived from betting market evaluations (
+).
+\end_layout
+
+\begin_layout Enumerate
+Distribution-based prior probabilities derived from betting market evaluations (
 \shape italic
 ProbHome
 \shape default
@@ -1294,6 +1305,139 @@ name "sec:Results"
 
 \end_layout
 
+\begin_layout Subsection
+Experimental settings 
+\end_layout
+
+\begin_layout Standard
+For the development and training of the predictive models for sports outcomes,
+ the ML.NET 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "ml.net"
+literal "false"
+
+\end_inset
+
+ framework was employed—
+an open-source,
+ cross-platform machine learning framework developed by Microsoft.
+ The choice of ML.NET was driven by its capability to integrate sophisticated algorithms,
+ such as FastForest (a highly optimized implementation of the Random Forest ),
+ which offers both computational efficiency and robustness when handling large-scale datasets.
+ To evaluate the stability of the models,
+ a 30-run stability analysis was conducted.
+ This rigorous validation process ensured consistent performance metrics (Error,
+ Precision,
+ and Recall) and minimized the risk of overfitting,
+ thereby validating the model's reliability for analyzing noisy,
+ real-world data.
+ The following methods were incorporated in the conducted experiments from ML.NET:
+\end_layout
+
+\begin_layout Enumerate
+FastTree
+\end_layout
+
+\begin_layout Enumerate
+Gam 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "gam"
+literal "false"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Enumerate
+LightGBM 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "lightgbm"
+literal "false"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Enumerate
+Logistic Regression 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "ml_logistic"
+literal "false"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Enumerate
+MLP,
+ that denotes an artificial neural network 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "nn1,nn2"
+literal "false"
+
+\end_inset
+
+ with 10 processing nodes.
+ This network is trained using the L-BFGS method 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "lbfgs"
+literal "false"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Enumerate
+Random Forest 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "randomForest"
+literal "false"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Enumerate
+RBF,
+ that denotes a Radial Basis Function network 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "rbf1,rbf2"
+literal "false"
+
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Standard
+Table 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "tab:Experimental-settings."
+plural "false"
+caps "false"
+noprefix "false"
+nolink "false"
+
+\end_inset
+
+ presents the parameters used by the machine learning methods employed in the conducted experiments.
+\end_layout
+
 \begin_layout Standard
 \begin_inset Float table
 placement H
@@ -1303,8 +1447,851 @@ sideways false
 status collapsed
 
 \begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Experimental settings.
+\begin_inset CommandInset label
+LatexCommand label
+name "tab:Experimental-settings."
+
+\end_inset
+
 
 \end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Tabular
+<lyxtabular version="3" rows="23" columns="3">
+<features tabularvalignment="middle">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<row>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+METHOD
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+PARAMETER
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+VALUE
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+FASTTREE
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Leaves
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+20
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+FASTTREE
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Trees
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+600
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+FASTTREE
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+MinExample
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+100
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+FASTTREE
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+LearnRate
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+0.05
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+FASTTREE
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+FeatureFraction
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+0.9
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+RandomForest
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Leaves
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+20
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+RandomForest
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Leaves
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+100
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+RandomForest
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+MinExample
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+10
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+RandomForest
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+FeatureFraction
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+0.8
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+LightGBM
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Leaves
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+31
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+LightGBM
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+MinExample
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+20
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+LightGBM
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+LearnRate
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+0.1
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+LightGBM
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Iterations
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+100
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+GAM
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Iterations
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+100
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+GAM
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+MaxBinCount
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+255
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+GAM
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+LearnRate
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+0.1
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+RBF
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Clusters (K-means)
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+2
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+RBF
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Sigma (Gaussian)
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+1.4
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+RBF
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+MaxIter
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+200
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+MLP
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+LBFGS Iterations
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+10
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Logistic 
+\begin_inset Newline newline
+\end_inset
+
+Regression
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+L2Regularization
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+0.1
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Logistic 
+\begin_inset Newline newline
+\end_inset
+
+Regression
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Tolerance
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $10^{-4}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+ These parameters are analyzed in detail below:
+\end_layout
+
+\begin_layout Enumerate
+
+\series bold
+Leaves
+\series default
+:
+ Defines the complexity of each tree by setting the maximum number of leaves.
+ A higher value allows the model to capture more complex patterns but increases the risk of overfitting.
+\end_layout
+
+\begin_layout Enumerate
+
+\series bold
+Trees
+\series default
+:
+ Specifies the total number of trees to build.
+ Increasing this number generally improves model stability and predictive performance but requires more training time.
+\end_layout
+
+\begin_layout Enumerate
+
+\series bold
+MinExample
+\series default
+:Sets the minimum number of data samples required to create a leaf.
+ This acts as a regularization mechanism;
+ higher values prevent the model from learning from noise or outliers.
+\end_layout
+
+\begin_layout Enumerate
+
+\series bold
+LearnRate
+\series default
+:
+ Controls the contribution of each tree to the final prediction.
+ A lower learning rate makes the optimization process more robust,
+ requiring more trees to reach an optimal solution.
+\end_layout
+
+\begin_layout Enumerate
+
+\series bold
+FeatureFraction
+\series default
+:
+ Determines the percentage of features to consider when building each tree.
+ Using a fraction (e.g.,
+ 
+\begin_inset Formula $0.8$
+\end_inset
+
+) introduces randomness,
+ which helps the model avoid focusing too heavily on a single feature and improves generalization.
+\end_layout
+
+\begin_layout Enumerate
+
+\series bold
+MaximumIterations
+\series default
+ (Iterations):
+ The number of times the algorithm passes through the entire training dataset to update weights.
+\end_layout
+
+\begin_layout Enumerate
+
+\series bold
+MaxBinCount
+\series default
+:
+ Sets the maximum number of bins used to group features,
+ helping to discretize continuous variables for more efficient processing.
+\end_layout
+
+\begin_layout Enumerate
+
+\series bold
+Clusters
+\series default
+ (K-Means):
+ Defines the number of centroids (hidden neurons) used to represent the input space.
+ Each cluster captures a local region of the data.
+\end_layout
+
+\begin_layout Enumerate
+
+\series bold
+Sigma
+\series default
+ (Gaussian Spread):
+ Controls the width of the radial basis function (Gaussian kernel).
+ It determines how far the influence of a single neuron extends in the input space;
+ a smaller sigma makes neurons more sensitive to localized inputs.
+\end_layout
+
+\begin_layout Enumerate
+
+\series bold
+L2Regularization
+\series default
+:
+ A penalty applied to the magnitude of the model weights.
+ It discourages overly large weights,
+ which helps in preventing overfitting and improves the model's ability to generalize to unseen data.
+\end_layout
+
+\begin_layout Enumerate
+
+\series bold
+Tolerance
+\series default
+:
+ The threshold for the optimization algorithm to determine convergence.
+ It dictates how small the improvements in the loss function must be before the algorithm stops.
+\end_layout
+
+\begin_layout Subsection
+Experimental results
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float table
+placement H
+alignment document
+wide false
+sideways false
+status collapsed
 
 \begin_layout Plain Layout
 \begin_inset Caption Standard
@@ -1395,7 +2382,7 @@ FastTree
 \begin_inset Text
 
 \begin_layout Plain Layout
-0.649
+64.91%
 \end_layout
 
 \end_inset
@@ -1404,7 +2391,7 @@ FastTree
 \begin_inset Text
 
 \begin_layout Plain Layout
-0.633
+63.28%
 \end_layout
 
 \end_inset
@@ -1433,7 +2420,7 @@ GAM
 \begin_inset Text
 
 \begin_layout Plain Layout
-0.648
+64.82%
 \end_layout
 
 \end_inset
@@ -1442,7 +2429,7 @@ GAM
 \begin_inset Text
 
 \begin_layout Plain Layout
-0.628
+62.75%
 \end_layout
 
 \end_inset
@@ -1471,7 +2458,7 @@ LightGBM
 \begin_inset Text
 
 \begin_layout Plain Layout
-0.646
+64.59%
 \end_layout
 
 \end_inset
@@ -1480,7 +2467,7 @@ LightGBM
 \begin_inset Text
 
 \begin_layout Plain Layout
-0.63
+63.00%
 \end_layout
 
 \end_inset
@@ -1513,7 +2500,7 @@ Regression
 \begin_inset Text
 
 \begin_layout Plain Layout
-0.65
+65.03%
 \end_layout
 
 \end_inset
@@ -1522,7 +2509,7 @@ Regression
 \begin_inset Text
 
 \begin_layout Plain Layout
-0.634
+63.44%
 \end_layout
 
 \end_inset
@@ -1593,7 +2580,7 @@ Forest
 \begin_inset Text
 
 \begin_layout Plain Layout
-0.651
+65.11%
 \end_layout
 
 \end_inset
@@ -1602,7 +2589,7 @@ Forest
 \begin_inset Text
 
 \begin_layout Plain Layout
-0.629
+62.86%
 \end_layout
 
 \end_inset
@@ -1631,7 +2618,7 @@ RBF
 \begin_inset Text
 
 \begin_layout Plain Layout
-0.548
+54.75%
 \end_layout
 
 \end_inset
@@ -1640,7 +2627,7 @@ RBF
 \begin_inset Text
 
 \begin_layout Plain Layout
-0.547
+54.71%
 \end_layout
 
 \end_inset
@@ -1661,7 +2648,7 @@ placement H
 alignment document
 wide false
 sideways false
-status open
+status collapsed
 
 \begin_layout Plain Layout
 \begin_inset Caption Standard
@@ -1752,7 +2739,7 @@ FastTree
 \begin_inset Text
 
 \begin_layout Plain Layout
-0.68
+68.04%
 \end_layout
 
 \end_inset
@@ -1761,7 +2748,7 @@ FastTree
 \begin_inset Text
 
 \begin_layout Plain Layout
-0.593
+59.29%
 \end_layout
 
 \end_inset
@@ -1790,7 +2777,7 @@ GAM
 \begin_inset Text
 
 \begin_layout Plain Layout
-0.686
+68.64%
 \end_layout
 
 \end_inset
@@ -1799,7 +2786,7 @@ GAM
 \begin_inset Text
 
 \begin_layout Plain Layout
-0.584
+58.36%
 \end_layout
 
 \end_inset
@@ -1828,7 +2815,7 @@ LightGBM
 \begin_inset Text
 
 \begin_layout Plain Layout
-0.681
+68.07%
 \end_layout
 
 \end_inset
@@ -1837,7 +2824,7 @@ LightGBM
 \begin_inset Text
 
 \begin_layout Plain Layout
-0.593
+59.31%
 \end_layout
 
 \end_inset
@@ -1870,7 +2857,7 @@ Regression
 \begin_inset Text
 
 \begin_layout Plain Layout
-0.682
+68.21%
 \end_layout
 
 \end_inset
@@ -1879,7 +2866,7 @@ Regression
 \begin_inset Text
 
 \begin_layout Plain Layout
-0.597
+59.66%
 \end_layout
 
 \end_inset
@@ -1908,7 +2895,7 @@ MLP
 \begin_inset Text
 
 \begin_layout Plain Layout
-0.676
+67.59%
 \end_layout
 
 \end_inset
@@ -1917,7 +2904,7 @@ MLP
 \begin_inset Text
 
 \begin_layout Plain Layout
-0.603
+60.25%
 \end_layout
 
 \end_inset
@@ -1950,7 +2937,7 @@ Forest
 \begin_inset Text
 
 \begin_layout Plain Layout
-0.691
+69.07%
 \end_layout
 
 \end_inset
@@ -1959,7 +2946,7 @@ Forest
 \begin_inset Text
 
 \begin_layout Plain Layout
-0.584
+58.39%
 \end_layout
 
 \end_inset
@@ -1979,7 +2966,7 @@ RBF
 \begin_inset Text
 
 \begin_layout Plain Layout
-
+32.62%
 \end_layout
 
 \end_inset
@@ -1988,7 +2975,7 @@ RBF
 \begin_inset Text
 
 \begin_layout Plain Layout
-
+56.68%
 \end_layout
 
 \end_inset
@@ -1997,7 +2984,7 @@ RBF
 \begin_inset Text
 
 \begin_layout Plain Layout
-
+52.91%
 \end_layout
 
 \end_inset
@@ -2998,6 +3985,109 @@ Rahman,
  SN Applied Sciences,
  2(2),
  165.
+\end_layout
+
+\begin_layout Bibliography
+\begin_inset CommandInset bibitem
+LatexCommand bibitem
+key "ml.net"
+literal "false"
+
+\end_inset
+
+Microsoft.
+ (2026).
+ ML.NET:
+ Machine Learning for .NET.
+ Retrieved June 30,
+ 2026,
+ from 
+\begin_inset Flex URL
+status collapsed
+
+\begin_layout Plain Layout
+
+https://dotnet.microsoft.com/en-us/apps/machinelearning-ai/ml-dotnet
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Bibliography
+\begin_inset CommandInset bibitem
+LatexCommand bibitem
+label "(1989)"
+key "lbfgs"
+literal "false"
+
+\end_inset
+
+Liu,
+ D.
+ C.,
+ & Nocedal,
+ J.
+ (1989).
+ On the limited memory BFGS method for large scale optimization.
+ Mathematical programming,
+ 45(1),
+ 503-528.
+\end_layout
+
+\begin_layout Bibliography
+\begin_inset CommandInset bibitem
+LatexCommand bibitem
+label "(1991)"
+key "rbf1"
+literal "false"
+
+\end_inset
+
+J.
+ Park and I.
+ W.
+ Sandberg,
+ Universal Approximation Using Radial-Basis-Function Networks,
+ Neural Computation 
+\series bold
+3
+\series default
+,
+ pp.
+ 246-257,
+ 1991.
+\end_layout
+
+\begin_layout Bibliography
+\begin_inset CommandInset bibitem
+LatexCommand bibitem
+key "rbf2"
+literal "false"
+
+\end_inset
+
+G.A.
+ Montazer,
+ D.
+ Giveki,
+ M.
+ Karami,
+ H.
+ Rastegar,
+ Radial basis function neural networks:
+ A review.
+ Comput.
+ Rev.
+ J 
+\series bold
+1
+\series default
+,
+ pp.
+ 52-74,
+ 2018.
 \end_layout
 
 \begin_layout Standard
