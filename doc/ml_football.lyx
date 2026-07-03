@@ -6,19 +6,15 @@
 \origin unavailable
 \textclass Definitions/mdpi
 \begin_preamble
-%  LaTeX support: latex@mdpi.com 
+%  LaTeX support: latex@mdpi.com
 %  For support, please attach all files needed for compiling as well as the log file, and specify your operating system, LaTeX version, and LaTeX editor.
-
 %=================================================================
-%\documentclass[preprints,article,submit,pdftex,moreauthors]{Definitions/mdpi} 
+%\documentclass[preprints,article,submit,pdftex,moreauthors]{Definitions/mdpi}
 % For posting an early version of this manuscript as a preprint, you may use "preprints" as the journal. Changing "submit" to "accept" before posting will remove line numbers.
-
 % Below journals will use APA reference format:
 % admsci, aieduc, behavsci, businesses, econometrics, economies, education, ejihpe, famsci, games, humans, ijcs, ijfs, jintelligence, journalmedia, jrfm, jsam, languages, peacestud, psycholint, publications, tourismhosp, youth
-
 % Below journals will use Chicago reference format:
 % arts, genealogy, histories, humanities, laws, literature, religions, risks, socsci
-
 %--------------------
 % Class Options:
 %--------------------
@@ -27,32 +23,27 @@
 %----------
 % Choose between the following MDPI journals:
 % accountaudit, acoustics, actuators, addictions, adhesives, admsci, adolescents, aerobiology, aerospace, agriculture, agriengineering, agrochemicals, agronomy, ai, aichem, aieduc, aieng, aimater, aimed, aipa, air, aisens, algorithms, allergies, alloys, amh, analog, analytica, analytics, anatomia, anesthres, animals, antibiotics, antibodies, antioxidants, applbiosci, appliedchem, appliedmath, appliedphys, applmech, applmicrobiol, applnano, applsci, aquacj, architecture, arm, arthropoda, arts, asc, asi, astronautics, astronomy, atmosphere, atoms, audiolres, automation, axioms, bacteria, batteries, bdcc, behavsci, beverages, biochem, bioengineering, biologics, biology, biomass, biomechanics, biomed, biomedicines, biomedinformatics, biomimetics, biomolecules, biophysica, bioresourbioprod, biosensors, biosphere, biotech, birds, blockchains, bloods, blsf, brainsci, breath, buildings, businesses, cancers, carbon, cardio, cardiogenetics, cardiovascmed, catalysts, cells, ceramics, challenges, chemengineering, chemistry, chemosensors, chemproc, children, chips, cimb, civileng, cleantechnol, climate, clinbioenerg, clinpract, clockssleep, cmd, cmtr, coasts, coatings, colloids, colorants, commodities, complexities, complications, compounds, computation, computers, condensedmatter, conservation, constrmater, cosmetics, covid, crops, cryo, cryptography, crystals, csmf, ctn, culture, curroncol, cyber, dairy, data, ddc, dentistry, dermato, dermatopathology, designs, devices, dhi, diabetology, diagnostics, dietetics, digital, disabilities, diseases, diversity, dna, drones, dynamics, earth, ebj, ecm, ecologies, econometrics, economies, edm, education, eesp, ejihpe, electricity, electrochem, electronicmat, electronics, encyclopedia, endocrines, energies, eng, engproc, entomology, entropy, environments, environremediat, epidemiologia, epigenomes, esa, est, famsci, fermentation, fibers, fintech, fire, fishes, fluids, foods, forecasting, forensicsci, forests, fossstud, foundations, fractalfract, fuels, future, futureinternet, futurepharmacol, futurephys, futuretransp, galaxies, games, gases, gastroent, gastrointestdisord, gastronomy, gels, genealogy, genes, geographies, geohazards, geomatics, geometry, geosciences, geotechnics, geriatrics, germs, glacies, grasses, green, greenhealth, gucdd, hardware, hazardousmatters, healthcare, hearts, hemato, hematolrep, hep, heritage, higheredu, highthroughput, histories, horticulturae, hospitals, humanities, humans, hydrobiology, hydrogen, hydrology, hydropower, hygiene, idr, iic, ijcs, ijem, ijerph, ijfs, ijgi, ijmd, ijms, ijns, ijom, ijpb, ijt, ijtm, ijtpp, ime, immuno, informatics, information, infrastructures, inorganics, insects, instruments, inventions, iot, j, jaestheticmed, jal, jcdd, jcm, jcp, jcrm, jcs, jcto, jdad, jdb, jdream, jemr, jeta, jfb, jfmk, jgbg, jgg, jimaging, jintelligence, jlpea, jmahp, jmmp, jmms, jmp, jmse, jne, jnt, jof, joi, joitmc, joma, jop, joptm, jor, journalmedia, jox, jpbi, jphytomed, jpm, jrfm, jsam, jsan, jtaer, jvd, jzbg, kidneydial, kinasesphosphatases, knowledge, labmed, laboratories, lae, land, languages, laws, life, lights, limnolrev, lipidology, liquids, literature, livers, logics, logistics, lubricants, lymphatics, machines, macromol, magnetism, magnetochemistry, make, marinedrugs, materials, materproc, mathematics, mca, measurements, medicina, medicines, medsci, membranes, merits, metabolites, metals, meteorology, methane, metrics, metrology, micro, microarrays, microbiolres, microelectronics, micromachines, microorganisms, microplastics, microwave, minerals, mining, mmphys, modelling, molbank, molecules, mps, msf, mti, multimedia, muscles, nanoenergyadv, nanomanufacturing, nanomaterials, ncrna, ndt, network, neuroglia, neuroimaging, neurolint, neurosci, nitrogen, notspecified, nursrep, nutraceuticals, nutrients, obesities, occuphealth, oceans, ohbm, onco, optics, oral, organics, organoids, osteology, oxygen, pandemics, parasites, parasitologia, particles, pathogens, pathophysiology, peacestud, pediatrrep, pets, pharmaceuticals, pharmaceutics, pharmacoepidemiology, pharmacy, philosophies, photochem, photonics, phycology, physchem, physics, physiologia, plants, plasma, platforms, pollutants, polymers, polysaccharides, populations, poultry, powders, precipitation, precisoncol, preprints, proceedings, processes, prosthesis, proteomes, psf, psychiatryint, psychoactives, psycholint, publications, purification, quantumrep, quaternary, qubs, radiation, rdt, reactions, realestate, receptors, recycling, regeneration, religions, remotesensing, reports, reprodmed, resources, rheumato, risks, rjpm, robotics, rsee, ruminants, safety, sci, scipharm, sclerosis, seeds, sensors, separations, sexes, shi, signals, sinusitis, siuj, skins, smartcities, sna, societies, socsci, software, soilsystems, solar, solids, spectroscj, sports, standards, stats, std, stratsediment, stresses, surfaces, surgeries, suschem, sustainability, symmetry, synbio, systems, tae, targets, taxonomy, technologies, telecom, test, textiles, thalassrep, therapeutics, thermo, timespace, tomography, tourismhosp, toxics, toxins, tph, transplantology, transportation, traumacare, traumas, tri, tropicalmed, universe, urbansci, uro, vaccines, vehicles, venereology, vetsci, vibration, virtualworlds, viruses, vision, waste, water, welding, wem, wevj, wild, wind, women, world, youth, zoonoticdis
-
 %---------
 % article
 %---------
-% The default type of manuscript is "article", but can be replaced by: 
+% The default type of manuscript is "article", but can be replaced by:
 % abstract, addendum, article, book, bookreview, briefreport, casereport, comment, commentary, communication, conferenceproceedings, correction, conferencereport, entry, expressionofconcern, extendedabstract, datadescriptor, editorial, essay, erratum, hypothesis, interestingimage, obituary, opinion, projectreport, reply, retraction, review, perspective, protocol, shortnote, studyprotocol, systematicreview, supfile, technicalnote, viewpoint, guidelines, registeredreport, tutorial
 % supfile = supplementary materials
-
 %----------
 % submit
 %----------
 % The class option "submit" will be changed to "accept" by the Editorial Office when the paper is accepted. This will only make changes to the frontpage (e.g., the logo of the journal will get visible), the headings, and the copyright information. Also, line numbering will be removed. Journal info and pagination for accepted papers will also be assigned by the Editorial Office.
-
 %------------------
 % moreauthors
 %------------------
 % If there is only one author the class option oneauthor should be used. Otherwise use the class option moreauthors.
-
 %---------
 % pdftex
 %---------
 % The option pdftex is for use with pdfLaTeX. If eps figures are used, remove the option pdftex and use LaTeX and dvi2pdf.
-
 %=================================================================
 % MDPI internal commands - do not modify
-\firstpage{1} 
+\firstpage{1}
 \setcounter{page}{\@firstpage}
 \pubvolume{1}
 \issuenum{1}
@@ -71,48 +62,37 @@
 %\CorrStatement{yes}  % For updates
 %\longauthorlist{yes} % For many authors that exceed the left citation part
 %\IsAssociation{yes} % For association journals
-
 %=================================================================
 % Add packages and commands here. The following packages are loaded in our class file: fontenc, inputenc, calc, indentfirst, fancyhdr, graphicx, epstopdf, lastpage, ifthen, lineno, float, amsmath, setspace, enumitem, mathpazo, booktabs, titlesec, etoolbox, tabto, xcolor, soul, multirow, microtype, tikz, totcount, changepage, attrib, upgreek, cleveref, amsthm, hyphenat, natbib, hyperref, footmisc, url, geometry, newfloat, caption
-
 %=================================================================
 %% Please use the following mathematics environments: Theorem, Lemma, Corollary, Proposition, Characterization, Property, Problem, Example, ExamplesandDefinitions, Hypothesis, Remark, Definition, Notation, Assumption
 %% For proofs, please use the proof environment (the amsthm package is loaded by the MDPI class).
-
 %=================================================================
 % The fields PACS, MSC, and JEL may be left empty or commented out if not applicable
 %\PACS{J0101}
 %\MSC{}
 %\JEL{}
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Only for the journal Diversity
 %\LSID{\url{http://}}
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Only for the journal Applied Sciences:
 %\featuredapplication{Authors are encouraged to provide a concise description of the specific application or a potential application of the work. This section is not mandatory.}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Only for the journal Data:
 %\dataset{DOI number or link to the deposited data set in cases where the data set is published or set to be published separately. If the data set is submitted and will be published as a supplement to this paper in the journal Data, this field will be filled by the editors of the journal. In this case, please make sure to submit the data set as a supplement when entering your manuscript into our manuscript editorial system.}
-
 %\datasetlicense{license under which the data set is made available (CC0, CC-BY, CC-BY-SA, CC-BY-NC, etc.)}
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Only for the journal BioTech, Fishes, Neuroimaging and Toxins
 %\keycontribution{The breakthroughs or highlights of the manuscript. Authors can write one or two sentences to describe the most important part of the paper.}
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Only for the journal Encyclopedia
 %\encyclopediadef{Instead of the abstract}
 %\entrylink{The Link to this entry published on the encyclopedia platform.}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Different journals have different requirements. Please check the specific journal guidelines in the "Instructions for Authors" on the journal's official website.
- 
 %\addhighlights{yes}
 %\renewcommand{\addhighlights}{%
 %
@@ -671,26 +651,39 @@ Comprehensive Architectural Benchmarking:
 \begin_layout Itemize
 Framework for Robust Betting Signals:
  To bridge the gap between model scores and actionable betting decisions,
- our framework incorporates an Isotonic Calibration layer.
- As our next research phase,
- we apply this stabilization layer to transform raw output scores into mathematically objective probabilities,
+ we propose the integration of an Isotonic Calibration layer as part of this framework.
+ While the present study focuses on establishing and benchmarking the underlying predictive models,
+ this calibration layer —
+ to be applied in the next research phase —
+ is intended to transform raw output scores into mathematically objective probabilities,
  enabling the derivation of robust betting signals.
  As empirical results demonstrate,
  this process highlights clear performance trends across both the Home Win and Away Win markets:
 \end_layout
 
+\begin_deeper
 \begin_layout Itemize
 Performance Stability:
  Linear models and methods,
- such as Logistic Regression and Random Forest provide high structural stability and competitive Precision (e.g.,
- 65.11% for Home Win and 69.07% for Away Win).
+ such as Logistic Regression and Random Forest,
+ provide high structural stability and consistently competitive Precision across both markets.
 \end_layout
 
 \begin_layout Itemize
 Non-Linear Interaction Mapping:
  The Multi-Layer Perceptron (MLP) acts as the most balanced model,
- consistently achieving the highest Recall in both markets (63.94% for Home Win and 60.25% for Away Win).
+ consistently achieving the highest Recall in both markets.
  This suggests that the MLP is better at mapping complex feature interactions and identifying "hidden value" opportunities that traditional statistical models often miss.
+\end_layout
+
+\end_deeper
+\begin_layout Itemize
+Reproducible Large-Scale Evaluation:
+ Unlike many previous studies that evaluate a single predictive model or employ heterogeneous experimental settings,
+ all algorithms are trained and evaluated using the same large-scale dataset,
+ an identical feature space,
+ and a chronological train–test split that better reflects real-world forecasting conditions while preventing information leakage.
+ This unified evaluation protocol enables a fair comparison of fundamentally different machine learning paradigms and improves the reproducibility of the reported results.
 \end_layout
 
 \begin_layout Standard
@@ -699,6 +692,17 @@ Ultimately,
  value-driven risk management.
  By showing that the MLP maintains structural integrity while maximizing the recovery of betting value,
  we provide a reliable roadmap for building scalable and calibrated predictive systems in sports analytics.
+\end_layout
+
+\begin_layout Standard
+Although numerous studies have reported promising results for football match prediction,
+ direct numerical comparison remains challenging because different datasets,
+ leagues,
+ feature sets,
+ and evaluation protocols are typically employed.
+ Rather than claiming a universally superior predictive accuracy,
+ the present work focuses on providing a unified and reproducible benchmarking framework in which seven fundamentally different machine learning paradigms are evaluated under identical experimental conditions on a large-scale dataset.
+ This allows a fair assessment of their relative strengths while emphasizing model stability and probability reliability through repeated experimentation and calibration.
 \end_layout
 
 \begin_layout Standard
@@ -768,7 +772,7 @@ Dataset Description
 \end_layout
 
 \begin_layout Standard
-The experimental dataset comprises 225,474 match events spanning from 2018 to 2026.
+The experimental dataset comprises 225,474 match events spanning from 2018 to 2025.
  To ensure rigorous evaluation,
  the data was partitioned into a training set of 149,998 matches and a dedicated test set of 75,476 matches.
  The core variables included in the raw data are summarized in Table 
@@ -792,6 +796,9 @@ LeagueId
 SeasonPhase
 \shape default
  allows the model to account for competitive context and seasonal variations.
+ To avoid information leakage and better reflect a real-world deployment scenario,
+ the dataset was partitioned chronologically,
+ with earlier seasons used for training and later matches reserved exclusively for testing.
 \end_layout
 
 \begin_layout Standard
@@ -867,7 +874,7 @@ MatchDate
 \begin_inset Text
 
 \begin_layout Plain Layout
-Temporal identifier (2018–2026)
+Temporal identifier (2018–2025)
 \end_layout
 
 \end_inset
@@ -1432,6 +1439,23 @@ literal "false"
 \end_layout
 
 \begin_layout Standard
+The MLP was trained with 10 L-BFGS iterations (Table 2).
+ To confirm this was sufficient for convergence,
+ a control run with 100 iterations was also conducted;
+ the resulting Precision,
+ Recall,
+ and Error values differed by no more than 1.1 percentage points from those reported in Tables 3 and 4 for both markets,
+ confirming that the model had already converged within the original 10-iteration budget.
+\end_layout
+
+\begin_layout Standard
+\begin_inset VSpace 6pt
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
 Table 
 \begin_inset CommandInset ref
 LatexCommand ref
@@ -1452,7 +1476,7 @@ placement H
 alignment document
 wide false
 sideways false
-status collapsed
+status open
 
 \begin_layout Plain Layout
 \begin_inset Caption Standard
@@ -1698,7 +1722,7 @@ RandomForest
 \begin_inset Text
 
 \begin_layout Plain Layout
-Leaves
+Trees
 \end_layout
 
 \end_inset
@@ -2299,7 +2323,7 @@ placement H
 alignment document
 wide false
 sideways false
-status collapsed
+status open
 
 \begin_layout Plain Layout
 \begin_inset Caption Standard
@@ -2656,7 +2680,7 @@ placement H
 alignment document
 wide false
 sideways false
-status collapsed
+status open
 
 \begin_layout Plain Layout
 \begin_inset Caption Standard
@@ -3010,6 +3034,298 @@ RBF
 
 \end_layout
 
+\begin_layout Subsection
+Statistics
+\end_layout
+
+\begin_layout Standard
+Due to computational constraints,
+ the 30-run stability analysis was conducted for the Random Forest model only,
+ as the model with the highest Precision among the benchmarked methods;
+ extending this analysis to the remaining six models is left for future work.
+ For this stability analysis,
+ the Random Forest was configured with 200 trees (rather than the 100 trees used in the main benchmarking of Section 3.2 and Tables 2–4),
+ in order to provide a more robust and representative estimate of run-to-run variance.
+\end_layout
+
+\begin_layout Standard
+The following five figures were produced from the 30-run stability analysis and the overall model-comparison results contained in the accompanying experimental workbook.
+ They are intended to supplement Section 3 (Results) with a visual,
+ league-level and run-level view of model robustness,
+ and to support the completed Conclusions section at the end of this document.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+placement H
+alignment document
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename football1.png
+	scale 80
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Mean Precision,
+ Recall and Error (%) of the Random Forest model (200 trees,
+ 30-run average) for the Home Win and Away Win markets,
+ compared across the pooled dataset ("All Leagues") and the two individually evaluated leagues,
+ French 1 and German 1.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset VSpace 6pt
+\end_inset
+
+The grouped comparison shows that Precision is fairly stable across leagues (60.98–68.95% for Home Win;
+ 69.11–69.83% for Away Win),
+ but Recall is markedly more sensitive to the league subset.
+ For the Away Win market in particular,
+ Recall collapses from 58.21% on the pooled dataset to 21.05% on French 1 and 31.25% on German 1.
+ Since Away Win is already the minority outcome class in most domestic leagues,
+ restricting training and evaluation to a single,
+ smaller league sharply reduces the number of positive (away-win) examples available to the model,
+ which pushes the classifier towards more conservative,
+ higher-precision but lower-recall behaviour.
+ Home Win shows the same direction of effect,
+ though less severely,
+ with German 1 trading Recall (41.65%) for higher Precision (68.95%) relative to the pooled model.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+placement H
+alignment document
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename football2.png
+	scale 80
+
+\end_inset
+
+
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Distribution of the Random Forest Error Rate (%) over 30 independent runs (200 trees),
+ shown separately for the Home Win and Away Win markets and for each league subset.
+ Diamonds mark the mean;
+ the horizontal line marks the median;
+ circles denote outlier runs.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset VSpace 6pt
+\end_inset
+
+The box plot is the clearest evidence of statistical stability in the study.
+ The pooled ("All Leagues") boxes are visibly the narrowest for both markets,
+ with an interquartile range of well under one percentage point,
+ confirming that the model's error is not the product of a lucky or unlucky random seed.
+ The single-league boxes are noticeably wider —
+ French 1 Home Win ranges from 32.55% to 34.11% and German 1 Away Win from 24.63% to 26.54% —
+ indicating that model performance on smaller,
+ single-league samples is more sensitive to the particular train/test partition drawn in each of the 30 runs.
+ This supports training the calibrated model on the pooled,
+ multi-league dataset rather than on isolated per-league subsets whenever a league-specific deployment is not strictly required.
+\begin_inset VSpace 6pt
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+placement H
+alignment document
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename football3.png
+	scale 60
+
+\end_inset
+
+
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Precision versus Recall for each of the 30 Random Forest runs,
+ grouped by league and market (circles = Home Win,
+ triangles = Away Win).
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset VSpace 6pt
+\end_inset
+
+Each cluster of points corresponds to one of the six run-groups from Figure 2,
+ and the tightness of a cluster is a direct visual proxy for run-to-run consistency.
+ The pooled-dataset clusters (blue) are compact,
+ confirming the low variance already observed in the box plot.
+ The single-league clusters,
+ by contrast,
+ are visibly more elongated along the Recall axis —
+ most clearly for French 1 Away Win (orange triangles),
+ which occupies a narrow Precision band around 67–73% but a wide Recall band from roughly 19% to 23%.
+ This pattern is consistent with the smaller effective sample size of single-league evaluation:
+ Precision is estimated from a comparatively larger pool of predicted positives,
+ while Recall depends on the (much smaller) count of true away-win matches actually present in that league's test fold,
+ making it inherently noisier from run to run.
+\begin_inset VSpace 6pt
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+placement H
+alignment document
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename football4.png
+	scale 60
+
+\end_inset
+
+
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Error Rate (%) of the pooled ("All Leagues") Random Forest model across the 30 individual runs,
+ for the Home Win (top) and Away Win (bottom) markets.
+ Dashed lines mark the 30-run mean
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+No individual run departs materially from the mean trend in either market:
+ Home Win error oscillates within roughly 34.5–34.8% and Away Win error within roughly 27.9–28.1%,
+ with no visible upward or downward drift across the sequence of runs.
+ This absence of any isolated spike or systematic trend rules out a training-order or seed-dependent instability in the pooled configuration,
+ and is consistent with the narrow boxes obtained for the same group in Figure above.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+placement H
+alignment document
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename football5.png
+	width 80text%
+	height 80theight%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Heatmap of Precision,
+ Recall and Error (%) for all seven benchmarked models on the Home Win (left) and Away Win (right) markets.
+ The Error column is displayed inverted (100 − Error) so that green consistently denotes better performance across all three columns;
+ the numeric labels show the original,
+ non-inverted values.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+The heatmap condenses Tables of the manuscript into a single,
+ immediately readable panel.
+ Random Forest and Logistic Regression stand out with the darkest green cells in the Precision column for both markets,
+ confirming their role as the most structurally stable,
+ high-precision methods.
+ The MLP row is the greenest in the Recall column for both markets (63.94% Home Win,
+ 60.25% Away Win),
+ visually reinforcing the paper's central claim that the neural network best recovers "hidden value" opportunities.
+ RBF is uniformly the weakest model,
+ appearing in red across nearly every cell for both markets,
+ which visually isolates it as the clear outlier among the seven benchmarked algorithms.
+\end_layout
+
 \begin_layout Section
 Conclusions
 \begin_inset CommandInset label
@@ -3019,6 +3335,67 @@ name "sec:Conclusions"
 \end_inset
 
 
+\end_layout
+
+\begin_layout Standard
+This study presented a unified benchmarking and calibration framework for football match outcome prediction,
+ evaluating seven machine learning paradigms —
+ Logistic Regression,
+ GAM,
+ FastTree,
+ LightGBM,
+ Random Forest,
+ RBF,
+ and MLP —
+ on a large-scale dataset of approximately 230,000 matches spanning 2018–2025.
+ Under strictly uniform experimental conditions,
+ Random Forest and Logistic Regression consistently delivered the highest Precision for both the Home Win (65.11% and 65.03%,
+ respectively) and Away Win markets (69.07% and 68.21%,
+ respectively),
+ confirming their suitability as stable,
+ low-variance baselines.
+ The Multi-Layer Perceptron,
+ in contrast,
+ achieved the highest Recall in both markets (63.94% for Home Win and 60.25% for Away Win),
+ indicating a superior ability to capture the non-linear feature interactions that drive less obvious,
+ higher-value outcomes.
+ RBF consistently underperformed across every metric and both markets,
+ making it unsuitable for this task in its present configuration.
+\end_layout
+
+\begin_layout Standard
+The 30-run stability analysis conducted on the Random Forest model reinforces these findings from a robustness perspective.
+ When trained and evaluated on the full,
+ pooled multi-league dataset,
+ the model's Error Rate,
+ Precision,
+ and Recall all exhibited very low run-to-run variance (standard deviations below 0.3 percentage points for Error),
+ confirming that the reported performance is a reliable structural property of the model rather than an artifact of a favourable random seed.
+ However,
+ when the same architecture was restricted to individual leagues —
+ French 1 and German 1 —
+ both the variance and the bias of the estimates increased substantially,
+ most visibly in Recall for the Away Win market,
+ which fell to 21.05% and 31.25% respectively,
+ compared with 58.21% on the pooled data.
+ This pattern is attributable to the reduced number of minority-class (away-win) examples available within a single league,
+ and it carries a practical implication for deployment:
+ a pooled,
+ multi-league training strategy should be preferred over per-league retraining whenever data volume in a target league is limited,
+ in order to preserve both the stability and the recall of the resulting betting signals.
+\end_layout
+
+\begin_layout Standard
+Taken together,
+ these results show that combining rigorous multi-model benchmarking with an explicit stability analysis provides a more complete and trustworthy picture of predictive performance than single-run accuracy figures alone.
+ As outlined in the Introduction,
+ the next phase of this research applies the Newton–Raphson de-vigging procedure and an Isotonic Calibration layer to the raw outputs of these models,
+ in order to transform them into objective,
+ well-calibrated probabilities from which robust betting signals can be derived.
+ Future work will extend the present 30-run robustness protocol to the remaining six algorithms and to additional leagues,
+ and will investigate whether league-aware feature engineering or transfer-learning strategies can recover the Recall lost when a model is confined to a single,
+ smaller competition,
+ without sacrificing the stability demonstrated by the pooled configuration.
 \end_layout
 
 \begin_layout Standard
