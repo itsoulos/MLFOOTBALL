@@ -295,14 +295,14 @@ Football match outcomes are influenced by a complex interplay of dynamic team st
 ranging from linear models (Logistic Regression) and generalized additive frameworks (GAM) to tree structures (FastTree,
  LightGBM,
  Random Forest) and Neural Network models (MLP).
- To support future probability calibration,
- bookmaker odds are transformed using the Newton–Raphson method to remove bookmaker margins.
- The resulting predictive framework establishes the basis for the subsequent integration of an Isotonic Calibration layer for probability estimation and betting signal generation.
+ To enhance the reliability of our predictions,
+ we implement the Newton–Raphson method to strip away bookmaker margins and incorporate an Isotonic Calibration layer for the subsequent derivation of robust betting signals.
  Our empirical results demonstrate that while methods like Random Forest excel in overall Precision (reaching 65.11% for Home Win and 69.07% for Away Win),
  the Multi-Layer Perceptron (MLP) yields superior non-linear feature interaction mapping,
  achieving the highest Recall across both markets (63.94% and 60.25% respectively).
- Our findings show that advanced feature engineering combined with systematic benchmarking enables the development of reliable predictive models,
- while establishing the foundation for subsequent probability calibration and betting-oriented decision support.
+ Our findings show that by combining advanced feature engineering with probability calibration,
+ we can create more reliable models,
+ helping to manage risk and identify betting value more effectively than standard statistical methods.
 \end_layout
 
 \begin_layout Keywords
@@ -673,7 +673,7 @@ Performance Stability:
 Non-Linear Interaction Mapping:
  The Multi-Layer Perceptron (MLP) acts as the most balanced model,
  consistently achieving the highest Recall in both markets.
- This suggests that the MLP is better at mapping complex feature interactions and identifying matches with higher expected betting value that traditional statistical models often miss.
+ This suggests that the MLP is better at mapping complex feature interactions and identifying "hidden value" opportunities that traditional statistical models often miss.
 \end_layout
 
 \end_deeper
@@ -687,11 +687,11 @@ Reproducible Large-Scale Evaluation:
 \end_layout
 
 \begin_layout Standard
-Overall,
- the proposed framework provides a reproducible methodology for evaluating multiple machine learning paradigms under identical experimental conditions.
- The experimental results indicate that the MLP captures complex non-linear feature interactions more effectively than the remaining benchmarked methods,
- while the Random Forest exhibits superior precision and stability.
- These findings support the development of calibrated predictive systems for football match forecasting and subsequent probability-based decision making.
+Ultimately,
+ this work helps bridge the gap between simple statistical forecasting and more practical,
+ value-driven risk management.
+ By showing that the MLP maintains structural integrity while maximizing the recovery of betting value,
+ we provide a reliable roadmap for building scalable and calibrated predictive systems in sports analytics.
 \end_layout
 
 \begin_layout Standard
@@ -2318,28 +2318,12 @@ Experimental results
 \end_layout
 
 \begin_layout Standard
-Table 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "tab:Home-win-experimental"
-plural "false"
-caps "false"
-noprefix "false"
-nolink "false"
-
-\end_inset
-
- depicts the experimental results using the incorporated method on the Home Win dataset.
- 
-\end_layout
-
-\begin_layout Standard
 \begin_inset Float table
 placement H
 alignment document
 wide false
 sideways false
-status collapsed
+status open
 
 \begin_layout Plain Layout
 \begin_inset Caption Standard
@@ -2690,25 +2674,13 @@ RBF
 
 \end_inset
 
-Similarly,
- Table 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "tab:Away-win-experimental"
-plural "false"
-caps "false"
-noprefix "false"
-nolink "false"
 
-\end_inset
-
- presents the experimental results on the Away win dataset with the assistance of the the used machine learning methods.
 \begin_inset Float table
 placement H
 alignment document
 wide false
 sideways false
-status collapsed
+status open
 
 \begin_layout Plain Layout
 \begin_inset Caption Standard
@@ -3067,34 +3039,20 @@ Statistics
 \end_layout
 
 \begin_layout Standard
-The following five figures were produced from the 30-run stability analysis and the overall model-comparison results contained in the accompanying experimental workbook.
- They are intended to supplement the experimental results with a visual,
- league-level and run-level view of model robustness,
- and to support the completed Conclusions section at the end of this document.
- The Figure 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "fig:meanTrees"
-plural "false"
-caps "false"
-noprefix "false"
-nolink "false"
-
-\end_inset
-
- illustrates the average precision,
- recall,
- and classification error achieved by the Random Forest model (200 trees,
- averaged over 30 runs) for the Home Win and Away Win markets.
- The results are reported for both the pooled dataset ("All Leagues") and each of the ten leagues evaluated individually.
- 
+Due to computational constraints,
+ the 30-run stability analysis was conducted for the Random Forest model only,
+ as the model with the highest Precision among the benchmarked methods;
+ extending this analysis to the remaining six models is left for future work.
+ For this stability analysis,
+ the Random Forest was configured with 200 trees (rather than the 100 trees used in the main benchmarking of Section 3.2 and Tables 2–4),
+ in order to provide a more robust and representative estimate of run-to-run variance.
 \end_layout
 
 \begin_layout Standard
-\begin_inset VSpace 6pt
-\end_inset
-
-
+The following five figures were produced from the 30-run stability analysis and the overall model-comparison results contained in the accompanying experimental workbook.
+ They are intended to supplement Section 3 (Results) with a visual,
+ league-level and run-level view of model robustness,
+ and to support the completed Conclusions section at the end of this document.
 \end_layout
 
 \begin_layout Standard
@@ -3106,10 +3064,10 @@ sideways false
 status open
 
 \begin_layout Plain Layout
+\align center
 \begin_inset Graphics
-	filename all4.png
-	lyxscale 50
-	scale 40
+	filename football1.png
+	scale 80
 
 \end_inset
 
@@ -3123,14 +3081,8 @@ status open
 Mean Precision,
  Recall and Error (%) of the Random Forest model (200 trees,
  30-run average) for the Home Win and Away Win markets,
- compared across the pooled dataset ("All Leagues") and the ten individually evaluated leagues.
-\begin_inset CommandInset label
-LatexCommand label
-name "fig:meanTrees"
-
-\end_inset
-
-
+ compared across the pooled dataset ("All Leagues") and the two individually evaluated leagues,
+ French 1 and German 1.
 \end_layout
 
 \end_inset
@@ -3144,25 +3096,23 @@ name "fig:meanTrees"
 
 \end_inset
 
-The grouped comparison,
- now extended to all ten individually evaluated leagues alongside the pooled dataset,
- confirms that Precision remains comparatively stable across leagues (53.98% for Japan 1 to 69.36% for German 1,
- Home Win;
- 33.60% for German 2 to 69.52% for French 1,
- Away Win),
- while Recall is markedly more league-dependent.
- For the Away Win market,
- Recall collapses from 58.24% on the pooled dataset to as low as 5.13% (German 2) and 7.55% (Eng 2),
- and reaches at most 38.55% (Italy 1) among the individually evaluated leagues —
- still well below the pooled figure.
- Home Win shows the same pattern,
- with Recall ranging from 22.74% (Italy 2) up to 61.49% (Eng 1),
- the latter being the only individual league to approach the pooled model's 63.04%.
+
+\begin_inset VSpace 6pt
+\end_inset
+
+The grouped comparison shows that Precision is fairly stable across leagues (60.98–68.95% for Home Win;
+ 69.11–69.83% for Away Win),
+ but Recall is markedly more sensitive to the league subset.
+ For the Away Win market in particular,
+ Recall collapses from 58.21% on the pooled dataset to 21.05% on French 1 and 31.25% on German 1.
  Since Away Win is already the minority outcome class in most domestic leagues,
  restricting training and evaluation to a single,
- smaller league sharply reduces the number of positive examples available to the model,
- consistently pushing the classifier towards more conservative,
+ smaller league sharply reduces the number of positive (away-win) examples available to the model,
+ which pushes the classifier towards more conservative,
  higher-precision but lower-recall behaviour.
+ Home Win shows the same direction of effect,
+ though less severely,
+ with German 1 trading Recall (41.65%) for higher Precision (68.95%) relative to the pooled model.
 \end_layout
 
 \begin_layout Standard
@@ -3174,10 +3124,10 @@ sideways false
 status open
 
 \begin_layout Plain Layout
+\align center
 \begin_inset Graphics
-	filename all3.png
-	lyxscale 50
-	scale 40
+	filename football2.png
+	scale 80
 
 \end_inset
 
@@ -3190,13 +3140,6 @@ Distribution of the Random Forest Error Rate (%) over 30 independent runs (200 t
  Diamonds mark the mean;
  the horizontal line marks the median;
  circles denote outlier runs.
-\begin_inset CommandInset label
-LatexCommand label
-name "fig:Distribution-of-the"
-
-\end_inset
-
-
 \end_layout
 
 \end_inset
@@ -3210,49 +3153,16 @@ name "fig:Distribution-of-the"
 \begin_inset VSpace 6pt
 \end_inset
 
-The box plot presented in Figure 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "fig:Distribution-of-the"
-plural "false"
-caps "false"
-noprefix "false"
-nolink "false"
-
-\end_inset
-
- is the clearest evidence of statistical stability in the study.
+The box plot is the clearest evidence of statistical stability in the study.
  The pooled ("All Leagues") boxes are visibly the narrowest for both markets,
  with an interquartile range of well under one percentage point,
  confirming that the model's error is not the product of a lucky or unlucky random seed.
- The single-league boxes are noticeably wider than the pooled model across all ten leagues,
- with the extremes illustrating the effect clearly:
- Home Win Error ranges from a low of 32.15% (Italy 1) to a high of 41.46% (Eng 2),
- while Away Win Error ranges from 25.62% (Italy 1) to 34.32% (Japan 1).
- Italy 1 is consistently the most stable individual league in both markets,
- while Eng 2 (Home Win) and Japan 1 (Away Win) show both the highest mean Error and the widest run-to-run spread —
+ The single-league boxes are noticeably wider —
+ French 1 Home Win ranges from 32.55% to 34.11% and German 1 Away Win from 24.63% to 26.54% —
  indicating that model performance on smaller,
- single-league samples is sensitive not only to Recall but to overall predictive stability,
- and more susceptible to the particular train/test partition drawn in each of the 30 runs.
+ single-league samples is more sensitive to the particular train/test partition drawn in each of the 30 runs.
  This supports training the calibrated model on the pooled,
  multi-league dataset rather than on isolated per-league subsets whenever a league-specific deployment is not strictly required.
-\end_layout
-
-\begin_layout Standard
-Figure 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "fig:Precision-versus-Recall"
-plural "false"
-caps "false"
-noprefix "false"
-nolink "false"
-
-\end_inset
-
- displays the Precision–Recall results obtained from the 30 Random Forest runs for each league and market.
- The Home Win market is indicated by circles,
- while the Away Win market is represented by triangles.
 \begin_inset VSpace 6pt
 \end_inset
 
@@ -3270,8 +3180,7 @@ status open
 \begin_layout Plain Layout
 \align center
 \begin_inset Graphics
-	filename all2.png
-	lyxscale 50
+	filename football3.png
 	scale 60
 
 \end_inset
@@ -3283,13 +3192,6 @@ status open
 Precision versus Recall for each of the 30 Random Forest runs,
  grouped by league and market (circles = Home Win,
  triangles = Away Win).
-\begin_inset CommandInset label
-LatexCommand label
-name "fig:Precision-versus-Recall"
-
-\end_inset
-
-
 \end_layout
 
 \end_inset
@@ -3297,9 +3199,17 @@ name "fig:Precision-versus-Recall"
 
 \end_layout
 
+\begin_layout Plain Layout
+
+\end_layout
+
 \end_inset
 
-Each cluster of points corresponds to one of the twenty-two run-groups from Figure 1,
+
+\begin_inset VSpace 6pt
+\end_inset
+
+Each cluster of points corresponds to one of the six run-groups from Figure 2,
  and the tightness of a cluster is a direct visual proxy for run-to-run consistency.
  The pooled-dataset clusters (blue) are compact,
  confirming the low variance already observed in the box plot.
@@ -3312,26 +3222,10 @@ Each cluster of points corresponds to one of the twenty-two run-groups from Figu
  Precision is estimated from a comparatively larger pool of predicted positives,
  while Recall depends on the (much smaller) count of true away-win matches actually present in that league's test fold,
  making it inherently noisier from run to run.
- This pattern generalizes across all ten leagues:
- German 2 Away Win shows the most extreme case,
- with Recall collapsing to a 30-run mean of just 5.13% despite a Precision of 33.60%,
- reflecting the very small number of true away-win matches available within that single league's test folds.
-\end_layout
-
-\begin_layout Standard
-Figure 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "fig:Error-Rate"
-plural "false"
-caps "false"
-noprefix "false"
-nolink "false"
-
+\begin_inset VSpace 6pt
 \end_inset
 
- displays the classification error recorded over 30 Random Forest runs for the pooled ("All Leagues") model in the Home Win (top) and Away Win (bottom) markets.
- The dashed lines represent the corresponding mean error across all runs.
+
 \end_layout
 
 \begin_layout Standard
@@ -3356,14 +3250,7 @@ status open
 \begin_layout Plain Layout
 Error Rate (%) of the pooled ("All Leagues") Random Forest model across the 30 individual runs,
  for the Home Win (top) and Away Win (bottom) markets.
- Dashed lines mark the 30-run mean.
-\begin_inset CommandInset label
-LatexCommand label
-name "fig:Error-Rate"
-
-\end_inset
-
-
+ Dashed lines mark the 30-run mean
 \end_layout
 
 \end_inset
@@ -3377,26 +3264,11 @@ name "fig:Error-Rate"
 
 \end_inset
 
-
-\begin_inset VSpace 6pt
-\end_inset
-
 No individual run departs materially from the mean trend in either market:
  Home Win error oscillates within roughly 34.5–34.8% and Away Win error within roughly 27.9–28.1%,
  with no visible upward or downward drift across the sequence of runs.
  This absence of any isolated spike or systematic trend rules out a training-order or seed-dependent instability in the pooled configuration,
- and is consistent with the narrow boxes obtained for the same group in Figure 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "fig:Heatmap-of-Precision,"
-plural "false"
-caps "false"
-noprefix "false"
-nolink "false"
-
-\end_inset
-
-.
+ and is consistent with the narrow boxes obtained for the same group in Figure above.
 \end_layout
 
 \begin_layout Standard
@@ -3408,11 +3280,11 @@ sideways false
 status open
 
 \begin_layout Plain Layout
-\align left
+\align center
 \begin_inset Graphics
-	filename all.png
-	lyxscale 50
-	scale 40
+	filename football5.png
+	width 80text%
+	height 80theight%
 
 \end_inset
 
@@ -3428,13 +3300,6 @@ Heatmap of Precision,
  The Error column is displayed inverted (100 − Error) so that green consistently denotes better performance across all three columns;
  the numeric labels show the original,
  non-inverted values.
-\begin_inset CommandInset label
-LatexCommand label
-name "fig:Heatmap-of-Precision,"
-
-\end_inset
-
-
 \end_layout
 
 \end_inset
@@ -3508,16 +3373,13 @@ The 30-run stability analysis conducted on the Random Forest model reinforces th
  confirming that the reported performance is a reliable structural property of the model rather than an artifact of a favourable random seed.
  However,
  when the same architecture was restricted to individual leagues —
- evaluated across all ten leagues available in the workbook —
- both the variance and the bias of the estimates increased substantially and consistently,
+ French 1 and German 1 —
+ both the variance and the bias of the estimates increased substantially,
  most visibly in Recall for the Away Win market,
- which fell as low as 5.13% (German 2) and did not exceed 38.55% (Italy 1) in any single league,
- compared with 58.24% on the pooled data.
- Home Win Recall showed the same directional effect,
- though less severely,
- ranging from 22.74% (Italy 2) to 61.49% (Eng 1).
- This pattern held across every individually evaluated league without exception and is attributable to the reduced number of minority-class (away-win) examples available within a single league.
- It carries a practical implication for deployment:
+ which fell to 21.05% and 31.25% respectively,
+ compared with 58.21% on the pooled data.
+ This pattern is attributable to the reduced number of minority-class (away-win) examples available within a single league,
+ and it carries a practical implication for deployment:
  a pooled,
  multi-league training strategy should be preferred over per-league retraining whenever data volume in a target league is limited,
  in order to preserve both the stability and the recall of the resulting betting signals.
@@ -3530,9 +3392,7 @@ Taken together,
  the next phase of this research applies the Newton–Raphson de-vigging procedure and an Isotonic Calibration layer to the raw outputs of these models,
  in order to transform them into objective,
  well-calibrated probabilities from which robust betting signals can be derived.
- While the present study substantially extends the league-level robustness analysis to ten individually evaluated leagues,
- future work will extend the present 30-run robustness protocol to the remaining six algorithms,
- to leagues beyond those currently available in the workbook,
+ Future work will extend the present 30-run robustness protocol to the remaining six algorithms and to additional leagues,
  and will investigate whether league-aware feature engineering or transfer-learning strategies can recover the Recall lost when a model is confined to a single,
  smaller competition,
  without sacrificing the stability demonstrated by the pooled configuration.
