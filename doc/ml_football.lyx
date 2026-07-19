@@ -1,4 +1,4 @@
-#LyX 2.4 created this file. For more info see https://www.lyx.org/
+#LyX 2.5 created this file. For more info see https://www.lyx.org/
 \lyxformat 620
 \begin_document
 \begin_header
@@ -216,7 +216,7 @@ End
 \begin_body
 
 \begin_layout Title
-Predicting Football Match Outcomes Using Machine Learning and Probability Calibration 
+Predicting Football Match Outcomes Using Machine Learning 
 \end_layout
 
 \begin_layout Author
@@ -1237,7 +1237,7 @@ AwayFTSRatio
  (AFTS) capture probabilistic historical frequencies:
 \begin_inset Formula 
 \begin{equation}
-HCSR=\frac{\sum_{i=1}^{N}\mathbb{I}(G_{H,c}=0)}{N},\quad AFTS=\frac{\sum_{j=1}^{N}\mathbb{I}(G_{A,s}=0)}{N}\label{eq:HCSR}
+HCSR=\frac{\sum^{N}_{i=1}\mathbb{I}(G_{H,c}=0)}{N},\quad AFTS=\frac{\sum^{N}_{j=1}\mathbb{I}(G_{A,s}=0)}{N}\label{eq:HCSR}
 \end{equation}
 
 \end_inset
@@ -2318,6 +2318,71 @@ Experimental results
 \end_layout
 
 \begin_layout Standard
+Definition of the two binary problems.
+ Before presenting the numerical results,
+ it is important to clarify how the target variable was constructed for each market.
+ The original dataset label (Label ∈ {1,
+ X,
+ 2}) corresponds to the three-way outcome of a match (home win,
+ draw,
+ away win).
+ For the purposes of this analysis,
+ the problem was not treated as a three-class classification task,
+ but was instead reformulated into two separate binary classification problems,
+ one for each betting market:
+\end_layout
+
+\begin_layout Standard
+Home Win market (Table 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "tab:Home-win-experimental"
+plural "false"
+caps "false"
+noprefix "false"
+nolink "false"
+
+\end_inset
+
+):
+ The positive class corresponds to the outcome "1" (home win),
+ while the classes "X" (draw) and "2" (away win) were merged into a single negative class,
+ "not Home Win." In other words,
+ the model is asked to answer the question "will the home team win or not," collapsing the distinction between a draw and an away win.
+\end_layout
+
+\begin_layout Standard
+Away Win market (Table 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "tab:Away-win-experimental"
+plural "false"
+caps "false"
+noprefix "false"
+nolink "false"
+
+\end_inset
+
+):
+ Conversely,
+ the positive class corresponds to the outcome "2" (away win),
+ while the classes "X" (draw) and "1" (home win) were merged into a single negative class,
+ "not Away Win."
+\end_layout
+
+\begin_layout Standard
+This approach was chosen because it directly mirrors how real-world betting markets of the "Double Chance" / single-market type are structured (e.g.,
+ "1" versus "X2," and "2" versus "1X"),
+ and it allows each model to be independently optimized for the specific market of interest,
+ without the constraints of a shared multi-class loss function.
+ It is worth noting that this merging directly affects class balance:
+ in the Away Win market,
+ the positive class ("2") is the minority category in most leagues,
+ which partly explains the systematically lower Recall values observed both in Table 4 and in the per-league stability analysis (§3.3,
+ Figures 1–3).
+\end_layout
+
+\begin_layout Standard
 Table 
 \begin_inset CommandInset ref
 LatexCommand ref
@@ -2339,7 +2404,7 @@ placement H
 alignment document
 wide false
 sideways false
-status collapsed
+status open
 
 \begin_layout Plain Layout
 \begin_inset Caption Standard
@@ -2690,6 +2755,64 @@ RBF
 
 \end_inset
 
+
+\end_layout
+
+\begin_layout Standard
+Home Win results (Table 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "tab:Home-win-experimental"
+plural "false"
+caps "false"
+noprefix "false"
+nolink "false"
+
+\end_inset
+
+).
+ Table 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "tab:Home-win-experimental"
+plural "false"
+caps "false"
+noprefix "false"
+nolink "false"
+
+\end_inset
+
+ summarizes the performance of the seven methods on the binary "Home Win vs.
+ merged X2" problem.
+ Random Forest achieved the highest Precision overall (65.11%),
+ with Logistic Regression close behind (65.03%) and also recording the lowest Error among all seven methods (34.51%).
+ Together,
+ these two methods confirm their role as the most structurally stable,
+ high-precision baselines for this market.
+ In contrast,
+ the MLP,
+ despite showing the highest error (35.05%) and the lowest Precision (64.21%) in the group,
+ stood out with the highest Recall (63.94%),
+ indicating that the network recovers a larger proportion of actual home-win instances,
+ even at the cost of somewhat lower precision on its positive predictions.
+ RBF remained clearly the weakest model (Error 44.31%,
+ Precision 54.75%,
+ Recall 54.71%),
+ confirming its limited suitability for this task under the current parameterization (Table 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "tab:Experimental-settings."
+plural "false"
+caps "false"
+noprefix "false"
+nolink "false"
+
+\end_inset
+
+).
+\end_layout
+
+\begin_layout Standard
 Similarly,
  Table 
 \begin_inset CommandInset ref
@@ -2708,7 +2831,7 @@ placement H
 alignment document
 wide false
 sideways false
-status collapsed
+status open
 
 \begin_layout Plain Layout
 \begin_inset Caption Standard
@@ -3062,6 +3185,79 @@ RBF
 
 \end_layout
 
+\begin_layout Standard
+Away Win results (Table 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "tab:Away-win-experimental"
+plural "false"
+caps "false"
+noprefix "false"
+nolink "false"
+
+\end_inset
+
+).
+ In the binary "Away Win vs.
+ merged X1" problem,
+ absolute error levels are lower than in the Home Win market (Error 27.82%–28.07% for the six strongest methods),
+ reflecting the fact that away wins occur less frequently overall,
+ which mechanically lowers the baseline error rate for a model that leans conservative.
+ Random Forest again delivered the highest Precision (69.07%),
+ followed by GAM (68.64%) and Logistic Regression (68.21%),
+ reinforcing the pattern observed in the Home Win market:
+ tree-based and linear methods excel at producing high-confidence positive predictions.
+ The MLP,
+ once more,
+ achieved the highest Recall (60.25%) while trailing slightly in Precision (67.59%) and Error (27.90% —
+ still competitive,
+ and in fact better than several tree-based alternatives).
+ RBF again underperformed substantially across all three metrics (Error 32.62%,
+ Precision 56.68%,
+ Recall 52.91%),
+ confirming its consistent weakness across both markets.
+\end_layout
+
+\begin_layout Standard
+Overall pattern.
+ Taken together,
+ Table 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "tab:Home-win-experimental"
+plural "false"
+caps "false"
+noprefix "false"
+nolink "false"
+
+\end_inset
+
+ and Table 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "tab:Away-win-experimental"
+plural "false"
+caps "false"
+noprefix "false"
+nolink "false"
+
+\end_inset
+
+ reveal a consistent trade-off across both merged binary formulations:
+ Random Forest and Logistic Regression prioritize Precision and stability,
+ making fewer but more confident positive predictions,
+ whereas the MLP prioritizes Recall,
+ capturing a larger share of true positive outcomes (whether "Home Win" or "Away Win") at a modest cost in precision.
+ This trade-off is directly relevant to betting-signal generation,
+ since a higher-Recall model such as the MLP is more likely to surface value opportunities that higher-Precision models miss,
+ while a higher-Precision model such as Random Forest is more likely to minimize false-positive betting signals.
+ This distinction motivates the subsequent stability analysis in §3.3,
+ where the behavior of the (higher-Precision) Random Forest model is examined in greater depth across leagues and repeated runs,
+ and it also motivates the planned Isotonic Calibration layer,
+ which aims to reconcile these Precision/Recall trade-offs into a single,
+ well-calibrated probability estimate for each of the two merged binary markets.
+\end_layout
+
 \begin_layout Subsection
 Statistics
 \end_layout
@@ -3388,7 +3584,7 @@ No individual run departs materially from the mean trend in either market:
  and is consistent with the narrow boxes obtained for the same group in Figure 
 \begin_inset CommandInset ref
 LatexCommand ref
-reference "fig:Heatmap-of-Precision,"
+reference "fig:Heatmap-of-Precision."
 plural "false"
 caps "false"
 noprefix "false"
@@ -3430,7 +3626,7 @@ Heatmap of Precision,
  non-inverted values.
 \begin_inset CommandInset label
 LatexCommand label
-name "fig:Heatmap-of-Precision,"
+name "fig:Heatmap-of-Precision."
 
 \end_inset
 
@@ -4531,7 +4727,6 @@ Microsoft.
 status collapsed
 
 \begin_layout Plain Layout
-
 https://dotnet.microsoft.com/en-us/apps/machinelearning-ai/ml-dotnet
 \end_layout
 
@@ -4620,17 +4815,14 @@ G.A.
 status open
 
 \begin_layout Plain Layout
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \end_layout
 
 \begin_layout Plain Layout
-
 %% for journal Sci
 \end_layout
 
 \begin_layout Plain Layout
-
 %
 \backslash
 reviewreports{
@@ -4641,7 +4833,6 @@ reviewreports{
 \end_layout
 
 \begin_layout Plain Layout
-
 %Reviewer 1 comments and authors' response
 \backslash
 
@@ -4650,7 +4841,6 @@ reviewreports{
 \end_layout
 
 \begin_layout Plain Layout
-
 %Reviewer 2 comments and authors' response
 \backslash
 
@@ -4659,17 +4849,14 @@ reviewreports{
 \end_layout
 
 \begin_layout Plain Layout
-
 %Reviewer 3 comments and authors' response
 \end_layout
 
 \begin_layout Plain Layout
-
 %}
 \end_layout
 
 \begin_layout Plain Layout
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \end_layout
 
@@ -4683,7 +4870,6 @@ reviewreports{
 status open
 
 \begin_layout Plain Layout
-
 
 \backslash
 PublishersNote{}
