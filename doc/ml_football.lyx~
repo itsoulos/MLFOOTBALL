@@ -1,5 +1,5 @@
-#LyX 2.4 created this file. For more info see https://www.lyx.org/
-\lyxformat 620
+#LyX 2.5 created this file. For more info see https://www.lyx.org/
+\lyxformat 643
 \begin_document
 \begin_header
 \save_transient_properties true
@@ -181,11 +181,19 @@ End
 \use_indices false
 \paperorientation portrait
 \suppress_date false
-\justification true
-\use_refstyle 0
+\justification default
+\crossref_package prettyref
 \use_formatted_ref 0
 \use_minted 0
 \use_lineno 0
+\backgroundcolor none
+\fontcolor none
+\notefontcolor lightgray
+\boxbgcolor red
+\table_border_color default
+\table_odd_row_color default
+\table_even_row_color default
+\table_alt_row_colors_start 1
 \index Index
 \shortcut idx
 \color #008000
@@ -211,12 +219,13 @@ End
 \html_be_strict false
 \docbook_table_output 0
 \docbook_mathml_prefix 1
+\docbook_mathml_version 0
 \end_header
 
 \begin_body
 
 \begin_layout Title
-Predicting Football Match Outcomes Using Machine Learning and Probability Calibration 
+Predicting Football Match Outcomes Using Machine Learning 
 \end_layout
 
 \begin_layout Author
@@ -295,14 +304,14 @@ Football match outcomes are influenced by a complex interplay of dynamic team st
 ranging from linear models (Logistic Regression) and generalized additive frameworks (GAM) to tree structures (FastTree,
  LightGBM,
  Random Forest) and Neural Network models (MLP).
- To enhance the reliability of our predictions,
- we implement the Newton–Raphson method to strip away bookmaker margins and incorporate an Isotonic Calibration layer for the subsequent derivation of robust betting signals.
+ To support future probability calibration,
+ bookmaker odds are transformed using the Newton–Raphson method to remove bookmaker margins.
+ The resulting predictive framework establishes the basis for the subsequent integration of an Isotonic Calibration layer for probability estimation and betting signal generation.
  Our empirical results demonstrate that while methods like Random Forest excel in overall Precision (reaching 65.11% for Home Win and 69.07% for Away Win),
  the Multi-Layer Perceptron (MLP) yields superior non-linear feature interaction mapping,
  achieving the highest Recall across both markets (63.94% and 60.25% respectively).
- Our findings show that by combining advanced feature engineering with probability calibration,
- we can create more reliable models,
- helping to manage risk and identify betting value more effectively than standard statistical methods.
+ Our findings show that advanced feature engineering combined with systematic benchmarking enables the development of reliable predictive models,
+ while establishing the foundation for subsequent probability calibration and betting-oriented decision support.
 \end_layout
 
 \begin_layout Keywords
@@ -673,10 +682,9 @@ Performance Stability:
 Non-Linear Interaction Mapping:
  The Multi-Layer Perceptron (MLP) acts as the most balanced model,
  consistently achieving the highest Recall in both markets.
- This suggests that the MLP is better at mapping complex feature interactions and identifying "hidden value" opportunities that traditional statistical models often miss.
+ This suggests that the MLP is better at mapping complex feature interactions and identifying matches with higher expected betting value that traditional statistical models often miss.
 \end_layout
 
-\end_deeper
 \begin_layout Itemize
 Reproducible Large-Scale Evaluation:
  Unlike many previous studies that evaluate a single predictive model or employ heterogeneous experimental settings,
@@ -686,12 +694,13 @@ Reproducible Large-Scale Evaluation:
  This unified evaluation protocol enables a fair comparison of fundamentally different machine learning paradigms and improves the reproducibility of the reported results.
 \end_layout
 
+\end_deeper
 \begin_layout Standard
-Ultimately,
- this work helps bridge the gap between simple statistical forecasting and more practical,
- value-driven risk management.
- By showing that the MLP maintains structural integrity while maximizing the recovery of betting value,
- we provide a reliable roadmap for building scalable and calibrated predictive systems in sports analytics.
+Overall,
+ the proposed framework provides a reproducible methodology for evaluating multiple machine learning paradigms under identical experimental conditions.
+ The experimental results indicate that the MLP captures complex non-linear feature interactions more effectively than the remaining benchmarked methods,
+ while the Random Forest exhibits superior precision and stability.
+ These findings support the development of calibrated predictive systems for football match forecasting and subsequent probability-based decision making.
 \end_layout
 
 \begin_layout Standard
@@ -1237,7 +1246,7 @@ AwayFTSRatio
  (AFTS) capture probabilistic historical frequencies:
 \begin_inset Formula 
 \begin{equation}
-HCSR=\frac{\sum_{i=1}^{N}\mathbb{I}(G_{H,c}=0)}{N},\quad AFTS=\frac{\sum_{j=1}^{N}\mathbb{I}(G_{A,s}=0)}{N}\label{eq:HCSR}
+HCSR=\frac{\sum^{N}_{i=1}\mathbb{I}(G_{H,c}=0)}{N},\quad AFTS=\frac{\sum^{N}_{j=1}\mathbb{I}(G_{A,s}=0)}{N}\label{eq:HCSR}
 \end{equation}
 
 \end_inset
@@ -2318,6 +2327,87 @@ Experimental results
 \end_layout
 
 \begin_layout Standard
+Definition of the two binary problems.
+ Before presenting the numerical results,
+ it is important to clarify how the target variable was constructed for each market.
+ The original dataset label (Label ∈ {1,
+ X,
+ 2}) corresponds to the three-way outcome of a match (home win,
+ draw,
+ away win).
+ For the purposes of this analysis,
+ the problem was not treated as a three-class classification task,
+ but was instead reformulated into two separate binary classification problems,
+ one for each betting market:
+\end_layout
+
+\begin_layout Standard
+Home Win market (Table 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "tab:Home-win-experimental"
+plural "false"
+caps "false"
+noprefix "false"
+nolink "false"
+
+\end_inset
+
+):
+ The positive class corresponds to the outcome "1" (home win),
+ while the classes "X" (draw) and "2" (away win) were merged into a single negative class,
+ "not Home Win." In other words,
+ the model is asked to answer the question "will the home team win or not," collapsing the distinction between a draw and an away win.
+\end_layout
+
+\begin_layout Standard
+Away Win market (Table 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "tab:Away-win-experimental"
+plural "false"
+caps "false"
+noprefix "false"
+nolink "false"
+
+\end_inset
+
+):
+ Conversely,
+ the positive class corresponds to the outcome "2" (away win),
+ while the classes "X" (draw) and "1" (home win) were merged into a single negative class,
+ "not Away Win."
+\end_layout
+
+\begin_layout Standard
+This approach was chosen because it directly mirrors how real-world betting markets of the "Double Chance" / single-market type are structured (e.g.,
+ "1" versus "X2," and "2" versus "1X"),
+ and it allows each model to be independently optimized for the specific market of interest,
+ without the constraints of a shared multi-class loss function.
+ It is worth noting that this merging directly affects class balance:
+ in the Away Win market,
+ the positive class ("2") is the minority category in most leagues,
+ which partly explains the systematically lower Recall values observed both in Table 4 and in the per-league stability analysis (§3.3,
+ Figures 1–3).
+\end_layout
+
+\begin_layout Standard
+Table 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "tab:Home-win-experimental"
+plural "false"
+caps "false"
+noprefix "false"
+nolink "false"
+
+\end_inset
+
+ depicts the experimental results using the incorporated method on the Home Win dataset.
+ 
+\end_layout
+
+\begin_layout Standard
 \begin_inset Float table
 placement H
 alignment document
@@ -2675,6 +2765,76 @@ RBF
 \end_inset
 
 
+\end_layout
+
+\begin_layout Standard
+Home Win results (Table 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "tab:Home-win-experimental"
+plural "false"
+caps "false"
+noprefix "false"
+nolink "false"
+
+\end_inset
+
+).
+ Table 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "tab:Home-win-experimental"
+plural "false"
+caps "false"
+noprefix "false"
+nolink "false"
+
+\end_inset
+
+ summarizes the performance of the seven methods on the binary "Home Win vs.
+ merged X2" problem.
+ Random Forest achieved the highest Precision overall (65.11%),
+ with Logistic Regression close behind (65.03%) and also recording the lowest Error among all seven methods (34.51%).
+ Together,
+ these two methods confirm their role as the most structurally stable,
+ high-precision baselines for this market.
+ In contrast,
+ the MLP,
+ despite showing the highest error (35.05%) and the lowest Precision (64.21%) in the group,
+ stood out with the highest Recall (63.94%),
+ indicating that the network recovers a larger proportion of actual home-win instances,
+ even at the cost of somewhat lower precision on its positive predictions.
+ RBF remained clearly the weakest model (Error 44.31%,
+ Precision 54.75%,
+ Recall 54.71%),
+ confirming its limited suitability for this task under the current parameterization (Table 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "tab:Experimental-settings."
+plural "false"
+caps "false"
+noprefix "false"
+nolink "false"
+
+\end_inset
+
+).
+\end_layout
+
+\begin_layout Standard
+Similarly,
+ Table 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "tab:Away-win-experimental"
+plural "false"
+caps "false"
+noprefix "false"
+nolink "false"
+
+\end_inset
+
+ presents the experimental results on the Away win dataset with the assistance of the the used machine learning methods.
 \begin_inset Float table
 placement H
 alignment document
@@ -3034,25 +3194,112 @@ RBF
 
 \end_layout
 
-\begin_layout Subsection
-Statistics
+\begin_layout Standard
+Away Win results (Table 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "tab:Away-win-experimental"
+plural "false"
+caps "false"
+noprefix "false"
+nolink "false"
+
+\end_inset
+
+).
+ In the binary "Away Win vs.
+ merged X1" problem,
+ absolute error levels are lower than in the Home Win market (Error 27.82%–28.07% for the six strongest methods),
+ reflecting the fact that away wins occur less frequently overall,
+ which mechanically lowers the baseline error rate for a model that leans conservative.
+ Random Forest again delivered the highest Precision (69.07%),
+ followed by GAM (68.64%) and Logistic Regression (68.21%),
+ reinforcing the pattern observed in the Home Win market:
+ tree-based and linear methods excel at producing high-confidence positive predictions.
+ The MLP,
+ once more,
+ achieved the highest Recall (60.25%) while trailing slightly in Precision (67.59%) and Error (27.90% —
+ still competitive,
+ and in fact better than several tree-based alternatives).
+ RBF again underperformed substantially across all three metrics (Error 32.62%,
+ Precision 56.68%,
+ Recall 52.91%),
+ confirming its consistent weakness across both markets.
 \end_layout
 
 \begin_layout Standard
-Due to computational constraints,
- the 30-run stability analysis was conducted for the Random Forest model only,
- as the model with the highest Precision among the benchmarked methods;
- extending this analysis to the remaining six models is left for future work.
- For this stability analysis,
- the Random Forest was configured with 200 trees (rather than the 100 trees used in the main benchmarking of Section 3.2 and Tables 2–4),
- in order to provide a more robust and representative estimate of run-to-run variance.
+Overall pattern.
+ Taken together,
+ Table 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "tab:Home-win-experimental"
+plural "false"
+caps "false"
+noprefix "false"
+nolink "false"
+
+\end_inset
+
+ and Table 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "tab:Away-win-experimental"
+plural "false"
+caps "false"
+noprefix "false"
+nolink "false"
+
+\end_inset
+
+ reveal a consistent trade-off across both merged binary formulations:
+ Random Forest and Logistic Regression prioritize Precision and stability,
+ making fewer but more confident positive predictions,
+ whereas the MLP prioritizes Recall,
+ capturing a larger share of true positive outcomes (whether "Home Win" or "Away Win") at a modest cost in precision.
+ This trade-off is directly relevant to betting-signal generation,
+ since a higher-Recall model such as the MLP is more likely to surface value opportunities that higher-Precision models miss,
+ while a higher-Precision model such as Random Forest is more likely to minimize false-positive betting signals.
+ This distinction motivates the subsequent stability analysis in §3.3,
+ where the behavior of the (higher-Precision) Random Forest model is examined in greater depth across leagues and repeated runs,
+ and it also motivates the planned Isotonic Calibration layer,
+ which aims to reconcile these Precision/Recall trade-offs into a single,
+ well-calibrated probability estimate for each of the two merged binary markets.
+\end_layout
+
+\begin_layout Subsection
+Statistical comparison of the experimental results
 \end_layout
 
 \begin_layout Standard
 The following five figures were produced from the 30-run stability analysis and the overall model-comparison results contained in the accompanying experimental workbook.
- They are intended to supplement Section 3 (Results) with a visual,
+ They are intended to supplement the experimental results with a visual,
  league-level and run-level view of model robustness,
  and to support the completed Conclusions section at the end of this document.
+ The Figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:meanTrees"
+plural "false"
+caps "false"
+noprefix "false"
+nolink "false"
+
+\end_inset
+
+ illustrates the average precision,
+ recall,
+ and classification error achieved by the Random Forest model (200 trees,
+ averaged over 30 runs) for the Home Win and Away Win markets.
+ The results are reported for both the pooled dataset ("All Leagues") and each of the ten leagues evaluated individually.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset VSpace 6pt
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -3064,10 +3311,10 @@ sideways false
 status open
 
 \begin_layout Plain Layout
-\align center
 \begin_inset Graphics
-	filename football1.png
-	scale 80
+	filename all4.png
+	lyxscale 50
+	scale 20
 
 \end_inset
 
@@ -3081,8 +3328,14 @@ status open
 Mean Precision,
  Recall and Error (%) of the Random Forest model (200 trees,
  30-run average) for the Home Win and Away Win markets,
- compared across the pooled dataset ("All Leagues") and the two individually evaluated leagues,
- French 1 and German 1.
+ compared across the pooled dataset ("All Leagues") and the ten individually evaluated leagues.
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:meanTrees"
+
+\end_inset
+
+
 \end_layout
 
 \end_inset
@@ -3096,23 +3349,25 @@ Mean Precision,
 
 \end_inset
 
-
-\begin_inset VSpace 6pt
-\end_inset
-
-The grouped comparison shows that Precision is fairly stable across leagues (60.98–68.95% for Home Win;
- 69.11–69.83% for Away Win),
- but Recall is markedly more sensitive to the league subset.
- For the Away Win market in particular,
- Recall collapses from 58.21% on the pooled dataset to 21.05% on French 1 and 31.25% on German 1.
+The grouped comparison,
+ now extended to all ten individually evaluated leagues alongside the pooled dataset,
+ confirms that Precision remains comparatively stable across leagues (53.98% for Japan 1 to 69.36% for German 1,
+ Home Win;
+ 33.60% for German 2 to 69.52% for French 1,
+ Away Win),
+ while Recall is markedly more league-dependent.
+ For the Away Win market,
+ Recall collapses from 58.24% on the pooled dataset to as low as 5.13% (German 2) and 7.55% (Eng 2),
+ and reaches at most 38.55% (Italy 1) among the individually evaluated leagues —
+ still well below the pooled figure.
+ Home Win shows the same pattern,
+ with Recall ranging from 22.74% (Italy 2) up to 61.49% (Eng 1),
+ the latter being the only individual league to approach the pooled model's 63.04%.
  Since Away Win is already the minority outcome class in most domestic leagues,
  restricting training and evaluation to a single,
- smaller league sharply reduces the number of positive (away-win) examples available to the model,
- which pushes the classifier towards more conservative,
+ smaller league sharply reduces the number of positive examples available to the model,
+ consistently pushing the classifier towards more conservative,
  higher-precision but lower-recall behaviour.
- Home Win shows the same direction of effect,
- though less severely,
- with German 1 trading Recall (41.65%) for higher Precision (68.95%) relative to the pooled model.
 \end_layout
 
 \begin_layout Standard
@@ -3124,10 +3379,10 @@ sideways false
 status open
 
 \begin_layout Plain Layout
-\align center
 \begin_inset Graphics
-	filename football2.png
-	scale 80
+	filename all3.png
+	lyxscale 50
+	scale 20
 
 \end_inset
 
@@ -3140,6 +3395,13 @@ Distribution of the Random Forest Error Rate (%) over 30 independent runs (200 t
  Diamonds mark the mean;
  the horizontal line marks the median;
  circles denote outlier runs.
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Distribution-of-the"
+
+\end_inset
+
+
 \end_layout
 
 \end_inset
@@ -3153,16 +3415,49 @@ Distribution of the Random Forest Error Rate (%) over 30 independent runs (200 t
 \begin_inset VSpace 6pt
 \end_inset
 
-The box plot is the clearest evidence of statistical stability in the study.
+The box plot presented in Figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Distribution-of-the"
+plural "false"
+caps "false"
+noprefix "false"
+nolink "false"
+
+\end_inset
+
+ is the clearest evidence of statistical stability in the study.
  The pooled ("All Leagues") boxes are visibly the narrowest for both markets,
  with an interquartile range of well under one percentage point,
  confirming that the model's error is not the product of a lucky or unlucky random seed.
- The single-league boxes are noticeably wider —
- French 1 Home Win ranges from 32.55% to 34.11% and German 1 Away Win from 24.63% to 26.54% —
+ The single-league boxes are noticeably wider than the pooled model across all ten leagues,
+ with the extremes illustrating the effect clearly:
+ Home Win Error ranges from a low of 32.15% (Italy 1) to a high of 41.46% (Eng 2),
+ while Away Win Error ranges from 25.62% (Italy 1) to 34.32% (Japan 1).
+ Italy 1 is consistently the most stable individual league in both markets,
+ while Eng 2 (Home Win) and Japan 1 (Away Win) show both the highest mean Error and the widest run-to-run spread —
  indicating that model performance on smaller,
- single-league samples is more sensitive to the particular train/test partition drawn in each of the 30 runs.
+ single-league samples is sensitive not only to Recall but to overall predictive stability,
+ and more susceptible to the particular train/test partition drawn in each of the 30 runs.
  This supports training the calibrated model on the pooled,
  multi-league dataset rather than on isolated per-league subsets whenever a league-specific deployment is not strictly required.
+\end_layout
+
+\begin_layout Standard
+Figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Precision-versus-Recall"
+plural "false"
+caps "false"
+noprefix "false"
+nolink "false"
+
+\end_inset
+
+ displays the Precision–Recall results obtained from the 30 Random Forest runs for each league and market.
+ The Home Win market is indicated by circles,
+ while the Away Win market is represented by triangles.
 \begin_inset VSpace 6pt
 \end_inset
 
@@ -3180,7 +3475,8 @@ status open
 \begin_layout Plain Layout
 \align center
 \begin_inset Graphics
-	filename football3.png
+	filename all2.png
+	lyxscale 50
 	scale 60
 
 \end_inset
@@ -3192,6 +3488,13 @@ status open
 Precision versus Recall for each of the 30 Random Forest runs,
  grouped by league and market (circles = Home Win,
  triangles = Away Win).
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Precision-versus-Recall"
+
+\end_inset
+
+
 \end_layout
 
 \end_inset
@@ -3199,17 +3502,9 @@ Precision versus Recall for each of the 30 Random Forest runs,
 
 \end_layout
 
-\begin_layout Plain Layout
-
-\end_layout
-
 \end_inset
 
-
-\begin_inset VSpace 6pt
-\end_inset
-
-Each cluster of points corresponds to one of the six run-groups from Figure 2,
+Each cluster of points corresponds to one of the twenty-two run-groups from Figure 1,
  and the tightness of a cluster is a direct visual proxy for run-to-run consistency.
  The pooled-dataset clusters (blue) are compact,
  confirming the low variance already observed in the box plot.
@@ -3222,10 +3517,26 @@ Each cluster of points corresponds to one of the six run-groups from Figure 2,
  Precision is estimated from a comparatively larger pool of predicted positives,
  while Recall depends on the (much smaller) count of true away-win matches actually present in that league's test fold,
  making it inherently noisier from run to run.
-\begin_inset VSpace 6pt
+ This pattern generalizes across all ten leagues:
+ German 2 Away Win shows the most extreme case,
+ with Recall collapsing to a 30-run mean of just 5.13% despite a Precision of 33.60%,
+ reflecting the very small number of true away-win matches available within that single league's test folds.
+\end_layout
+
+\begin_layout Standard
+Figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Error-Rate"
+plural "false"
+caps "false"
+noprefix "false"
+nolink "false"
+
 \end_inset
 
-
+ displays the classification error recorded over 30 Random Forest runs for the pooled ("All Leagues") model in the Home Win (top) and Away Win (bottom) markets.
+ The dashed lines represent the corresponding mean error across all runs.
 \end_layout
 
 \begin_layout Standard
@@ -3250,7 +3561,14 @@ status open
 \begin_layout Plain Layout
 Error Rate (%) of the pooled ("All Leagues") Random Forest model across the 30 individual runs,
  for the Home Win (top) and Away Win (bottom) markets.
- Dashed lines mark the 30-run mean
+ Dashed lines mark the 30-run mean.
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Error-Rate"
+
+\end_inset
+
+
 \end_layout
 
 \end_inset
@@ -3264,11 +3582,26 @@ Error Rate (%) of the pooled ("All Leagues") Random Forest model across the 30 i
 
 \end_inset
 
+
+\begin_inset VSpace 6pt
+\end_inset
+
 No individual run departs materially from the mean trend in either market:
  Home Win error oscillates within roughly 34.5–34.8% and Away Win error within roughly 27.9–28.1%,
  with no visible upward or downward drift across the sequence of runs.
  This absence of any isolated spike or systematic trend rules out a training-order or seed-dependent instability in the pooled configuration,
- and is consistent with the narrow boxes obtained for the same group in Figure above.
+ and is consistent with the narrow boxes obtained for the same group in Figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Heatmap-of-Precision."
+plural "false"
+caps "false"
+noprefix "false"
+nolink "false"
+
+\end_inset
+
+.
 \end_layout
 
 \begin_layout Standard
@@ -3280,11 +3613,11 @@ sideways false
 status open
 
 \begin_layout Plain Layout
-\align center
+\align left
 \begin_inset Graphics
-	filename football5.png
-	width 80text%
-	height 80theight%
+	filename all.png
+	lyxscale 50
+	scale 40
 
 \end_inset
 
@@ -3300,6 +3633,13 @@ Heatmap of Precision,
  The Error column is displayed inverted (100 − Error) so that green consistently denotes better performance across all three columns;
  the numeric labels show the original,
  non-inverted values.
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Heatmap-of-Precision."
+
+\end_inset
+
+
 \end_layout
 
 \end_inset
@@ -3373,13 +3713,16 @@ The 30-run stability analysis conducted on the Random Forest model reinforces th
  confirming that the reported performance is a reliable structural property of the model rather than an artifact of a favourable random seed.
  However,
  when the same architecture was restricted to individual leagues —
- French 1 and German 1 —
- both the variance and the bias of the estimates increased substantially,
+ evaluated across all ten leagues available in the workbook —
+ both the variance and the bias of the estimates increased substantially and consistently,
  most visibly in Recall for the Away Win market,
- which fell to 21.05% and 31.25% respectively,
- compared with 58.21% on the pooled data.
- This pattern is attributable to the reduced number of minority-class (away-win) examples available within a single league,
- and it carries a practical implication for deployment:
+ which fell as low as 5.13% (German 2) and did not exceed 38.55% (Italy 1) in any single league,
+ compared with 58.24% on the pooled data.
+ Home Win Recall showed the same directional effect,
+ though less severely,
+ ranging from 22.74% (Italy 2) to 61.49% (Eng 1).
+ This pattern held across every individually evaluated league without exception and is attributable to the reduced number of minority-class (away-win) examples available within a single league.
+ It carries a practical implication for deployment:
  a pooled,
  multi-league training strategy should be preferred over per-league retraining whenever data volume in a target league is limited,
  in order to preserve both the stability and the recall of the resulting betting signals.
@@ -3392,7 +3735,9 @@ Taken together,
  the next phase of this research applies the Newton–Raphson de-vigging procedure and an Isotonic Calibration layer to the raw outputs of these models,
  in order to transform them into objective,
  well-calibrated probabilities from which robust betting signals can be derived.
- Future work will extend the present 30-run robustness protocol to the remaining six algorithms and to additional leagues,
+ While the present study substantially extends the league-level robustness analysis to ten individually evaluated leagues,
+ future work will extend the present 30-run robustness protocol to the remaining six algorithms,
+ to leagues beyond those currently available in the workbook,
  and will investigate whether league-aware feature engineering or transfer-learning strategies can recover the Recall lost when a model is confined to a single,
  smaller competition,
  without sacrificing the stability demonstrated by the pooled configuration.
@@ -3582,6 +3927,16 @@ literal "false"
  Journal of Computational Physics,
  357,
  125-141.
+\begin_inset Flex URL
+status collapsed
+
+\begin_layout Plain Layout
+https://doi.org/10.1016/j.jcp.2017.11.039
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Bibliography
@@ -3614,6 +3969,16 @@ Kashinath,
  Philosophical Transactions of the Royal Society A,
  379(2194),
  20200093.
+\begin_inset Flex URL
+status collapsed
+
+\begin_layout Plain Layout
+https://doi.org/10.1098/rsta.2020.0093
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Bibliography
@@ -3642,6 +4007,16 @@ Viquar,
  Proceedings of IEMIS 2018,
  Volume 3,
  827-836.
+\begin_inset Flex URL
+status collapsed
+
+\begin_layout Plain Layout
+https://doi.org/10.1007/978-981-13-1501-5_72
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Bibliography
@@ -3669,6 +4044,16 @@ Luo,
  Monthly Notices of the Royal Astronomical Society,
  492(4),
  5377-5390.
+\begin_inset Flex URL
+status collapsed
+
+\begin_layout Plain Layout
+https://doi.org/10.1093/mnras/staa166
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Bibliography
@@ -3687,6 +4072,16 @@ Meuwly,
  Chemical Reviews,
  121(16),
  10218-10239.
+\begin_inset Flex URL
+status collapsed
+
+\begin_layout Plain Layout
+https://doi.org/10.1021/acs.chemrev.1c00033
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Bibliography
@@ -3701,7 +4096,8 @@ J.A.
  Aguiar,
  M.L.
  Gong,
- T.Tasdizen,
+ T.
+ Tasdizen,
  Crystallographic prediction from diffraction and chemistry data for higher throughput classification using machine learning,
  Computational Materials Science 
 \series bold
@@ -3710,6 +4106,16 @@ J.A.
 ,
  109409,
  2020.
+\begin_inset Flex URL
+status collapsed
+
+\begin_layout Plain Layout
+https://doi.org/10.1016/j.commatsci.2019.109409
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Bibliography
@@ -3733,6 +4139,16 @@ S.S.
 ,
  113,
  2019.
+\begin_inset Flex URL
+status collapsed
+
+\begin_layout Plain Layout
+https://doi.org/10.1186/s40537-019-0276-2
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Bibliography
@@ -3758,6 +4174,16 @@ L.
  255,
  2019.
  
+\begin_inset Flex URL
+status collapsed
+
+\begin_layout Plain Layout
+https://doi.org/10.3390/fi11120255
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Bibliography
@@ -3777,6 +4203,16 @@ Athey,
  An agenda (pp.
  507-547).
  University of Chicago Press.
+\begin_inset Flex URL
+status collapsed
+
+\begin_layout Plain Layout
+https://doi.org/10.7208/chicago/9780226613475.003.0021
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Bibliography
@@ -3803,6 +4239,16 @@ R.
  pp.
  196-210,
  2015.
+\begin_inset Flex URL
+status collapsed
+
+\begin_layout Plain Layout
+https://doi.org/10.1016/j.asoc.2014.12.028
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Bibliography
@@ -3828,6 +4274,16 @@ Ghai,
  (2022).
  Machine learning algorithms for signal and image processing.
  John Wiley & Sons.
+\begin_inset Flex URL
+status collapsed
+
+\begin_layout Plain Layout
+https://doi.org/10.1002/9781119861850
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Bibliography
@@ -3854,6 +4310,16 @@ Ahmed,
  Econometric reviews,
  29(5-6),
  594-621.
+\begin_inset Flex URL
+status collapsed
+
+\begin_layout Plain Layout
+https://doi.org/10.1080/07474938.2010.481556
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Bibliography
@@ -3877,6 +4343,16 @@ Zou,
  Artificial neural networks:
  methods and applications,
  14-22.
+\begin_inset Flex URL
+status collapsed
+
+\begin_layout Plain Layout
+https://doi.org/10.1007/978-1-60327-101-1_2
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Bibliography
@@ -3909,6 +4385,16 @@ Abiodun,
  A survey.
  Heliyon,
  4(11).
+\begin_inset Flex URL
+status collapsed
+
+\begin_layout Plain Layout
+https://doi.org/10.1016/j.heliyon.2018.e00938
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Bibliography
@@ -3928,6 +4414,16 @@ De Ville,
  Computational Statistics,
  5(6),
  448-455.
+\begin_inset Flex URL
+status collapsed
+
+\begin_layout Plain Layout
+https://doi.org/10.1007/s10462-011-9272-4
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Bibliography
@@ -3948,6 +4444,16 @@ Kotsiantis,
  Artificial Intelligence Review,
  39(4),
  261-283.
+\begin_inset Flex URL
+status collapsed
+
+\begin_layout Plain Layout
+https://doi.org/10.1007/s10462-011-9272-4
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Bibliography
@@ -3970,6 +4476,16 @@ Pisner,
  In Machine learning (pp.
  101-121).
  Academic Press.
+\begin_inset Flex URL
+status collapsed
+
+\begin_layout Plain Layout
+https://doi.org/10.1016/b978-0-12-815739-8.00006-7
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Bibliography
@@ -3995,6 +4511,16 @@ Valkenborg,
  American journal of orthodontics and dentofacial orthopedics,
  164(5),
  754-757.
+\begin_inset Flex URL
+status collapsed
+
+\begin_layout Plain Layout
+https://doi.org/10.1016/j.ajodo.2023.08.003
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Bibliography
@@ -4026,6 +4552,16 @@ Wood,
  Generalized Additive Models:
  An Introduction with R (2nd ed.).
  Chapman and Hall/CRC.
+\begin_inset Flex URL
+status collapsed
+
+\begin_layout Plain Layout
+https://doi.org/10.1201/9781315370279
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Bibliography
@@ -4051,6 +4587,16 @@ Price,
  PloS one,
  5(3),
  e9490.
+\begin_inset Flex URL
+status collapsed
+
+\begin_layout Plain Layout
+https://doi.org/10.1371/journal.pone.0009490
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Bibliography
@@ -4083,6 +4629,16 @@ Ke,
  A highly efficient gradient boosting decision tree.
  Advances in neural information processing systems,
  30.
+\begin_inset Flex URL
+status collapsed
+
+\begin_layout Plain Layout
+https://dl.acm.org/doi/10.5555/3294996.3295074
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Bibliography
@@ -4098,10 +4654,10 @@ Liaw,
  & Wiener,
  M.
  (2002).
- Classification and regression by randomForest.
+ Classification and regression by random Forest.
  R News,
  2(3),
- 18-22.s
+ 18-22.
 \end_layout
 
 \begin_layout Bibliography
@@ -4123,6 +4679,16 @@ Hvattum,
  International Journal of forecasting,
  26(3),
  460-470.
+\begin_inset Flex URL
+status collapsed
+
+\begin_layout Plain Layout
+https://doi.org/10.1016/j.ijforecast.2009.10.002
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Bibliography
@@ -4146,6 +4712,16 @@ Marcot,
  Environmental modelling & software,
  111,
  386-393.
+\begin_inset Flex URL
+status collapsed
+
+\begin_layout Plain Layout
+https://doi.org/10.1016/j.envsoft.2018.09.016
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Bibliography
@@ -4169,6 +4745,16 @@ Owramipur,
  International Journal of Computer Theory and Engineering,
  5(5),
  812.
+\begin_inset Flex URL
+status collapsed
+
+\begin_layout Plain Layout
+https://doi.org/10.7763/ijcte.2013.v5.802
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Bibliography
@@ -4189,6 +4775,16 @@ Stoltzfus,
  Academic emergency medicine,
  18(10),
  1099-1104.
+\begin_inset Flex URL
+status collapsed
+
+\begin_layout Plain Layout
+https://doi.org/10.1111/j.1553-2712.2011.01185.x
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Bibliography
@@ -4213,6 +4809,16 @@ D.
  1-5,
  doi:
  10.1109/ICAICTA.2016.7803111.
+\begin_inset Flex URL
+status collapsed
+
+\begin_layout Plain Layout
+https://doi.org/10.1109/icaicta.2016.7803111
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Bibliography
@@ -4247,6 +4853,16 @@ Martins,
  Expert Systems with Applications,
  83,
  79-93.
+\begin_inset Flex URL
+status collapsed
+
+\begin_layout Plain Layout
+https://doi.org/10.1016/j.eswa.2017.04.040
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Bibliography
@@ -4267,6 +4883,16 @@ Schauberger,
  Statistical Modelling,
  18(5-6),
  460-482.
+\begin_inset Flex URL
+status collapsed
+
+\begin_layout Plain Layout
+https://doi.org/10.1177/1471082x18799934
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Bibliography
@@ -4290,6 +4916,16 @@ Danisik,
  In 2018 World symposium on digital intelligence for systems and machines (DISA) (pp.
  201-206).
  IEEE.
+\begin_inset Flex URL
+status collapsed
+
+\begin_layout Plain Layout
+https://doi.org/10.1109/disa.2018.8490613
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Bibliography
@@ -4310,6 +4946,16 @@ Constantinou,
  Machine learning,
  108(1),
  49-75.
+\begin_inset Flex URL
+status collapsed
+
+\begin_layout Plain Layout
+https://doi.org/10.1007/s10994-018-5703-7
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Bibliography
@@ -4331,6 +4977,16 @@ Natekin,
  Frontiers in neurorobotics,
  7,
  63623.
+\begin_inset Flex URL
+status collapsed
+
+\begin_layout Plain Layout
+https://doi.org/10.3389/fnbot.2013.00021
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Bibliography
@@ -4351,6 +5007,16 @@ Baboota,
  International Journal of Forecasting,
  35(2),
  741-755.
+\begin_inset Flex URL
+status collapsed
+
+\begin_layout Plain Layout
+https://doi.org/10.1016/j.ijforecast.2018.01.003
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Bibliography
@@ -4370,6 +5036,16 @@ Rahman,
  SN Applied Sciences,
  2(2),
  165.
+\begin_inset Flex URL
+status collapsed
+
+\begin_layout Plain Layout
+https://doi.org/10.1007/s42452-019-1821-5
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Bibliography
@@ -4391,7 +5067,6 @@ Microsoft.
 status collapsed
 
 \begin_layout Plain Layout
-
 https://dotnet.microsoft.com/en-us/apps/machinelearning-ai/ml-dotnet
 \end_layout
 
@@ -4419,6 +5094,17 @@ Liu,
  Mathematical programming,
  45(1),
  503-528.
+ 
+\begin_inset Flex URL
+status collapsed
+
+\begin_layout Plain Layout
+https://doi.org/10.1007/bf01589116
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Bibliography
@@ -4443,6 +5129,16 @@ J.
  pp.
  246-257,
  1991.
+\begin_inset Flex URL
+status collapsed
+
+\begin_layout Plain Layout
+https://doi.org/10.1162/neco.1991.3.2.246
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Bibliography
@@ -4480,17 +5176,14 @@ G.A.
 status open
 
 \begin_layout Plain Layout
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \end_layout
 
 \begin_layout Plain Layout
-
 %% for journal Sci
 \end_layout
 
 \begin_layout Plain Layout
-
 %
 \backslash
 reviewreports{
@@ -4501,7 +5194,6 @@ reviewreports{
 \end_layout
 
 \begin_layout Plain Layout
-
 %Reviewer 1 comments and authors' response
 \backslash
 
@@ -4510,7 +5202,6 @@ reviewreports{
 \end_layout
 
 \begin_layout Plain Layout
-
 %Reviewer 2 comments and authors' response
 \backslash
 
@@ -4519,17 +5210,14 @@ reviewreports{
 \end_layout
 
 \begin_layout Plain Layout
-
 %Reviewer 3 comments and authors' response
 \end_layout
 
 \begin_layout Plain Layout
-
 %}
 \end_layout
 
 \begin_layout Plain Layout
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \end_layout
 
@@ -4543,7 +5231,6 @@ reviewreports{
 status open
 
 \begin_layout Plain Layout
-
 
 \backslash
 PublishersNote{}
