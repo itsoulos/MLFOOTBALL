@@ -1448,7 +1448,19 @@ literal "false"
 \end_layout
 
 \begin_layout Standard
-The MLP was trained with 10 L-BFGS iterations (Table 2).
+The MLP was trained with 10 L-BFGS iterations (Table 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "tab:Experimental-settings."
+plural "false"
+caps "false"
+noprefix "false"
+nolink "false"
+tuple "list"
+
+\end_inset
+
+).
  To confirm this was sufficient for convergence,
  a control run with 100 iterations was also conducted;
  the resulting Precision,
@@ -3664,6 +3676,145 @@ The heatmap condenses Tables of the manuscript into a single,
  RBF is uniformly the weakest model,
  appearing in red across nearly every cell for both markets,
  which visually isolates it as the clear outlier among the seven benchmarked algorithms.
+\end_layout
+
+\begin_layout Subsection
+Experiments with different parameters
+\end_layout
+
+\begin_layout Standard
+An additional experiment was conducted by modifying selected parameter settings of the L-BFGS method and the Random Forest technique.
+ For L-BFGS,
+ the number of iterations was varied from 5 to 50,
+ and the corresponding results for both datasets are presented in Figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:lbfgsIters"
+plural "false"
+caps "false"
+noprefix "false"
+nolink "false"
+tuple "list"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+placement H
+alignment document
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename lbfgs_exper.png
+	scale 75
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Experimental results for the neural network trained with a variety of values for LBFGS iterations.
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:lbfgsIters"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+As shown in this figure,
+ the classification error starts at relatively higher values for small numbers of L-BFGS iterations but remains almost constant for values greater than 10 or 15.
+\end_layout
+
+\begin_layout Standard
+Also,
+ the number of trees used in the Random Forest model was altered from 10 to 500 and the results for both datasets are shown in Figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:randomForest"
+plural "false"
+caps "false"
+noprefix "false"
+nolink "false"
+tuple "list"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+placement H
+alignment document
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename randomforest_exper.png
+	scale 75
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Experiments with number of trees used in the Random Forest model.
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:randomForest"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+For small numbers of trees,
+ the classification error is relatively higher and gradually decreases as the number of trees increases,
+ eventually remaining approximately constant for more than 100 trees.
+\end_layout
+
+\begin_layout Standard
+
 \end_layout
 
 \begin_layout Section
