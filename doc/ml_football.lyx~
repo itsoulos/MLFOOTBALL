@@ -715,6 +715,24 @@ Although numerous studies have reported promising results for football match pre
 \end_layout
 
 \begin_layout Standard
+The main contributions of this work can be summarized as follows:
+\end_layout
+
+\begin_layout Enumerate
+The paper proposes a unified framework that integrates team-performance indicators,
+ tactical interaction features,
+ and bookmaker-derived probabilities for football match prediction.
+\end_layout
+
+\begin_layout Enumerate
+This work provides benchmark executions using a series of machine learning methods.
+\end_layout
+
+\begin_layout Enumerate
+The paper includes a series of systematic robustness analysis based on 30 independent runs and ten individual leagues.
+\end_layout
+
+\begin_layout Standard
 The remaining of this article is organized as follows:
  in section 
 \begin_inset CommandInset ref
@@ -764,20 +782,12 @@ name "sec:Materials-and-Methods"
 
 \end_layout
 
-\begin_layout Subsection
-The Dataset Employed
-\end_layout
-
 \begin_layout Standard
 In this study,
  we utilized a large-scale dataset of historical football matches sourced from a professional sports analytics repository.
  The data collection process prioritized high granularity,
  incorporating not only match results but also advanced performance indicators and pre-match market probabilities.
  The dataset's reliability is ensured through its internal consistency and widespread use in sports forecasting benchmarks.
-\end_layout
-
-\begin_layout Subsection
-Dataset Description
 \end_layout
 
 \begin_layout Standard
@@ -1151,10 +1161,6 @@ Away team Failed-to-Score probability
 
 \end_layout
 
-\begin_layout Subsection
-Feature Engineering and Mathematical Formulation
-\end_layout
-
 \begin_layout Standard
 To capture the dynamic interaction between offensive and defensive capacities,
  the raw data was transformed into formal performance metrics.
@@ -1177,10 +1183,16 @@ To capture the dynamic interaction between offensive and defensive capacities,
 \end_inset
 
  was applied to prevent division by zero.
+ Hence,
+ the following features have been added in the used dataset:
 \end_layout
 
-\begin_layout Description
-AttackVsDefense:
+\begin_layout Enumerate
+
+\series bold
+AttackVsDefense
+\series default
+:
  Represents the home team's offensive efficiency relative to the away team's defensive record:
 \begin_inset Formula 
 \begin{equation}
@@ -1189,11 +1201,15 @@ AttackVsDefense:
 
 \end_inset
 
-
+This feature measures how effectively the home team scores relative to the average number of goals conceded by its opponent.
 \end_layout
 
-\begin_layout Description
-DefenseVsAttack:
+\begin_layout Enumerate
+
+\series bold
+DefenseVsAttack
+\series default
+:
  Quantifies the home team's defensive capability against the away team's scoring force:
 \begin_inset Formula 
 \begin{equation}
@@ -1202,11 +1218,15 @@ DefenseVsAttack:
 
 \end_inset
 
-
+This feature describes the defensive capability of the home team relative to the offensive strength of the away team.
 \end_layout
 
-\begin_layout Description
-TotalScoringPotential:
+\begin_layout Enumerate
+
+\series bold
+TotalScoringPotential
+\series default
+:
  Modeled as the numerical difference between home and away scoring capacities,
  identifying the relative offensive edge:
 \begin_inset Formula 
@@ -1216,11 +1236,15 @@ TotalScoringPotential:
 
 \end_inset
 
-
+This metric provides the scoring potential of the two teams.
 \end_layout
 
-\begin_layout Description
-TotalDefensiveWeakness:
+\begin_layout Enumerate
+
+\series bold
+TotalDefensiveWeakness
+\series default
+:
  Assesses the relative vulnerability of the home defense compared to the away defense as a ratio:
 \begin_inset Formula 
 \begin{equation}
@@ -1229,13 +1253,15 @@ TotalDefensiveWeakness:
 
 \end_inset
 
-
+This feature compares the average goals conceded by the home and away teams.
 \end_layout
 
-\begin_layout Description
+\begin_layout Enumerate
 
+\series bold
 \shape italic
 HomeCleanSheetRatio
+\series default
 \shape default
  (HCSR) and 
 \series bold
@@ -1251,11 +1277,9 @@ HCSR=\frac{\sum^{N}_{i=1}\mathbb{I}(G_{H,c}=0)}{N},\quad AFTS=\frac{\sum^{N}_{j=
 
 \end_inset
 
-
-\end_layout
-
-\begin_layout Subsection
-Feature Importance Motivation
+The (HCSR) represents the historical frequency with which the home team has prevented its opponent from scoring.
+ Also,
+ the (AFTS) represents the historical probability that the away team fails.
 \end_layout
 
 \begin_layout Standard
@@ -1275,7 +1299,7 @@ EloDiff
 RankDifference
 \shape default
 ).
- 
+ These metric can be used to provide information about the relative competitive strength of the two teams and their position within their respective competitions.
 \end_layout
 
 \begin_layout Enumerate
@@ -1289,6 +1313,7 @@ AttackVsDefense
 DefenseVsAttack
 \shape default
 ).
+ These features can be used to estimate the interaction between the offensive and defensive characteristics of the competing teams rather than considering their individual strengths independently.
 \end_layout
 
 \begin_layout Enumerate
@@ -1497,7 +1522,7 @@ placement H
 alignment document
 wide false
 sideways false
-status open
+status collapsed
 
 \begin_layout Plain Layout
 \begin_inset Caption Standard
@@ -2339,8 +2364,7 @@ Experimental results
 \end_layout
 
 \begin_layout Standard
-Definition of the two binary problems.
- Before presenting the numerical results,
+Before presenting the numerical results,
  it is important to clarify how the target variable was constructed for each market.
  The original dataset label (Label ∈ {1,
  X,
@@ -2353,7 +2377,7 @@ Definition of the two binary problems.
  one for each betting market:
 \end_layout
 
-\begin_layout Standard
+\begin_layout Enumerate
 Home Win market (Table 
 \begin_inset CommandInset ref
 LatexCommand ref
@@ -2372,7 +2396,7 @@ nolink "false"
  the model is asked to answer the question "will the home team win or not," collapsing the distinction between a draw and an away win.
 \end_layout
 
-\begin_layout Standard
+\begin_layout Enumerate
 Away Win market (Table 
 \begin_inset CommandInset ref
 LatexCommand ref
@@ -2399,8 +2423,19 @@ This approach was chosen because it directly mirrors how real-world betting mark
  It is worth noting that this merging directly affects class balance:
  in the Away Win market,
  the positive class ("2") is the minority category in most leagues,
- which partly explains the systematically lower Recall values observed both in Table 4 and in the per-league stability analysis (§3.3,
- Figures 1–3).
+ which partly explains the systematically lower Recall values observed both in Table 4 and in the per-league stability analysis in subsection 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "subsec:Statistical-comparison-of"
+plural "false"
+caps "false"
+noprefix "false"
+nolink "false"
+tuple "list"
+
+\end_inset
+
+.
 \end_layout
 
 \begin_layout Standard
@@ -2417,15 +2452,12 @@ nolink "false"
 
  depicts the experimental results using the incorporated method on the Home Win dataset.
  
-\end_layout
-
-\begin_layout Standard
 \begin_inset Float table
 placement H
 alignment document
 wide false
 sideways false
-status open
+status collapsed
 
 \begin_layout Plain Layout
 \begin_inset Caption Standard
@@ -2776,22 +2808,7 @@ RBF
 
 \end_inset
 
-
-\end_layout
-
-\begin_layout Standard
-Home Win results (Table 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "tab:Home-win-experimental"
-plural "false"
-caps "false"
-noprefix "false"
-nolink "false"
-
-\end_inset
-
-).
+.
  Table 
 \begin_inset CommandInset ref
 LatexCommand ref
@@ -2852,7 +2869,7 @@ placement H
 alignment document
 wide false
 sideways false
-status open
+status collapsed
 
 \begin_layout Plain Layout
 \begin_inset Caption Standard
@@ -3203,11 +3220,7 @@ RBF
 
 \end_inset
 
-
-\end_layout
-
-\begin_layout Standard
-Away Win results (Table 
+ Away Win results (Table 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "tab:Away-win-experimental"
@@ -3240,8 +3253,7 @@ nolink "false"
 \end_layout
 
 \begin_layout Standard
-Overall pattern.
- Taken together,
+Taken together,
  Table 
 \begin_inset CommandInset ref
 LatexCommand ref
@@ -3272,7 +3284,19 @@ nolink "false"
  This trade-off is directly relevant to betting-signal generation,
  since a higher-Recall model such as the MLP is more likely to surface value opportunities that higher-Precision models miss,
  while a higher-Precision model such as Random Forest is more likely to minimize false-positive betting signals.
- This distinction motivates the subsequent stability analysis in §3.3,
+ This distinction motivates the subsequent stability analysis in subsection 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "subsec:Statistical-comparison-of"
+plural "false"
+caps "false"
+noprefix "false"
+nolink "false"
+tuple "list"
+
+\end_inset
+
+,
  where the behavior of the (higher-Precision) Random Forest model is examined in greater depth across leagues and repeated runs,
  and it also motivates the planned Isotonic Calibration layer,
  which aims to reconcile these Precision/Recall trade-offs into a single,
@@ -3281,6 +3305,13 @@ nolink "false"
 
 \begin_layout Subsection
 Statistical comparison of the experimental results
+\begin_inset CommandInset label
+LatexCommand label
+name "subsec:Statistical-comparison-of"
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -3320,7 +3351,7 @@ placement H
 alignment document
 wide false
 sideways false
-status open
+status collapsed
 
 \begin_layout Plain Layout
 \begin_inset Graphics
@@ -3388,7 +3419,7 @@ placement H
 alignment document
 wide false
 sideways false
-status open
+status collapsed
 
 \begin_layout Plain Layout
 \begin_inset Graphics
@@ -3482,7 +3513,7 @@ placement H
 alignment document
 wide false
 sideways false
-status open
+status collapsed
 
 \begin_layout Plain Layout
 \align center
@@ -3811,10 +3842,6 @@ name "fig:randomForest"
 For small numbers of trees,
  the classification error is relatively higher and gradually decreases as the number of trees increases,
  eventually remaining approximately constant for more than 100 trees.
-\end_layout
-
-\begin_layout Standard
-
 \end_layout
 
 \begin_layout Section
