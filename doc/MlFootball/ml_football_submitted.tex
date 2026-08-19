@@ -21,7 +21,7 @@
 
 
 \address{$^{1}$\quad{} Department of Informatics and Telecommunications,
-University of Ioannina, 45500 Ioannina, Greece;e.sallis@uoi.gr\\
+University of Ioannina, 45500 Ioannina, Greece; e.sallis@uoi.gr\\
 $^{2}$\quad{} Department of Mechanical Engineering and Aeronautics,
 University of Patras, Panepistimioupoli Patron, Rio 26504, Greece;
 georgoul@gmail.com\\
@@ -34,31 +34,34 @@ of Ioannina, 45500 Ioannina, Greece; itsoulos@uoi.gr}
 
 \abstract{Football match outcomes are influenced by a complex interplay of
 dynamic team strategies and stochastic match events, posing a significant
-challenge for predictive analytics. In this paper we present\textbf{
-a unified benchmarking study for football match outcome classification},
-using a dataset of\textbf{ 225,474 matches spanning 2018-{}-2026 and
-a strictly chronological train-test split}. Six classifiers spanning
-several modelling approaches, Logistic Regression, Generalized Additive
-Models, FastTree, Random Forest, Radial Basis Function networks and
-a Multi-Layer Perceptron, are trained and evaluated under identical
-conditions. Bookmaker odds are converted into margin-free probabilities
-by the power method, with the exponent found by Newton-{}-Raphson,\textbf{
-and are included among the input features}.\textbf{ In addition to
-the six classifiers we also report a majority-class baseline and the
-de-vigged bookmaker prediction itself. Results are reported for both
-a binary one-vs-rest formulation and the original three-class (1,
-X, 2) formulation, with 95\% bootstrap CIs for every metric and every
-model.} Across the six classifiers the differences are small: macro-averaged
-precision ranges from 64.83\% to 65.16\% for Home Win and from 68.05\%
-to 68.46\% for Away Win, and macro-averaged recall from 63.16\% to
-63.51\% and from 59.10\% to 59.72\% respectively, with substantially
-overlapping confidence intervals.\textbf{ In the three-class formulation,
-models trained without market data reach 48.0\% accuracy against 43.4\%
-for a trivial baseline and 51.9\% for the bookmaker. Models trained
-with market data match the bookmaker but do not improve upon it on
-log-loss, Brier score or the ranked probability score. Probability
-calibration and betting-signal generation are outside the scope of
-this study.}}
+challenge for predictive analytics. In this paper we present a unified
+benchmarking study for football match outcome classification, using
+a dataset of 225,474 matches spanning 2018-2026 and a strictly chronological
+train-test split. Six classifiers spanning several modelling approaches,
+Logistic Regression, Generalized Additive Models, FastTree, Random
+Forest, Radial Basis Function networks and Multi-Layer Perceptron,
+are trained and evaluated under identical conditions. Bookmaker odds
+are converted into margin-free probabilities by the power method,
+with the exponent found by Newton-Raphson, and are included among
+the input features. In addition to the six classifiers we also report
+a majority-class baseline and the de-vigged bookmaker prediction itself.
+Results are reported for both a binary one-vs-rest formulation and
+the original three-class (1, X, 2) formulation, with 95\% bootstrap
+CIs for every metric and every model. Across the six classifiers the
+differences are small: macro-averaged precision ranges from 64.83\%
+to 65.16\% for Home Win and from 68.05\% to 68.46\% for Away Win,
+and macro-averaged recall from 63.16\% to 63.51\% and from 59.10\%
+to 59.72\% respectively, with substantially overlapping confidence
+intervals. In the three-class formulation, models trained without
+market data reach 48.0\% accuracy against 43.4\% for a trivial baseline
+and 51.9\% for the bookmaker. Models trained with market data match
+the bookmaker but do not improve upon it on log-loss, Brier score
+or the ranked probability score.\textbf{ The only statistically distinguishable
+improvement of any kind is a 0.086 point accuracy advantage for the
+additive model, which is not accompanied by any improvement in the
+proper scoring rules and therefore does not indicate a practical advantage.}
+Probability calibration and betting-signal generation are outside
+the scope of this study.}
 
 
 \keyword{Machine learning; classification; sports forecasting; model benchmarking;
@@ -185,13 +188,12 @@ probability estimation.}
 
 \section{Introduction}
 
-\textbf{Machine learning (ML) methods are now applied across a wide
-range of scientific and applied fields, from the physical sciences
-\citep{physics_ml1,physics_ml2,astronomy_ml1,astronomy_ml2,chemistry_ml1,chemistry_ml2}
+Machine learning (ML) methods are now applied across a wide range
+of scientific and applied fields, from the physical sciences \citep{physics_ml1,physics_ml2,astronomy_ml1,astronomy_ml2,chemistry_ml1,chemistry_ml2}
 to medicine \citep{med_ml1,med_ml2} and economics \citep{econ_ml1,econ_ml2},
 and the tools most often used, neural networks (NNs) \citep{nn1,nn2,nn_image,nn_timeseries},
 decision trees (DTs) \citep{dt1,dt2} and support vector machines
-(SVMs) \citep{svm1,svm2}.} In this research study, we address the
+(SVMs) \citep{svm1,svm2}. In this research study, we address the
 problem of predicting the outcome of a football match by examining
 it through a variety of ML techniques. This problem has been addressed
 in a number of earlier studies. 
@@ -199,22 +201,21 @@ in a number of earlier studies.
 Predicting football match outcomes is difficult because of the high
 levels of noise, changing team strategies, and unpredictable match
 events. Standard predictive models often struggle in these volatile
-environments. This research is important for three main reasons.\textbf{
-First, we conduct a rigorous comparative analysis.} Instead of focusing
-on just one algorithm, we compare different classifiers on the same
-input space. This provides a controlled comparison of how each model
-handles the non-linearity and volatility of sports data. Second, we
-report results for both a binary one-vs-rest decomposition and the
-original three-class outcome, using metrics that do not depend on
-an arbitrary decision threshold.\textbf{ Third, and central to this
-study, we evaluate all models against the de-vigged bookmaker forecast.
-Because market prices already aggregate team strength, recent form
-and public information, a benchmark that omits them cannot establish
-whether a model contributes new information or simply reproduces the
-bookmaker's choice \citep{forrest2005,dixoncoles1997}. Reporting
-such a comparison also calls for restraint in what is claimed from
-model outputs, a concern documented in forecasting settings beyond
-sport \citep{kliger2025}.}
+environments. This research is important for three main reasons. First,
+we conduct a rigorous comparative analysis. Instead of focusing on
+just one algorithm, we compare different classifiers on the same input
+space. This provides a controlled comparison of how each model handles
+the non-linearity and volatility of sports data. Second, we report
+results for both a binary one-vs-rest decomposition and the original
+three-class outcome, using metrics that do not depend on an arbitrary
+decision threshold. Third, and central to this study, we evaluate
+all models against the de-vigged bookmaker forecast. Because market
+prices already aggregate team strength, recent form and public information,
+a benchmark that omits them cannot establish whether a model contributes
+new information or simply reproduces the bookmaker's choice \citep{forrest2005,dixoncoles1997}.
+Reporting such a comparison also calls for restraint in what is claimed
+from model outputs, a concern documented in forecasting settings beyond
+sport \citep{kliger2025}.
 
 For example, Hvattum et al. proposed the incorporation of ELO ratings
 for the prediction of match outcomes in their study \citep{elo_football}.
@@ -249,19 +250,19 @@ exponent solved by Newton--Raphson \citep{power}.
 evaluation of different classifiers under the same conditions. By
 testing models ranging from linear approaches (logistic regression)
 and generalized additive frameworks (Generalized Additive Models (GAM))
-to tree structures (FastTree , RF) and NN models (Multilayer Perceptron
+to tree structures (FastTree, RF) and NN models (Multilayer Perceptron
 (MLP), Radial Basis Function (RBF) networks), we provide a controlled
 comparison across different modelling mechanisms.
 \end{itemize}
 Overall, the proposed framework provides a fully specified methodology
 for evaluating several classifiers under identical experimental conditions.
-\textbf{The experimental results indicate that the six classifiers
-perform almost identically once they are evaluated under a common
-protocol with confidence intervals (CIs). What separates the predictors
-is not the choice of algorithm but the comparison with the two reference
-predictors.} \textbf{These findings support the systematic evaluation
-of predictive models for football match forecasting under a common
-experimental protocol.}
+The experimental results indicate that the six classifiers perform
+almost identically once they are evaluated under a common protocol
+with confidence intervals (CIs). What separates the predictors is
+not the choice of algorithm but the comparison with the two reference
+predictors. These findings support the systematic evaluation of predictive
+models for football match forecasting under a common experimental
+protocol.
 
 Although numerous studies have reported promising results for football
 match prediction, direct numerical comparison remains challenging
@@ -271,29 +272,28 @@ superior predictive accuracy, the present work focuses on providing
 a unified and fully specified benchmarking framework in which six
 classifiers spanning several modelling approaches are evaluated under
 identical experimental conditions on a large-scale dataset. This allows
-a fair assessment of their relative performance\textbf{ using metrics
-that do not depend on arbitrary decision thresholds, with CIs obtained
-by bootstrap resampling, and against explicit reference predictors.}
+a fair assessment of their relative performance using metrics that
+do not depend on arbitrary decision thresholds, with CIs obtained
+by bootstrap resampling, and against explicit reference predictors.
 
 The main contributions of this work can be summarized as follows:
 \begin{enumerate}
-\item \textbf{A large-scale classification benchmark in which six classifiers
-are trained and evaluated under identical experimental conditions
-on 225,474 matches, using a feature space that is identical across
-the six classifiers }and chronological train-test split.
-\item \textbf{An evaluation against two reference predictors: a trivial
-majority-class baseline and the de-vigged bookmaker probability treated
-as a classifier. In both outcome formulations all six classifiers
-are additionally estimated without odds-based inputs, which isolates
-the contribution of the remaining features.}
-\item \textbf{Results for both a binary one-vs-rest decomposition and the
-original three-class outcome, reported with proper scoring rules (log-loss,
+\item A large-scale classification benchmark in which six classifiers are
+trained and evaluated under identical experimental conditions on 225,474
+matches, using a feature space that is identical across the six classifiers
+and chronological train-test split.
+\item An evaluation against two reference predictors: a trivial majority-class
+baseline and the de-vigged bookmaker probability treated as a classifier.
+In both outcome formulations all six classifiers are additionally
+estimated without odds-based inputs, which isolates the contribution
+of the remaining features.
+\item Results for both a binary one-vs-rest decomposition and the original
+three-class outcome, reported with proper scoring rules (log-loss,
 Brier score, ranked probability score) and 95\% bootstrap CIs for
-all six classifiers.}
-\item \textbf{A time sensitive feature construction pipeline explicitly
-preventing leakage, and a permutation-importance analysis identifying
-which engineered features contribute to predictive performance and
-which do not.}
+all six classifiers.
+\item A time sensitive feature construction pipeline explicitly preventing
+leakage, and a permutation-importance analysis identifying which engineered
+features contribute to predictive performance and which do not.
 \end{enumerate}
 The remainder of this article is organised as follows: in section
 \ref{sec:Materials-and-Methods} the dataset and the methodology are
@@ -304,13 +304,13 @@ is provided based on the experimental results.
 \section{Materials and Methods\label{sec:Materials-and-Methods}}
 
 In this study we use a large-scale dataset of historical football
-matches.\textbf{ The match results and pre-match odds were collected
-from the publicly accessible pages of OPAP, the licensed operator
-of fixed-odds sports betting in Greece, by automated retrieval carried
-out for this study. For each match the records contain the final score,
-the identity of the two teams and the competition, and a single pre-match
-quotation for the home-draw-away market together with several ancillary
-markets. The automated retrieval formed part of a scientific text-and-data-mining
+matches. The match results and pre-match odds were collected from
+the publicly accessible pages of OPAP, the licensed operator of fixed-odds
+sports betting in Greece, by automated retrieval carried out for this
+study. For each match the records contain the final score, the identity
+of the two teams and the competition, and a single pre-match quotation
+for the home-draw-away market together with several ancillary markets.
+The automated retrieval formed part of a scientific text-and-data-mining
 workflow conducted within the research activities of the authors'
 universities, and relies on the mandatory exception for text and data
 mining for the purposes of scientific research by research organisations,
@@ -318,50 +318,49 @@ introduced into Greek law by Article 21A of Law 2121/1993 as added
 by Law 4996/2022, transposing Article 3 of Directive (EU) 2019/790.
 De-vigging uses the power method: the reciprocals of the three decimal
 odds are raised to the exponent that makes them sum to one, solved
-by Newton-{}-Raphson from a starting value of one, with a tolerance
-of 1e-13 and at most sixty iterations. All 75,495 test matches yield
-a complete set of market probabilities, so the bookmaker benchmark
-uses no imputed value..} The data include not only match results but
-also team-level performance indicators and pre-match market odds.
+by Newton-Raphson from a starting value of one, with a tolerance of
+1e-13 and at most sixty iterations. The data include not only match
+results but also team-level performance indicators and pre-match market
+odds.
 
 \begin{figure}[H]
 \begin{centering}
 \includegraphics[width=0.95\columnwidth]{methodology_flowchart}
 \par\end{centering}
-\caption{\textbf{Overview of the experimental methodology. Historical features
-are constructed under a strict point-in-time rule. Both the binary
-one-vs-rest and the three-class formulations are estimated on an identical
-feature space, with and without the market probabilities among the
-inputs, and every result is compared against a majority-class baseline
-and the de-vigged bookmaker forecast.}\label{fig:Methodology-overview}}
+\caption{Overview of the experimental methodology. Historical features are
+constructed under a strict point-in-time rule. Both the binary one-vs-rest
+and the three-class formulations are estimated on an identical feature
+space, with and without the market probabilities among the inputs,
+and every result is compared against a majority-class baseline and
+the de-vigged bookmaker forecast.\label{fig:Methodology-overview}}
 \end{figure}
 
-\textbf{Figure 1 summarises the complete experimental pipeline, from
-the raw match records through feature construction and the chronological
-split to the evaluation protocol. All historical features are built
-under a strict point-in-time rule, described in detail below. The
-same benchmark feature set is used in all the primary performance
-comparisons: the binary and the three-class formulations differ only
-in how the outcome is encoded, and each of them is estimated both
-with and without the market probabilities among the inputs. This way
-it is possible to separate the contribution of the engineered features
-from the information already contained in the odds.}
+Figure 1 summarises the complete experimental pipeline, from the raw
+match records through feature construction and the chronological split
+to the evaluation protocol. All historical features are built under
+a strict point-in-time rule, described in detail below. The same benchmark
+feature set is used in all performance comparisons: the binary and
+the three-class formulations differ only in how the outcome is encoded,
+and each of them is estimated both with and without the market probabilities
+among the inputs. This way it is possible to separate the contribution
+of the engineered features from the information already contained
+in the odds.
 
-The experimental dataset comprises 225,474 match events spanning\textbf{
-from 20 October 2018 to 28 February 2026}.\textbf{ The records cover
-a large number of competitions, identified in the source by 583 distinct
-competition codes of widely varying size, from major national first
-divisions to competitions represented by only a handful of fixtures.
-All of them are included in the pooled training and test sets.} To
-ensure rigorous evaluation, the data was partitioned into a training
-set of \textbf{149,979} matches and a dedicated test set of \textbf{75,495}
-matches. The raw variables and the candidate derived features are
-summarized in Table \ref{tab:Description-of-the}. Neither LeagueId
-nor SeasonPhase is supplied to the models as an input: the first would
-let a model identify the competition rather than assess the fixture,
-and the second was found to contribute nothing in the feature-importance
-analysis reported below. To avoid information leakage and better reflect
-a real-world deployment scenario, the dataset was partitioned chronologically,
+The experimental dataset comprises 225,474 match events spanning from
+20 October 2018 to 28 February 2026. The records cover a large number
+of competitions, identified in the source by 583 distinct competition
+codes of widely varying size, from major national first divisions
+to competitions represented by only a handful of fixtures. All of
+them are included in the pooled training and test sets. To ensure
+rigorous evaluation, the data was partitioned into a training set
+of 149,979 matches and a dedicated test set of 75,495 matches. The
+raw variables and the candidate derived features are summarized in
+Table \ref{tab:Description-of-the}. Neither LeagueId nor SeasonPhase
+is supplied to the models as an input: the first would let a model
+identify the competition rather than assess the fixture, and the second
+was found to contribute nothing in the feature-importance analysis
+reported below. To avoid information leakage and better reflect a
+real-world deployment scenario, the dataset was partitioned chronologically,
 with earlier seasons used for training and later matches reserved
 exclusively for testing.
 
@@ -384,25 +383,24 @@ HomeTeam / AwayTeam & Competing squad identifiers & Raw record; not an input\tab
 Label & Primary outcome target (1, X, 2) & Prediction target\tabularnewline
 EloDiff & Difference in Elo ratings ($-500$ to $+500$) & Final benchmark\tabularnewline
 ProbHome/Draw/Away & Pre-match market probabilities (0 to 1) & Final benchmark (odds designs)\tabularnewline
-RankDifference & \textbf{Difference between the three-level ranking tiers of the two
-teams as recorded in the source, away minus home (values -2 to +2)} & Final benchmark\tabularnewline
+RankDifference & Difference between the three-level ranking tiers of the two teams
+as recorded in the source, away minus home (values -2 to +2) & Final benchmark\tabularnewline
 SeasonPhase & Categorical marker for season stage & Candidate; excluded\tabularnewline
 AttackVsDefense / DefenseVsAttack & AvgHs / (AvgAc + e) and AvgHc / (AvgAs + e): candidate ratio forms,
 not retained & Candidate; excluded\tabularnewline
-TotalScoringPotential & \textbf{AvgHs - AvgAs: difference between the two teams' rolling goal
-averages} & Final benchmark\tabularnewline
-TotalDefensiveWeakness & \textbf{AvgHc / (AvgAc + e): ratio of the two teams' rolling goals-conceded
-averages} & Candidate; excluded\tabularnewline
+TotalScoringPotential & AvgHs - AvgAs: difference between the two teams' rolling goal averages & Final benchmark\tabularnewline
+TotalDefensiveWeakness & AvgHc / (AvgAc + e): ratio of the two teams' rolling goals-conceded
+averages & Candidate; excluded\tabularnewline
 HomeCleanSheetRatio & Probabilistic historical clean sheet frequency & Final benchmark\tabularnewline
 AwayFTSRatio & Away team Failed-to-Score probability & Final benchmark\tabularnewline
-\textbf{AvgHs / AvgHc / AvgAs / AvgAc} & \textbf{Rolling goal averages over the last five venue-specific matches
-(scored and conceded, home and away)} & Final benchmark\tabularnewline
-\textbf{AttackMinusDefense / DefenseMinusAttack} & \textbf{AvgHs - AvgAc and AvgHc - AvgAs: stable difference forms of
-the corresponding ratios} & Final benchmark\tabularnewline
-\textbf{DefensiveWeaknessDiff} & \textbf{AvgHc - AvgAc: stable difference form of TotalDefensiveWeakness} & Final benchmark\tabularnewline
-\textbf{HistHome / HistAway} & \textbf{Number of prior matches at the relevant venue available for
-each team, 0 to 5 (data availability)} & Final benchmark\tabularnewline
-\textbf{Imputed} & \textbf{Indicator that the historical features of the match were imputed} & Final benchmark\tabularnewline
+AvgHs / AvgHc / AvgAs / AvgAc & Rolling goal averages over the last five venue-specific matches (scored
+and conceded, home and away) & Final benchmark\tabularnewline
+AttackMinusDefense / DefenseMinusAttack & AvgHs - AvgAc and AvgHc - AvgAs: stable difference forms of the corresponding
+ratios & Final benchmark\tabularnewline
+DefensiveWeaknessDiff & AvgHc - AvgAc: stable difference form of TotalDefensiveWeakness & Final benchmark\tabularnewline
+HistHome / HistAway & Number of prior matches at the relevant venue available for each team,
+0 to 5 (data availability) & Final benchmark\tabularnewline
+Imputed & Indicator that the historical features of the match were imputed & Final benchmark\tabularnewline
 \hline 
 \end{tabular}
 \end{table}
@@ -419,38 +417,36 @@ a ratio and a difference; the ratio forms are given first, and were
 excluded from the benchmark in favour of their difference counterparts
 for the reasons reported in the feature-importance subsection:
 \begin{enumerate}
-\item \textbf{AttackVsDefense}: a candidate ratio form, representing the
-home team's offensive efficiency relative to the away team's defensive
-record:
+\item AttackVsDefense: a candidate ratio form, representing the home team's
+offensive efficiency relative to the away team's defensive record:
 \begin{equation}
 \mbox{AttackVsDefense}=\frac{AvgH_{s}}{AvgA_{c}+\epsilon}\label{eq:attack_vs_defense}
 \end{equation}
  This feature measures how effectively the home team scores relative
 to the average number of goals conceded by its opponent.
-\item \textbf{DefenseVsAttack}: a candidate ratio form, quantifying the
-home team's defensive capability against the away team's scoring force:
+\item DefenseVsAttack: a candidate ratio form, quantifying the home team's
+defensive capability against the away team's scoring force:
 \begin{equation}
 \mbox{DefenseVsAttack}=\frac{AvgH_{c}}{AvgA_{s}+\epsilon}\label{eq:defensevsattack}
 \end{equation}
  This feature describes the defensive capability of the home team
 relative to the offensive strength of the away team.
-\item \textbf{TotalScoringPotential}: Modeled as the numerical difference
-between home and away scoring capacities, identifying the relative
-offensive edge:
+\item TotalScoringPotential: Modeled as the numerical difference between
+home and away scoring capacities, identifying the relative offensive
+edge:
 \begin{equation}
 \mbox{TotalScoringPotential}=AvgH_{s}-AvgA_{s}\label{eq:totalscoringpotential}
 \end{equation}
  This metric provides the scoring potential of the two teams.
-\item \textbf{TotalDefensiveWeakness}: a candidate ratio form, assessing
-the relative vulnerability of the home defense compared to the away
-defense:
+\item TotalDefensiveWeakness: a candidate ratio form, assessing the relative
+vulnerability of the home defense compared to the away defense:
 \begin{equation}
 \mbox{TotalDefensiveWeakness}=\frac{AvgH_{c}}{AvgA_{c}+\epsilon}\label{eq:totaldefensiveweakness}
 \end{equation}
  This feature compares the average goals conceded by the home and
 away teams.
-\item \textbf{\textit{HomeCleanSheetRatio}} (HCSR) and \textbf{\textit{AwayFTSRatio}}
-(AFTS) capture probabilistic historical frequencies:
+\item \textit{HomeCleanSheetRatio} (HCSR) and \textit{AwayFTSRatio} (AFTS)
+capture probabilistic historical frequencies:
 \begin{equation}
 HCSR=\frac{\sum^{N}_{i=1}\mathbb{I}(G_{H,c}=0)}{N},\quad AFTS=\frac{\sum^{N}_{j=1}\mathbb{I}(G_{A,s}=0)}{N}\label{eq:HCSR}
 \end{equation}
@@ -459,54 +455,53 @@ team has prevented its opponent from scoring. Also, the (AFTS) represents
 the historical probability that the away team fails to score. In both,
 N is the same window of five venue-specific matches used for the goal
 averages.
-\item \textbf{AttackMinusDefense, DefenseMinusAttack and DefensiveWeaknessDiff}
-are the difference-form counterparts of the three ratios above, defined
+\item AttackMinusDefense, DefenseMinusAttack and DefensiveWeaknessDiff are
+the difference-form counterparts of the three ratios above, defined
 as AvgHs - AvgAc, AvgHc - AvgAs and AvgHc - AvgAc respectively. Together
 with TotalScoringPotential they are the four interaction features
 used in the benchmark. Unlike the ratios they remain bounded when
 a denominator approaches zero, which is the property that motivated
 the comparison between the two forms.
 \end{enumerate}
-\textbf{Feature construction follows a strict point-in-time rule:
-for a match played on date t, every historical feature is computed
-using only matches with date strictly earlier than t. Because the
-source records match dates without kick-off times, the procedure operates
-one calendar day at a time - all features for a given day are computed
-from the state preceding that day, and the state is updated only afterwards
+Feature construction follows a strict point-in-time rule: for a match
+played on date t, every historical feature is computed using only
+matches with date strictly earlier than t. Because the source records
+match dates without kick-off times, the procedure operates one calendar
+day at a time - all features for a given day are computed from the
+state preceding that day, and the state is updated only afterwards
 - so that matches played on the same day cannot inform one another.
 Averages are taken over the last five matches of each team at the
 relevant venue, that is, home matches for the home team and away matches
-for the away team.}
+for the away team.
 
-\textbf{Matches for which fewer than five prior matches are available
-(22.4\% of the dataset) are completed using the point-in-time mean
-of the same competition, computed only from earlier matches, with
-a global mean and a fixed prior as successive fallbacks, both of which
-are themselves computed only from matches earlier than the one being
-completed. A binary indicator is retained and supplied to the models
-as a feature. A static full-period mean was deliberately avoided,
-since it would use future matches to complete earlier ones. Because
-the ratio features become numerically unstable when the denominator
-approaches zero, they were winsorised at the 99.9th percentile of
-the training set, the threshold being computed on the training period
-alone and then applied unchanged to both periods. No class resampling
-was applied: the observed distribution of outcomes is the quantity
-being modelled.}
+Matches for which fewer than five prior matches are available (22.4\%
+of the dataset) are completed using the point-in-time mean of the
+same competition, computed only from earlier matches, with a global
+mean and a fixed prior as successive fallbacks, both of which are
+themselves computed only from matches earlier than the one being completed.
+A binary indicator is retained and supplied to the models as a feature.
+A static full-period mean was deliberately avoided, since it would
+use future matches to complete earlier ones. Because the ratio features
+become numerically unstable when the denominator approaches zero,
+they were winsorised at the 99.9th percentile of the training set,
+the threshold being computed on the training period alone and then
+applied unchanged to both periods. No class resampling was applied:
+the observed distribution of outcomes is the quantity being modelled.
 
-\textbf{Two checks were carried out to confirm that no information
-from the test period enters the training data. First, matches were
-matched between the two sets on the key formed by date, home team
-and away team: no match appears in both, and the unique record identifiers
+Two checks were carried out to confirm that no information from the
+test period enters the training data. First, matches were matched
+between the two sets on the key formed by date, home team and away
+team: no match appears in both, and the unique record identifiers
 are likewise disjoint. Second, the Elo ratings were examined for the
 warm-up behaviour that a correctly sequential computation must exhibit.
 At a team's first appearance the rating difference has a standard
 deviation of 39 points, rising to 99 points once at least twenty prior
 matches have been observed; a rating computed with hindsight would
-show no such widening.}
+show no such widening.
 
-\textbf{Rolling windows and Elo ratings are carried forward across
-season boundaries without reset: a team entering a new season retains
-the state accumulated in the preceding one, so that the first fixtures
+Rolling windows and Elo ratings are carried forward across season
+boundaries without reset: a team entering a new season retains the
+state accumulated in the preceding one, so that the first fixtures
 of a season are informed by the end of the previous campaign rather
 than being treated as if no history existed. Teams appearing in the
 data for the first time, including newly promoted sides, therefore
@@ -516,7 +511,7 @@ odds snapshot per fixture. The source does not record the time at
 which that snapshot was taken, so we cannot state whether it corresponds
 to an opening, an intermediate or a closing quotation, and we do not
 assume one; the consequence is that neither odds movement nor closing-line
-value can be examined here, and this is noted among the limitations.}
+value can be examined here, and this is noted among the limitations.
 
 The generated feature space is explicitly designed to satisfy three
 essential, complementary operational criteria: 
@@ -539,67 +534,82 @@ outcome based on the betting market.
 
 \subsection{Experimental settings }
 
-\textbf{The benchmark reported in this paper was implemented in Python
-using the scikit-learn library, which produced every value in the
-results tables and every figure. The estimators are, in the order
-used throughout: HistGradientBoostingClassifier for FastTree and for
-the additive model, the two differing in the number of iterations,
-the leaf count and the depth limit, with the additive model restricted
-to depth one; RandomForestClassifier; LogisticRegression; MLPClassifier
-with a single hidden layer; and RBFSampler followed by LogisticRegression,
-which approximates a Gaussian kernel by random Fourier features. }
+The benchmark reported in this paper was implemented in Python using
+the scikit-learn library. The estimators are, in the order used throughout:
+HistGradientBoostingClassifier for FastTree and for the additive model,
+the two differing in the number of iterations, the leaf count and
+the depth limit, with the additive model restricted to depth one (\textbf{that
+restriction is why the second configuration is labelled GAM: trees
+of depth one can each use only a single feature, so the fitted function
+is a sum of univariate terms and the model is additive in the inputs
+- it is not a spline-based generalized additive model, and the label
+denotes the additive structure rather than that estimation method});
+RandomForestClassifier; LogisticRegression; MLPClassifier with a single
+hidden layer; and RBFSampler followed by LogisticRegression, which
+approximates a Gaussian kernel by random Fourier features.
 
-\textbf{Numerical inputs are median-imputed and, for the linear, network
-and kernel models, standardised. Both steps are part of the estimator
+Table \ref{tab:Methods-overview} summarises the six classifiers compared
+in this study, each with its operating principle, the properties that
+motivate its inclusion, and the limitations that are relevant to the
+present task. The selection deliberately spans different inductive
+biases: a purely linear model, an additive non-linear model, a boosted-tree
+ensemble and a bagged one, a global non-linear approximator, and a
+kernel-approximation model. The purpose is not to identify a winner
+but to establish whether the choice among these classifiers materially
+affects predictive performance once the experimental conditions are
+held fixed.
+
+Numerical inputs are median-imputed and, for the linear, network and
+kernel models, standardised. Both steps are part of the estimator
 pipeline, so their parameters are estimated from the training data
 alone and merely applied to the test set; in the cross-validation
 of the sensitivity analysis they are re-estimated within each training
 fold before being applied to the validation fold; the tree ensembles
-receive the raw values. }
+receive the raw values. 
 
-\textbf{The Elo ratings use K = 20, an initial rating of 1500 and
-no home advantage term; the difference is taken as the home rating
-minus the away rating, the expected score of the home team is the
-logistic function of that difference divided by 400, a draw is scored
-as half a win for both teams, and the update is zero-sum, K times
-the difference between the realised and the expected score; the fixed
-prior used as the last imputation fallback is 0.30 for frequencies,
-1.00 for ratios and 0.00 for differences and goal averages; and the
-chronological split falls on 9 September 2022. Any estimator parameter
-not listed in the settings table retains the default value of the
-version stated below; the quantity referred to as the kernel scale
-is the gamma parameter of the random Fourier feature mapping. The
-results were produced with Python 3.12.10, scikit-learn 1.9.0, NumPy
-2.5.0 and pandas 2.3.3; the versions are stated because the default
-behaviour of some estimators depends on them, in particular the automatic
-activation of early stopping in the histogram-based boosting implementation
-at this sample size. Every estimator that accepts a random state was
-given the fixed value 42. }
+The Elo ratings use K = 20, an initial rating of 1500 and no home
+advantage term; the difference is taken as the home rating minus the
+away rating, the expected score of the home team is the logistic function
+of that difference divided by 400, a draw is scored as half a win
+for both teams, and the update is zero-sum, K times the difference
+between the realised and the expected score; the fixed prior used
+as the last imputation fallback is 0.30 for frequencies, 1.00 for
+ratios and 0.00 for differences and goal averages; and the chronological
+split falls on 9 September 2022. Any estimator parameter not listed
+in the settings table retains the default value of the version stated
+below; the quantity referred to as the kernel scale is the gamma parameter
+of the random Fourier feature mapping. The results were produced with
+Python 3.12.10, scikit-learn 1.9.0, NumPy 2.5.0 and pandas 2.3.3;
+the versions are stated because the default behaviour of some estimators
+depends on them, in particular the automatic activation of early stopping
+in the histogram-based boosting implementation at this sample size.
+Every estimator that accepts a random state was given the fixed value
+42. 
 
-\textbf{Hyperparameter sensitivity was assessed by random search with
-expanding-window time-series cross-validation carried out entirely
-inside the training set. Twenty configurations were drawn for each
-classifier, and each was scored on three successive validation folds
-in which the model is fitted on an earlier segment of the training
-data and evaluated on the segment that follows it, so that the temporal
-ordering is preserved at every stage. The purpose of this search was
-not to identify a single winning configuration but to establish how
-sensitive performance is to the choice of hyperparameters. Within
-the ranges given below, the sensitivity of validation AUC to the choice
+Hyperparameter sensitivity was assessed by random search with expanding-window
+time-series cross-validation carried out entirely inside the training
+set. Twenty configurations were drawn for each classifier, and each
+was scored on three successive validation folds in which the model
+is fitted on an earlier segment of the training data and evaluated
+on the segment that follows it, so that the temporal ordering is preserved
+at every stage. The purpose of this search was not to identify a single
+winning configuration but to establish how sensitive performance is
+to the choice of hyperparameters. Within the ranges given below, the
+sensitivity of validation area under the curve (AUC) to the choice
 of configuration differs markedly between classifiers. For five of
 the six it is small: across the 20 configurations the range is below
 0.001 for logistic regression and the additive model, and at most
 0.014 for FastTree, the RF and the MLP. It is larger elsewhere: 0.181
-for RBF netword, driven almost entirely by one setting, the kernel
+for RBF network, driven almost entirely by one setting, the kernel
 scale (correlation -0.992), whose extreme values degrade performance
 sharply rather than improve it. The best configuration of every classifier
 lies between 0.7061 and 0.7098, a band of 0.004, so no choice within
 the ranges explored raises any classifier above it. No configuration
 of any classifier reaches the de-vigged market forecast, which scores
-0.7104 on the same folds.}
+0.7104 on the same folds.
 
-\textbf{ The results reported throughout this paper were therefore
-produced with the fixed configurations listed in Table }\ref{tab:Experimental-settings.}\textbf{.
+ The results reported throughout this paper were therefore produced
+with the fixed configurations listed in Table \ref{tab:Experimental-settings.}.
 These are conventional settings for the implementations concerned.
 For the random-feature expansion, the one classifier in which the
 choice matters, the pre-specified kernel scale of 0.05 is not the
@@ -615,7 +625,7 @@ both outcome formulations, and the same sensitivity-analysis protocol
 was applied to all six classifiers, so that no classifier is treated
 more favourably than another. The test set was not used at any point,
 either in the sensitivity search or in the specification of these
-values.} Table \ref{tab:Experimental-settings.} reports the fixed
+values. Table \ref{tab:Experimental-settings.} reports the fixed
 configurations used for the results presented here; the ranges explored
 were, for the tree ensembles, 100 to 800 boosting iterations, 15 to
 127 leaves, learning rates from 0.02 to 0.2 and minimum leaf sizes
@@ -637,20 +647,8 @@ on the full training set. The mild temporal shift visible in the decline
 of the bookmaker margin over the observation period is discussed with
 the limitations.
 
-\textbf{Table \ref{tab:Methods-overview} summarises the six classifiers
-compared in this study, each with its operating principle, the properties
-that motivate its inclusion, and the limitations that are relevant
-to the present task. The selection deliberately spans different inductive
-biases: a purely linear model, an additive non-linear model, a boosted-tree
-ensemble and a bagged one, a global non-linear approximator, and a
-kernel-approximation model. The purpose is not to identify a winner
-but to establish whether the choice among these classifiers materially
-affects predictive performance once the experimental conditions are
-held fixed.}
-
 \begin{table}[H]
-\caption{\textbf{Functionality, advantages and limitations of the six benchmarked
-classifiers.}\label{tab:Methods-overview}}
+\caption{Functionality, advantages and limitations of the six benchmarked classifiers.\label{tab:Methods-overview}}
 
 \centering{}%
 \begin{tabular}{>{\raggedright}p{2.2cm}>{\raggedright}p{3.3cm}>{\raggedright}p{3.3cm}>{\raggedright}p{3.3cm}}
@@ -686,9 +684,6 @@ expansion is highly sensitive to extreme feature values.\tabularnewline
 \end{tabular}
 \end{table}
 
-Table \ref{tab:Experimental-settings.} presents the parameters used
-by the machine learning methods employed in the conducted experiments.
-
 \begin{table}[H]
 \caption{Experimental settings.\label{tab:Experimental-settings.}}
 
@@ -697,81 +692,78 @@ by the machine learning methods employed in the conducted experiments.
 \hline 
 \textbf{METHOD} & \textbf{PARAMETER} & \textbf{VALUE}\tabularnewline
 \hline 
-\textbf{FastTree} & \textbf{Boosting iterations} & \textbf{300}\tabularnewline
-\textbf{FastTree} & \textbf{Maximum leaves} & \textbf{31}\tabularnewline
-\textbf{FastTree} & \textbf{Learning rate} & \textbf{0.05}\tabularnewline
-\textbf{FastTree} & \textbf{Minimum samples per leaf} & \textbf{100}\tabularnewline
-\textbf{GAM} & \textbf{Boosting iterations} & \textbf{300}\tabularnewline
-\textbf{GAM} & \textbf{Learning rate} & \textbf{0.05}\tabularnewline
-\textbf{GAM} & \textbf{Maximum depth} & \textbf{1}\tabularnewline
+FastTree & Boosting iterations & 300\tabularnewline
+FastTree & Maximum leaves & 31\tabularnewline
+FastTree & Learning rate & 0.05\tabularnewline
+FastTree & Minimum samples per leaf & 100\tabularnewline
+GAM & Boosting iterations & 300\tabularnewline
+GAM & Learning rate & 0.05\tabularnewline
+GAM & Maximum depth & 1\tabularnewline
 \begin{cellvarwidth}[t]
 \centering
-\textbf{Logistic}\\
-\textbf{ Regression}
-\end{cellvarwidth} & \textbf{Inverse regularisation C} & \textbf{1.0}\tabularnewline
+Logistic\\
+ Regression
+\end{cellvarwidth} & Inverse regularisation C & 1.0\tabularnewline
 \begin{cellvarwidth}[t]
 \centering
-\textbf{Logistic}\\
-\textbf{ Regression}
-\end{cellvarwidth} & \textbf{Maximum iterations} & \textbf{3000}\tabularnewline
-\textbf{RF} & \textbf{Trees} & \textbf{200}\tabularnewline
-\textbf{RF} & \textbf{Maximum leaves} & \textbf{127}\tabularnewline
-\textbf{RF} & \textbf{Minimum samples per leaf} & \textbf{20}\tabularnewline
-\textbf{RF} & \textbf{Feature fraction} & \textbf{0.8}\tabularnewline
-\textbf{MLP} & \textbf{Hidden units (single layer)} & \textbf{32}\tabularnewline
-\textbf{MLP} & \textbf{L2 penalty} & \textbf{0.0001}\tabularnewline
-\textbf{MLP} & \textbf{Optimiser} & \textbf{Adam}\tabularnewline
-\textbf{MLP} & \textbf{Early stopping} & \textbf{Yes (10\% internal split)}\tabularnewline
-\textbf{MLP} & \textbf{Maximum iterations} & \textbf{300}\tabularnewline
-\textbf{RBF network} & \textbf{Basis functions} & \textbf{300}\tabularnewline
-\textbf{RBF network} & \textbf{Kernel scale} & \textbf{0.05}\tabularnewline
-\textbf{RBF network} & \textbf{Readout regularisation C} & \textbf{1.0}\tabularnewline
+Logistic\\
+ Regression
+\end{cellvarwidth} & Maximum iterations & 3000\tabularnewline
+RF & Trees & 200\tabularnewline
+RF & Maximum leaves & 127\tabularnewline
+RF & Minimum samples per leaf & 20\tabularnewline
+RF & Feature fraction & 0.8\tabularnewline
+MLP & Hidden units (single layer) & 32\tabularnewline
+MLP & L2 penalty & 0.0001\tabularnewline
+MLP & Optimiser & Adam\tabularnewline
+MLP & Early stopping & Yes (10\% internal split)\tabularnewline
+MLP & Maximum iterations & 300\tabularnewline
+RBF network & Basis functions & 300\tabularnewline
+RBF network & Kernel scale & 0.05\tabularnewline
+RBF network & Readout regularisation C & 1.0\tabularnewline
 \hline 
 \end{tabular}
 \end{table}
  These parameters are analyzed in detail below:
 \begin{enumerate}
-\item \textbf{Boosting iterations}: The number of successive trees added
-to a boosted ensemble. More iterations allow a closer fit but increase
-the risk of overfitting.
-\item \textbf{Maximum leaves}: The upper limit on the number of terminal
-nodes in a single tree, and hence on how many distinct regions of
-the feature space it can separate.
-\item \textbf{Maximum depth}: The longest path from root to leaf. A depth
-of one restricts the model to additive effects, with no interactions
-between features.
-\item \textbf{Learning rate}: The weight given to each successive tree.
-Lower values make the optimisation more stable but require more iterations
-to converge.
-\item \textbf{Minimum samples per leaf}: The smallest number of matches
-that a terminal node may contain. Higher values act as regularisation,
-preventing the model from fitting individual outliers.
-\item \textbf{Trees}: The number of trees grown independently in the bagged
-ensemble. More trees reduce variance at a proportional cost in training
-time.
-\item \textbf{Feature fraction}: The proportion of features considered at
-each split. Values below one introduce randomness across trees and
-improve generalisation.
-\item \textbf{Hidden units}: The width of the single hidden layer of the
-neural network, which determines how many non-linear basis functions
-the network can form.
-\item \textbf{L2 penalty}: The strength of the quadratic penalty on the
-network weights, controlling the trade-off between fit and smoothness.
-\item \textbf{Optimiser}: The numerical method used to minimise the training
-objective. Adam is a stochastic first-order method with adaptive per-parameter
+\item Boosting iterations: The number of successive trees added to a boosted
+ensemble. More iterations allow a closer fit but increase the risk
+of overfitting.
+\item Maximum leaves: The upper limit on the number of terminal nodes in
+a single tree, and hence on how many distinct regions of the feature
+space it can separate.
+\item Maximum depth: The longest path from root to leaf. A depth of one
+restricts the model to additive effects, with no interactions between
+features.
+\item Learning rate: The weight given to each successive tree. Lower values
+make the optimisation more stable but require more iterations to converge.
+\item Minimum samples per leaf: The smallest number of matches that a terminal
+node may contain. Higher values act as regularisation, preventing
+the model from fitting individual outliers.
+\item Trees: The number of trees grown independently in the bagged ensemble.
+More trees reduce variance at a proportional cost in training time.
+\item Feature fraction: The proportion of features considered at each split.
+Values below one introduce randomness across trees and improve generalisation.
+\item Hidden units: The width of the single hidden layer of the neural network,
+which determines how many non-linear basis functions the network can
+form.
+\item L2 penalty: The strength of the quadratic penalty on the network weights,
+controlling the trade-off between fit and smoothness.
+\item Optimiser: The numerical method used to minimise the training objective.
+Adam is a stochastic first-order method with adaptive per-parameter
 step sizes; training stops when the score on an internal validation
 split ceases to improve.
-\item \textbf{Basis functions}: The number of random Fourier features used
-to approximate the Gaussian kernel in the radial-basis network, following
-the construction of Rahimi and Recht \citep{rff}.
-\item \textbf{Kernel scale}: The gamma parameter of the random Fourier mapping
-that approximates the Gaussian kernel. Smaller values produce a broader,
+\item Basis functions: The number of random Fourier features used to approximate
+the Gaussian kernel in the radial-basis network, following the construction
+of Rahimi and Recht \citep{rff}.
+\item Kernel scale: The gamma parameter of the random Fourier mapping that
+approximates the Gaussian kernel. Smaller values produce a broader,
 smoother response over the feature space.
-\item \textbf{Inverse regularisation strength}: The reciprocal of the penalty
-applied to the coefficients of the linear models. Larger values correspond
+\item Inverse regularisation strength: The reciprocal of the penalty applied
+to the coefficients of the linear models. Larger values correspond
 to weaker regularisation.
-\item \textbf{Maximum iterations}: The limit on the number of passes the
-optimiser may make over the training data before stopping.
+\item Maximum iterations: The limit on the number of passes the optimiser
+may make over the training data before stopping.
 \end{enumerate}
 
 \subsection{Experimental results}
@@ -801,42 +793,40 @@ the positive class corresponds to the outcome \textquotedbl 2\textquotedbl{}
 and \textquotedbl 1\textquotedbl{} (home win) were merged into a
 single negative class, \textquotedbl not Away Win.\textquotedbl{}
 \end{enumerate}
-\textbf{The binary formulation is a one-vs-rest decomposition of the
-three-class outcome, reported because the two merged markets are the
-form in which such predictions are most often presented. Each of the
-three binary probabilities is directly comparable with the corresponding
-de-vigged market probability for that one-vs-rest task, and the tables
-below make that comparison. Their triplet, however, is not a coherent
-three-class distribution, because three independently fitted probabilities
-need not sum to one; the three-class formulation reported afterwards
-has that property by construction, and is therefore the formulation
-in which the multiclass scoring rules are applied. The operating threshold
+The binary formulation is a one-vs-rest decomposition of the three-class
+outcome, reported because the two merged markets are the form in which
+such predictions are most often presented. Each of the three binary
+probabilities is directly comparable with the corresponding de-vigged
+market probability for that one-vs-rest task, and the tables below
+make that comparison. Their triplet, however, is not a coherent three-class
+distribution, because three independently fitted probabilities need
+not sum to one; the three-class formulation reported afterwards has
+that property by construction, and is therefore the formulation in
+which the multiclass scoring rules are applied. The operating threshold
 for all binary tasks is 0.5. We also note that the precision and recall
 values in Tables \ref{tab:Home-win-experimental} and \ref{tab:Away-win-experimental}
 are macro averages across both classes rather than positive-class
-values.}
+values, as indicated in the column headings.
 
-\textbf{The same benchmark feature set is used in all the primary
-performance comparisons reported in this paper. It comprises the three
-de-vigged market probabilities, the Elo difference and the ranking
-difference, the two counts of prior matches available for the two
-teams together with the indicator recording whether historical values
-had to be imputed, the four rolling goal averages, four difference-form
-combinations of attacking and defensive strength, and two historical
-frequencies: 18 inputs in total, or 15 when the three market probabilities
-are withheld. The feature space is identical across all six classifiers
+The same benchmark feature set is used in all the primary performance
+comparisons reported in this paper. It comprises the three de-vigged
+market probabilities, the Elo difference and the ranking difference,
+the two counts of prior matches available for the two teams together
+with the indicator recording whether historical values had to be imputed,
+the four rolling goal averages, four difference-form combinations
+of attacking and defensive strength, and two historical frequencies:
+18 inputs in total, or 15 when the three market probabilities are
+withheld. The feature space is identical across all six classifiers
 and also identical between the binary and the three-class formulations,
 so that the two can be compared without any confounding from the inputs.
-The precision and recall columns of the binary tables are macro averages
-across both classes, as indicated in the column headings.}
 
 Table \ref{tab:Home-win-experimental} depicts the experimental results
 using the incorporated method on the Home Win dataset. 
 \begin{table}[H]
 \caption{Home win experimental results. Each model cell gives the point estimate
 and, beneath it, the 95\% bootstrap CI over 1000 paired resamples
-of the test set. The two reference predictors are computed without
-training and are reported as point estimates.\label{tab:Home-win-experimental}}
+\citep{efron1993}of the test set. The two reference predictors are
+computed without training and are reported as point estimates.\label{tab:Home-win-experimental}}
 
 \centering{}%
 \begin{tabular}{cccc}
@@ -855,7 +845,7 @@ training and are reported as point estimates.\label{tab:Home-win-experimental}}
 \centering
 \textbf{Trivial}\\
 \textbf{(majority class)}
-\end{cellvarwidth} & \textbf{43.45\%} & \textbf{-{}-{}-} & \textbf{-{}-{}-}\tabularnewline
+\end{cellvarwidth} & \textbf{43.45\%} & \textbf{-} & \textbf{-}\tabularnewline
 \begin{cellvarwidth}[t]
 \centering
 \textbf{Bookmaker odds}\\
@@ -887,11 +877,7 @@ GAM & \begin{cellvarwidth}[t]
 63.37\%\\
 {[}63.06, 63.74{]}
 \end{cellvarwidth}\tabularnewline
-\begin{cellvarwidth}[t]
-\centering
-Logistic\\
- Regression
-\end{cellvarwidth} & \begin{cellvarwidth}[t]
+LogReg & \begin{cellvarwidth}[t]
 \centering
 34.50\%\\
 {[}34.12, 34.82{]}
@@ -948,22 +934,19 @@ RBF & \begin{cellvarwidth}[t]
 \end{table}
  Table \ref{tab:Home-win-experimental} summarizes the performance
 of the six classifiers on the binary \textquotedbl Home Win vs. merged
-X2\textquotedbl{} problem.\textbf{ The most notable feature of the
-table is how little the methods differ. Error ranges from 34.50\%
-to 34.73\% and macro-averaged precision from 64.83\% to 65.16\%, a
-spread of 0.23 and 0.33 percentage points respectively across the
-six classifiers. MLP records both the lowest error (34.50\%) and the
-highest precision (65.16\%), but the bootstrap CIs of these quantities
-overlap for every pair of models, so the ordering should not be interpreted
-as a ranking. The comparison that does separate the predictors is
-the one with the two reference rows: all six classifiers improve substantially
-on the majority-class baseline (43.45\% error), and all six coincide
-with the de-vigged bookmaker forecast (34.52\% error) to within 0.21
-percentage points.}
-
-Similarly, Table \ref{tab:Away-win-experimental} presents the experimental
-results on the Away win dataset with the assistance of the machine
-learning methods used.
+X2\textquotedbl{} problem. The most notable feature of the table is
+how little the methods differ. Error ranges from 34.50\% to 34.73\%
+and macro-averaged precision from 64.83\% to 65.16\%, a spread of
+0.23 and 0.33 percentage points respectively across the six classifiers.
+MLP records both the lowest error (34.50\%) and the highest precision
+(65.16\%), but the bootstrap CIs of these quantities overlap for every
+pair of models, so the ordering should not be interpreted as a ranking.
+The comparison that does separate the predictors is the one with the
+two reference rows: all six classifiers improve substantially on the
+majority-class baseline (43.45\% error), and all six coincide with
+the de-vigged bookmaker forecast (34.52\% error) to within 0.21 percentage
+points. Similarly, Table \ref{tab:Away-win-experimental} presents
+the experimental results on the Away win dataset.
 \begin{table}[H]
 \caption{Away win experimental results. Each model cell gives the point estimate
 and, beneath it, the 95\% bootstrap CI over 1000 paired resamples
@@ -987,7 +970,7 @@ training and are reported as point estimates.\label{tab:Away-win-experimental}}
 \centering
 \textbf{Trivial}\\
 \textbf{(majority class)}
-\end{cellvarwidth} & \textbf{31.18\%} & \textbf{-{}-{}-} & \textbf{-{}-{}-}\tabularnewline
+\end{cellvarwidth} & \textbf{31.18\%} & \textbf{-} & \textbf{-}\tabularnewline
 \begin{cellvarwidth}[t]
 \centering
 \textbf{Bookmaker odds}\\
@@ -1019,11 +1002,7 @@ GAM & \begin{cellvarwidth}[t]
 59.10\%\\
 {[}58.82, 59.42{]}
 \end{cellvarwidth}\tabularnewline
-\begin{cellvarwidth}[t]
-\centering
-Logistic\\
- Regression
-\end{cellvarwidth} & \begin{cellvarwidth}[t]
+LogReg & \begin{cellvarwidth}[t]
 \centering
 27.85\%\\
 {[}27.52, 28.18{]}
@@ -1079,53 +1058,45 @@ RBF & \begin{cellvarwidth}[t]
 \end{tabular}
 \end{table}
  In the binary \textquotedbl Away Win vs. merged X1\textquotedbl{}
-problem, absolute error levels are lower than in the Home Win market
-(Error 27.83\%--27.98\% across the six classifiers), reflecting the
-fact that away wins occur less frequently overall, which mechanically
-lowers the baseline error rate for a model that leans conservative.\textbf{
-The same pattern holds. Error ranges from 27.83\% to 27.98\% and macro-averaged
-precision from 68.05\% to 68.46\%, with GAM attaining the highest
-precision and MLP the lowest error. Again the differences are smaller
-than the width of the corresponding CIs. The bookmaker reference records
-27.86\% error and 68.42\% precision, values that fall inside the range
-spanned by the models; the majority-class baseline records 31.18\%
-error. The absolute error level is lower than in the Home Win market
-because away wins are the less frequent outcome, which mechanically
-reduces the error of a conservative classifier. The same rarity shows
-in the positive class: at the 0.5 threshold the classifiers recover
-between 24.6\% and 26.7\% of away wins, against between 46.5\% and
-48.3\% of home wins at almost identical positive-class precision,
-so the macro averages reported here should be read together with the
-F1 column of the additional-metrics tables.}
+problem, error ranges from 27.83\% to 27.98\% across the six classifiers
+and macro-averaged precision from 68.05\% to 68.46\%, with GAM attaining
+the highest precision and MLP the lowest error. Again the differences
+are smaller than the width of the corresponding CIs. The bookmaker
+reference records 27.86\% error and 68.42\% precision, values that
+fall inside the range spanned by the models; the majority-class baseline
+records 31.18\% error. The absolute error level is lower than in the
+Home Win market because away wins are the less frequent outcome, which
+mechanically reduces the error of a conservative classifier. The same
+rarity shows in the positive class: at the 0.5 threshold the classifiers
+recover between 24.5\% and 26.7\% of away wins, against between 46.5\%
+and 48.3\% of home wins at comparable positive-class precision, so
+the macro averages reported here should be read together with the
+F1 column of the additional-metrics tables.
 
 Taken together, Table \ref{tab:Home-win-experimental} and Table \ref{tab:Away-win-experimental}
 show the same picture in both merged binary formulations: the models
-show small differences in precision and recall at the fixed 0.5 threshold,but
-no classifier holds a consistent advantage in both quantities: the
-highest macro precision is attained by MLP in the Home Win market
+show small differences in precision and recall at the fixed 0.5 threshold,
+but no classifier holds a consistent advantage in both quantities:
+the highest macro precision is attained by MLP in the Home Win market
 and by GAM in the Away Win market, while the highest macro recall
 is attained by logistic regression in both markets, which also has
 the second-lowest precision in both. The CIs of these leaders overlap
 with those of the classifiers immediately behind them, so none of
-these orderings is distinguishable.\textbf{ What differences there
-are reflect where each classifier's probabilities fall relative to
-the common 0.5 cut-off rather than any difference in discriminative
-ability: the models with higher recall record correspondingly lower
-precision, while their areas under the curve (AUC) are very close
-and their bootstrap CIs overlap substantially. The threshold-free
-comparison in the following subsection} \ref{subsec:Statistical-comparison-of},\textbf{
+these orderings is distinguishable. What differences there are reflect
+where each classifier's probabilities fall relative to the common
+0.5 cut-off rather than any difference in discriminative ability:
+the models with higher recall record correspondingly lower precision,
+while their AUC are very close and their bootstrap CIs overlap substantially.
+The threshold-free comparison in the following subsection \ref{subsec:Statistical-comparison-of},
 therefore addresses the question directly, with the six classifiers
 and the two reference predictors placed side by side on both markets.
-The threshold-free comparison reported in the following subsections
-addresses the same question directly, by removing the dependence on
-a fixed decision cut-off.}
 
 The results reported so far include the de-vigged market probabilities
 among the inputs. Table \ref{tab:binary-no-odds} repeats the two
 binary markets with those three columns removed, so that the contribution
-of the engineered features can be read on its own. Everything else
--{}- the chronological split, the fixed configurations and the evaluation
-protocol -{}- is unchanged.
+of the engineered features can be read on its own. Everything else,
+the chronological split, the fixed configurations and the evaluation
+protocol, is unchanged.
 
 \begin{table}[H]
 \caption{Binary results with the odds-based features removed. Error is reported
@@ -1145,7 +1116,6 @@ CI over the same 1000 resamples of the test set.\label{tab:binary-no-odds}}
 \end{cellvarwidth} & \begin{cellvarwidth}[t]
 \centering
 \textbf{HOME WIN}\\
-\textbf{AUC}
 \end{cellvarwidth} & \begin{cellvarwidth}[t]
 \centering
 \textbf{AWAY WIN}\\
@@ -1153,14 +1123,13 @@ CI over the same 1000 resamples of the test set.\label{tab:binary-no-odds}}
 \end{cellvarwidth} & \begin{cellvarwidth}[t]
 \centering
 \textbf{AWAY WIN}\\
-\textbf{AUC}
 \end{cellvarwidth}\tabularnewline
 \hline 
 \begin{cellvarwidth}[t]
 \centering
 \textbf{Trivial}\\
 \textbf{(majority class)}
-\end{cellvarwidth} & \textbf{43.45\%} & \textbf{-{}-{}-} & \textbf{31.18\%} & \textbf{-{}-{}-}\tabularnewline
+\end{cellvarwidth} & \textbf{43.45\%} & \textbf{-} & \textbf{31.18\%} & \textbf{-}\tabularnewline
 \begin{cellvarwidth}[t]
 \centering
 \textbf{Bookmaker odds}\\
@@ -1200,7 +1169,7 @@ GAM & \begin{cellvarwidth}[t]
 0.6510\\
 {[}0.6471, 0.6553{]}
 \end{cellvarwidth}\tabularnewline
-LogisticRegression & \begin{cellvarwidth}[t]
+LogReg & \begin{cellvarwidth}[t]
 \centering
 38.26\%\\
 {[}37.93, 38.62{]}
@@ -1234,7 +1203,7 @@ MLP & \begin{cellvarwidth}[t]
 0.6510\\
 {[}0.6470, 0.6553{]}
 \end{cellvarwidth}\tabularnewline
-RandomForest & \begin{cellvarwidth}[t]
+RF & \begin{cellvarwidth}[t]
 \centering
 38.09\%\\
 {[}37.76, 38.44{]}
@@ -1287,14 +1256,14 @@ removal lowers AUC to 0.5350-0.5476, against 0.5843 for the market,
 confirming that this outcome carries the least information of the
 three. No model attains a higher AUC than the market in either design,
 and the same holds for the logarithmic loss, the Brier score and the
-ranked probability score in the three-class tables below.
+ranked probability score (RPS) in the three-class tables below.
 
 \subsection{Statistical comparison of the experimental results\label{subsec:Statistical-comparison-of}}
 
-\textbf{The two binary markets are summarised together in Figure \ref{fig:Heatmap-of-Precision.},
+The two binary markets are summarised together in Figure \ref{fig:Heatmap-of-Precision.},
 which reports the same three quantities as Tables \ref{tab:Home-win-experimental}
 and \ref{tab:Away-win-experimental} for the six classifiers and for
-the two reference predictors on a single colour scale.}
+the two reference predictors on a single colour scale.
 
 \begin{figure}[H]
 \begin{raggedright}
@@ -1309,32 +1278,31 @@ inverted (100 - Error) so that green denotes better performance throughout;
 the numeric labels give the actual values.\label{fig:Heatmap-of-Precision.}}
 
 \end{figure}
-\textbf{The heatmap condenses the results of the two binary markets
-into a single panel. Its main message is the uniformity of the colouring:
+The heatmap condenses the results of the two binary markets into a
+single panel. Its main message is the uniformity of the colouring:
 the six classifiers occupy a narrow band in every column, and no row
-is systematically greener than the others.}
+is systematically greener than the others.
 
-\textbf{Five of the six classifiers are stochastic given fixed training
-data, so the values reported in the tables above depend to some extent
-on the random seed. Table \ref{tab:seed-stability} quantifies that
-dependence over 30 refits of each stochastic classifier; logistic
-regression was refitted twice, to confirm that it is deterministic.
-The standard deviation of the error lies between 0.012 and 0.066 percentage
-points, which is small in absolute terms but not negligible relative
-to the differences between classifiers: the means themselves span
-0.146 percentage points in the Home Win market, so seed variation
-does not by itself account for the ordering of the classifiers. What
-it does account for is the distance to the market. In the Home Win
-market the error of the de-vigged bookmaker forecast falls inside
-the range of the 30 refits for four of the six classifiers, and in
-the Away Win market for five of the six, while 14 of the 15 pairs
-of classifiers have overlapping ranges in the Home Win market and
-13 of 15 in the Away Win market. The observed gap between neighbouring
-classifiers is therefore of the same order as the variation induced
-by the seed alone, and should not be over-interpreted. The values
-printed in the results tables were produced with a single fixed seed,
-and they fall within or immediately adjacent to the ranges reported
-here.}
+Five of the six classifiers are stochastic given fixed training data,
+so the values reported in the tables above depend to some extent on
+the random seed. Table \ref{tab:seed-stability} quantifies that dependence
+over 30 refits of each stochastic classifier; logistic regression
+was refitted twice, to confirm that it is deterministic. The standard
+deviation of the error lies between 0.012 and 0.066 percentage points,
+which is small in absolute terms but not negligible relative to the
+differences between classifiers: the means themselves span 0.146 percentage
+points in the Home Win market, so seed variation does not by itself
+account for the ordering of the classifiers. What it does account
+for is the distance to the market. In the Home Win market the error
+of the de-vigged bookmaker forecast falls inside the range of the
+30 refits for four of the six classifiers, and in the Away Win market
+for five of the six, while 14 of the 15 pairs of classifiers have
+overlapping ranges in the Home Win market and 13 of 15 in the Away
+Win market. The observed gap between neighbouring classifiers is therefore
+of the same order as the variation induced by the seed alone, and
+should not be over-interpreted. The values printed in the results
+tables were produced with a single fixed seed, and they fall within
+or immediately adjacent to the ranges reported here.
 
 \begin{table}[H]
 \caption{Sensitivity of the reported error to the random seed. Each stochastic
@@ -1370,7 +1338,7 @@ tables and does not depend on training.\label{tab:seed-stability}}
 \centering
 {\footnotesize\textbf{Bookmaker odds}}\\
 {\footnotesize\textbf{(de-vigged)}}
-\end{cellvarwidth} & {\footnotesize\textbf{34.52\%}} & {\footnotesize\textbf{-{}-{}-}} & {\footnotesize\textbf{27.86\%}} & {\footnotesize\textbf{-{}-{}-}}\tabularnewline
+\end{cellvarwidth} & {\footnotesize\textbf{34.52\%}} & {\footnotesize\textbf{-}} & {\footnotesize\textbf{27.86\%}} & {\footnotesize\textbf{-}}\tabularnewline
 {\footnotesize FastTree} & {\footnotesize 34.577\%} & \begin{cellvarwidth}[t]
 \centering
 {\footnotesize 0.044}\\
@@ -1389,7 +1357,7 @@ tables and does not depend on training.\label{tab:seed-stability}}
 {\footnotesize 0.012}\\
 {\footnotesize{[}27.850, 27.892{]}}
 \end{cellvarwidth}\tabularnewline
-{\footnotesize Logistic Regression} & {\footnotesize 34.500\%} & \begin{cellvarwidth}[t]
+{\footnotesize LogReg} & {\footnotesize 34.500\%} & \begin{cellvarwidth}[t]
 \centering
 {\footnotesize 0}\\
 {\footnotesize{[}34.500, 34.500{]}}
@@ -1429,8 +1397,8 @@ tables and does not depend on training.\label{tab:seed-stability}}
 \end{tabular}
 \end{table}
 
-\textbf{The results tables report the three quantities on which the
-comparison with the market turns. For completeness, Tables \ref{tab:full-metrics-home}
+The results tables report the three quantities on which the comparison
+with the market turns. For completeness, Tables \ref{tab:full-metrics-home}
 and \ref{tab:full-metrics-away} give five further metrics for both
 binary markets, each with its 95\% bootstrap CIs: the two threshold-free
 measures of ranking quality, the F1 score of the positive class, and
@@ -1438,37 +1406,37 @@ the Brier score and logarithmic loss. The pattern is the one already
 described. Every interval for every model overlaps the corresponding
 value for the de-vigged market forecast on the probabilistic scores,
 and no model attains a higher AUC or average precision than the market
-in either market.}
+in either market.
 
-\textbf{For completeness, Table \ref{tab:Draw-experimental} reports
-the same binary decomposition applied to the draw outcome. The result
-is instructive: for four of the six classifiers, and for the market
-itself, the precision and recall of the positive class at the 0.5
-threshold are both exactly zero, because no positive prediction is
-ever issued; the macro averages printed in the table are correspondingly
-the values obtained when only the negative class is predicted, because
-the estimated draw probability almost never exceeds one half. The
-two classifiers that do issue positive predictions obtain a high macro
-precision from very few of them: 62 positive predictions for the multilayer
-perceptron and 122 for logistic regression, out of 75,495 matches,
-which is why their precision column appears favourable while their
-recall of actual draws remains below 0.4 per cent. Threshold-based
-measures are therefore uninformative for this outcome, which motivates
-the proper scoring rules reported in the following subsection.}
+For completeness, Table \ref{tab:Draw-experimental} reports the same
+binary decomposition applied to the draw outcome. The result is instructive:
+for four of the six classifiers, and for the market itself, the precision
+and recall of the positive class at the 0.5 threshold are both exactly
+zero, because no positive prediction is ever issued; the macro averages
+printed in the table are correspondingly the values obtained when
+only the negative class is predicted, because the estimated draw probability
+almost never exceeds one half. The two classifiers that do issue positive
+predictions obtain a high macro precision from very few of them: 62
+positive predictions for the MLP and 122 for logistic regression,
+out of 75,495 matches, which is why their precision column appears
+favourable while their recall of actual draws remains below 0.4 per
+cent. Threshold-based measures are therefore uninformative for this
+outcome, which motivates the proper scoring rules reported in the
+following subsection.
 
 \begin{table}[H]
 \caption{Additional metrics for the Home Win market, with 95\% bootstrap CIs.
 The three quantities reported in the corresponding results table above
 are not repeated here. Precision and recall for the positive class
 are summarised by the F1 column; their macro-averaged counterparts
-are in the results table. Intervals are percentile intervals over
-1000 resamples of the test set, computed from the same resamples for
-every predictor so that the comparisons are paired.\label{tab:full-metrics-home}}
+are in Table \ref{tab:Home-win-experimental}. Intervals are percentile
+intervals over 1000 resamples of the test set, computed from the same
+resamples for every predictor so that the comparisons are paired.\label{tab:full-metrics-home}}
 
 \centering{}%
 \begin{tabular}{cccccc}
 \hline 
-{\footnotesize\textbf{PREDICTOR}} & {\footnotesize\textbf{AUC}} & \begin{cellvarwidth}[t]
+{\footnotesize\textbf{PREDICTOR}} &  & \begin{cellvarwidth}[t]
 \centering
 {\footnotesize\textbf{AVERAGE}}\\
 {\footnotesize\textbf{PRECISION}}
@@ -1529,7 +1497,7 @@ every predictor so that the comparisons are paired.\label{tab:full-metrics-home}
 {\footnotesize 0.6153}\\
 {\footnotesize{[}0.6129, 0.6178{]}}
 \end{cellvarwidth}\tabularnewline
-{\footnotesize LogisticRegression} & \begin{cellvarwidth}[t]
+{\footnotesize LogReg} & \begin{cellvarwidth}[t]
 \centering
 {\footnotesize 0.7051}\\
 {\footnotesize{[}0.7015, 0.7089{]}}
@@ -1571,7 +1539,7 @@ every predictor so that the comparisons are paired.\label{tab:full-metrics-home}
 {\footnotesize 0.6163}\\
 {\footnotesize{[}0.6138, 0.6189{]}}
 \end{cellvarwidth}\tabularnewline
-{\footnotesize RandomForest} & \begin{cellvarwidth}[t]
+{\footnotesize RF} & \begin{cellvarwidth}[t]
 \centering
 {\footnotesize 0.7044}\\
 {\footnotesize{[}0.7009, 0.7081{]}}
@@ -1622,14 +1590,14 @@ every predictor so that the comparisons are paired.\label{tab:full-metrics-home}
 The three quantities reported in the corresponding results table above
 are not repeated here. Precision and recall for the positive class
 are summarised by the F1 column; their macro-averaged counterparts
-are in the results table. Intervals are percentile intervals over
-1000 resamples of the test set, computed from the same resamples for
-every predictor so that the comparisons are paired.\label{tab:full-metrics-away}}
+are in Table \ref{tab:Away-win-experimental}. Intervals are percentile
+intervals over 1000 resamples of the test set, computed from the same
+resamples for every predictor so that the comparisons are paired.\label{tab:full-metrics-away}}
 
 \centering{}%
 \begin{tabular}{cccccc}
 \hline 
-{\footnotesize\textbf{PREDICTOR}} & {\footnotesize\textbf{AUC}} & \begin{cellvarwidth}[t]
+{\footnotesize\textbf{PREDICTOR}} &  & \begin{cellvarwidth}[t]
 \centering
 {\footnotesize\textbf{AVERAGE}}\\
 {\footnotesize\textbf{PRECISION}}
@@ -1690,7 +1658,7 @@ every predictor so that the comparisons are paired.\label{tab:full-metrics-away}
 {\footnotesize 0.5543}\\
 {\footnotesize{[}0.5510, 0.5575{]}}
 \end{cellvarwidth}\tabularnewline
-{\footnotesize LogisticRegression} & \begin{cellvarwidth}[t]
+{\footnotesize LogReg} & \begin{cellvarwidth}[t]
 \centering
 {\footnotesize 0.7133}\\
 {\footnotesize{[}0.7094, 0.7173{]}}
@@ -1732,7 +1700,7 @@ every predictor so that the comparisons are paired.\label{tab:full-metrics-away}
 {\footnotesize 0.5545}\\
 {\footnotesize{[}0.5512, 0.5579{]}}
 \end{cellvarwidth}\tabularnewline
-{\footnotesize RandomForest} & \begin{cellvarwidth}[t]
+{\footnotesize RF} & \begin{cellvarwidth}[t]
 \centering
 {\footnotesize 0.7133}\\
 {\footnotesize{[}0.7095, 0.7174{]}}
@@ -1779,11 +1747,11 @@ every predictor so that the comparisons are paired.\label{tab:full-metrics-away}
 \end{table}
 
 \begin{table}[H]
-\caption{\textbf{Draw market experimental results. Precision and recall are
-macro averages across both classes.} Each model cell gives the point
-estimate and, beneath it, the 95\% bootstrap CI over 1000 paired resamples
-of the test set. The two reference predictors are computed without
-training and are reported as point estimates.\label{tab:Draw-experimental}}
+\caption{Draw market experimental results. Precision and recall are macro averages
+across both classes. Each model cell gives the point estimate and,
+beneath it, the 95\% bootstrap CI over 1000 paired resamples of the
+test set. The two reference predictors are computed without training
+and are reported as point estimates.\label{tab:Draw-experimental}}
 
 \centering{}%
 \begin{tabular}{cccc}
@@ -1802,7 +1770,7 @@ training and are reported as point estimates.\label{tab:Draw-experimental}}
 \centering
 \textbf{Trivial}\\
 \textbf{(majority class)}
-\end{cellvarwidth} & \textbf{25.37\%} & \textbf{-{}-{}-} & \textbf{-{}-{}-}\tabularnewline
+\end{cellvarwidth} & \textbf{25.37\%} & \textbf{-} & \textbf{-}\tabularnewline
 \begin{cellvarwidth}[t]
 \centering
 \textbf{Bookmaker odds}\\
@@ -1834,11 +1802,7 @@ GAM & \begin{cellvarwidth}[t]
 50.00\%\\
 {[}50.00, 50.00{]}
 \end{cellvarwidth}\tabularnewline
-\begin{cellvarwidth}[t]
-\centering
-Logistic\\
- Regression
-\end{cellvarwidth} & \begin{cellvarwidth}[t]
+LogReg & \begin{cellvarwidth}[t]
 \centering
 25.36\%\\
 {[}25.03, 25.67{]}
@@ -1864,11 +1828,7 @@ MLP & \begin{cellvarwidth}[t]
 50.11\%\\
 {[}50.07, 50.14{]}
 \end{cellvarwidth}\tabularnewline
-\begin{cellvarwidth}[t]
-\centering
-Random\\
- Forest
-\end{cellvarwidth} & \begin{cellvarwidth}[t]
+RF & \begin{cellvarwidth}[t]
 \centering
 25.37\%\\
 {[}25.05, 25.69{]}
@@ -1899,10 +1859,10 @@ RBF & \begin{cellvarwidth}[t]
 \end{table}
 
 
-\subsection{\textbf{Three-class classification results}}
+\subsection{Three-class classification results}
 
-\textbf{The binary formulation above merges two of the three outcomes
-into a single negative class. For completeness, this subsection reports
+The binary formulation above merges two of the three outcomes into
+a single negative class. For completeness, this subsection reports
 the three-class problem (home win, draw, away win) as a single multinomial
 classification task. This formulation has the additional property
 that the predicted probabilities sum to one by construction, which
@@ -1910,29 +1870,27 @@ makes them directly comparable with the de-vigged market probabilities.
 Because no natural decision threshold exists in the three-class setting,
 performance is reported using accuracy together with three threshold-free
 scoring rules \citep{gneiting2007,constantinou2012}: multiclass logarithmic
-loss, the multiclass Brier score, and the ranked probability score
-(RPS), which exploits the ordering of the outcome and penalises errors
-between adjacent categories less heavily than errors between extremes.
-Its suitability for football forecasts has been questioned \citep{wheatcroft2021},
-and it is therefore reported alongside the logarithmic loss and the
-Brier score rather than on its own. All values are accompanied by
-95\% bootstrap CIs obtained from 1000 paired resamples of the test
-set \citep{efron1993}.}
+loss, the multiclass Brier score, and the RPS, which exploits the
+ordering of the outcome and penalises errors between adjacent categories
+less heavily than errors between extremes. Its suitability for football
+forecasts has been questioned \citep{wheatcroft2021}, and it is therefore
+reported alongside the logarithmic loss and the Brier score rather
+than on its own. All values are accompanied by 95\% bootstrap CIs
+obtained from 1000 paired resamples of the test set \citep{efron1993}.
 
-\textbf{Two reference predictors are included in both tables. The
-trivial predictor assigns the class frequencies observed in the training
-set to every match. The bookmaker predictor is the de-vigged market
-probability itself, evaluated as a classifier without any training.
-Table \ref{tab:three-class-no-odds} reports the results obtained
-when the market probabilities are excluded from the feature set, and
-Table \ref{tab:three-class-with-odds} the results obtained when they
-are included.}
+Two reference predictors are included in both tables. The trivial
+predictor assigns the class frequencies observed in the training set
+to every match. The bookmaker predictor is the de-vigged market probability
+itself, evaluated as a classifier without any training. Table \ref{tab:three-class-no-odds}
+reports the results obtained when the market probabilities are excluded
+from the feature set, and Table \ref{tab:three-class-with-odds} the
+results obtained when they are included.
 
 \begin{table}[H]
-\caption{\textbf{Three-class classification without odds-based features. Each
-cell gives the point estimate followed by the 95\% bootstrap CIs in
-brackets (1000 paired resamples of the test set). Higher accuracy
-is better; lower LogLoss, Brier and RPS are better.}\label{tab:three-class-no-odds}}
+\caption{Three-class classification without odds-based features. Each cell
+gives the point estimate followed by the 95\% bootstrap CIs in brackets
+(1000 paired resamples of the test set). Higher accuracy is better;
+lower LogLoss, Brier and RPS are better.\label{tab:three-class-no-odds}}
 
 {\footnotesize{}%
 \begin{tabular}{>{\centering}p{2.6cm}>{\centering}p{2.28cm}>{\centering}p{2.28cm}>{\centering}p{2.28cm}>{\centering}p{2.28cm}}
@@ -1959,7 +1917,7 @@ is better; lower LogLoss, Brier and RPS are better.}\label{tab:three-class-no-od
 {\footnotesize{[}1.0266, 1.0320{]}} & {\footnotesize 0.6178}\\
 {\footnotesize{[}0.6159, 0.6198{]}} & {\footnotesize 0.2148}\\
 {\footnotesize{[}0.2140, 0.2156{]}}\tabularnewline
-{\footnotesize Logistic Regression} & {\footnotesize 48.02}\\
+{\footnotesize LogReg} & {\footnotesize 48.02}\\
 {\footnotesize{[}47.67, 48.38{]}} & {\footnotesize 1.0289}\\
 {\footnotesize{[}1.0262, 1.0318{]}} & {\footnotesize 0.6176}\\
 {\footnotesize{[}0.6157, 0.6196{]}} & {\footnotesize 0.2147}\\
@@ -1983,19 +1941,18 @@ is better; lower LogLoss, Brier and RPS are better.}\label{tab:three-class-no-od
 \end{tabular}}{\footnotesize\par}
 \end{table}
 
-\textbf{Without odds-based features, all six classifiers fall within
-0.08 accuracy points of one another (47.96-48.04\%), while the distance
+Without odds-based features, all six classifiers fall within 0.08
+accuracy points of one another (47.96-48.04\%), while the distance
 between the trivial baseline and the market is 8.4 points. This indicates
 that the limiting factor is the information available in the feature
 set rather than the choice of learning algorithm. The models nevertheless
-recover approximately half of that lose, improving on the trivial
-baseline by 4.6 accuracy points and by approximately 0.045 in logarithmic
-loss.}
+recover approximately half of that gap, improving on the trivial baseline
+by 4.6 accuracy points and by approximately 0.045 in logarithmic loss.
 
 \begin{table}[H]
-\caption{\textbf{Three-class classification with odds-based features included.
-Each cell gives the point estimate followed by the 95\% bootstrap
-CI in brackets (1000 paired resamples of the test set).}\label{tab:three-class-with-odds}}
+\caption{Three-class classification with odds-based features included. Each
+cell gives the point estimate followed by the 95\% bootstrap CI in
+brackets (1000 paired resamples of the test set).\label{tab:three-class-with-odds}}
 
 {\footnotesize{}%
 \begin{tabular}{>{\centering}p{2.6cm}>{\centering}p{2.28cm}>{\centering}p{2.28cm}>{\centering}p{2.28cm}>{\centering}p{2.28cm}}
@@ -2022,12 +1979,12 @@ CI in brackets (1000 paired resamples of the test set).}\label{tab:three-class-w
 {\footnotesize{[}0.9811, 0.9874{]}} & {\footnotesize 0.5868}\\
 {\footnotesize{[}0.5845, 0.5890{]}} & {\footnotesize 0.2004}\\
 {\footnotesize{[}0.1995, 0.2013{]}}\tabularnewline
-{\footnotesize Logistic Regression} & {\footnotesize 51.87}\\
+{\footnotesize LogReg} & {\footnotesize 51.87}\\
 {\footnotesize{[}51.50, 52.22{]}} & {\footnotesize 0.9845}\\
 {\footnotesize{[}0.9812, 0.9877{]}} & {\footnotesize 0.5868}\\
 {\footnotesize{[}0.5844, 0.5890{]}} & {\footnotesize 0.2004}\\
 {\footnotesize{[}0.1995, 0.2013{]}}\tabularnewline
-{\footnotesize Random Forest} & {\footnotesize 51.88}\\
+{\footnotesize RF} & {\footnotesize 51.88}\\
 {\footnotesize{[}51.51, 52.24{]}} & {\footnotesize 0.9846}\\
 {\footnotesize{[}0.9813, 0.9878{]}} & {\footnotesize 0.5871}\\
 {\footnotesize{[}0.5848, 0.5893{]}} & {\footnotesize 0.2005}\\
@@ -2046,14 +2003,152 @@ CI in brackets (1000 paired resamples of the test set).}\label{tab:three-class-w
 \end{tabular}}{\footnotesize\par}
 \end{table}
 
-\textbf{When the market probabilities are included, every model reproduces
+When the market probabilities are included, every model reproduces
 the bookmaker forecast to within 0.2 accuracy points. Paired bootstrap
-comparisons \citep{efron1993} show that no model improves upon the
-bookmaker on logarithmic loss, Brier score or RPS; the single exception
-is GAM, whose accuracy exceeds the market by 0.086 points (95\% CI
-{[}0.005, 0.158{]}), a difference corresponding to approximately 65
-additional correct predictions out of 75,495 and not accompanied by
-any improvement in the probabilistic scores.}
+comparisons \citep{efron1993}\textbf{ give the difference between
+each classifier and the market on the same resamples, and are reported
+in Table \ref{tab:paired-vs-market}. On the three proper scoring
+rules the outcome is not merely an absence of improvement: for every
+classifier the difference is positive and its interval lies entirely
+above zero, so each is significantly worse than the market on the
+logarithmic loss, the Brier score and the RPS. On accuracy, four of
+the six classifiers have intervals that contain zero. GAM is the only
+classifier with a favourable non-zero difference, +0.086 points (95\%
+CI {[}0.005, 0.158{]}), a difference corresponding to approximately
+65 additional correct predictions out of 75,495 and not accompanied
+by any improvement in the probabilistic scores; RBF also excludes
+zero, but in the unfavourable direction, -0.192 points (95\% CI {[}-0.314,
+-0.066{]}).}
+
+\begin{table}[H]
+\caption{Paired differences between each classifier and the de-vigged bookmaker
+forecast in the three-class formulation with market probabilities
+among the inputs. Each entry is the classifier minus the market on
+the same 1000 paired resamples of the test set, with the 95\% percentile
+interval of that difference beneath it. Accuracy is in percentage
+points and higher is better; for the logarithmic loss, the Brier score
+and the ranked probability score lower is better, so a positive difference
+denotes worse performance than the market. The quantities are the
+paired counterparts of the values in Table \ref{tab:three-class-with-odds}.\label{tab:paired-vs-market}}
+
+\centering{}%
+\begin{tabular}{ccccc}
+\hline 
+{\footnotesize\textbf{PREDICTOR}} & \begin{cellvarwidth}[t]
+\centering
+{\footnotesize\textbf{ACCURACY}}\\
+{\footnotesize\textbf{(points)}}
+\end{cellvarwidth} & \begin{cellvarwidth}[t]
+\centering
+{\footnotesize\textbf{LOG}}\\
+{\footnotesize\textbf{LOSS}}
+\end{cellvarwidth} & {\footnotesize\textbf{BRIER}} & {\footnotesize\textbf{RPS}}\tabularnewline
+\hline 
+{\footnotesize FastTree} & \begin{cellvarwidth}[t]
+\centering
+{\footnotesize +0.031}\\
+{\footnotesize{[}-0.069, +0.129{]}}
+\end{cellvarwidth} & \begin{cellvarwidth}[t]
+\centering
+{\footnotesize +0.0013}\\
+{\footnotesize{[}+0.0009, +0.0018{]}}
+\end{cellvarwidth} & \begin{cellvarwidth}[t]
+\centering
+{\footnotesize +0.0008}\\
+{\footnotesize{[}+0.0005, +0.0010{]}}
+\end{cellvarwidth} & \begin{cellvarwidth}[t]
+\centering
+{\footnotesize +0.0003}\\
+{\footnotesize{[}+0.0002, +0.0004{]}}
+\end{cellvarwidth}\tabularnewline
+{\footnotesize GAM} & \begin{cellvarwidth}[t]
+\centering
+{\footnotesize +0.086}\\
+{\footnotesize{[}+0.005, +0.158{]}}
+\end{cellvarwidth} & \begin{cellvarwidth}[t]
+\centering
+{\footnotesize +0.0008}\\
+{\footnotesize{[}+0.0004, +0.0011{]}}
+\end{cellvarwidth} & \begin{cellvarwidth}[t]
+\centering
+{\footnotesize +0.0004}\\
+{\footnotesize{[}+0.0002, +0.0006{]}}
+\end{cellvarwidth} & \begin{cellvarwidth}[t]
+\centering
+{\footnotesize +0.0001}\\
+{\footnotesize{[}+0.0001, +0.0002{]}}
+\end{cellvarwidth}\tabularnewline
+{\footnotesize LogReg} & \begin{cellvarwidth}[t]
+\centering
+{\footnotesize -0.025}\\
+{\footnotesize{[}-0.099, +0.041{]}}
+\end{cellvarwidth} & \begin{cellvarwidth}[t]
+\centering
+{\footnotesize +0.0009}\\
+{\footnotesize{[}+0.0006, +0.0013{]}}
+\end{cellvarwidth} & \begin{cellvarwidth}[t]
+\centering
+{\footnotesize +0.0003}\\
+{\footnotesize{[}+0.0002, +0.0005{]}}
+\end{cellvarwidth} & \begin{cellvarwidth}[t]
+\centering
+{\footnotesize +0.0001}\\
+{\footnotesize{[}+0.0001, +0.0002{]}}
+\end{cellvarwidth}\tabularnewline
+{\footnotesize RF} & \begin{cellvarwidth}[t]
+\centering
+{\footnotesize -0.013}\\
+{\footnotesize{[}-0.117, +0.105{]}}
+\end{cellvarwidth} & \begin{cellvarwidth}[t]
+\centering
+{\footnotesize +0.0010}\\
+{\footnotesize{[}+0.0006, +0.0014{]}}
+\end{cellvarwidth} & \begin{cellvarwidth}[t]
+\centering
+{\footnotesize +0.0006}\\
+{\footnotesize{[}+0.0003, +0.0009{]}}
+\end{cellvarwidth} & \begin{cellvarwidth}[t]
+\centering
+{\footnotesize +0.0002}\\
+{\footnotesize{[}+0.0001, +0.0003{]}}
+\end{cellvarwidth}\tabularnewline
+{\footnotesize MLP} & \begin{cellvarwidth}[t]
+\centering
+{\footnotesize -0.031}\\
+{\footnotesize{[}-0.134, +0.074{]}}
+\end{cellvarwidth} & \begin{cellvarwidth}[t]
+\centering
+{\footnotesize +0.0012}\\
+{\footnotesize{[}+0.0008, +0.0017{]}}
+\end{cellvarwidth} & \begin{cellvarwidth}[t]
+\centering
+{\footnotesize +0.0008}\\
+{\footnotesize{[}+0.0005, +0.0010{]}}
+\end{cellvarwidth} & \begin{cellvarwidth}[t]
+\centering
+{\footnotesize +0.0003}\\
+{\footnotesize{[}+0.0002, +0.0004{]}}
+\end{cellvarwidth}\tabularnewline
+{\footnotesize RBF} & \begin{cellvarwidth}[t]
+\centering
+{\footnotesize -0.192}\\
+{\footnotesize{[}-0.314, -0.066{]}}
+\end{cellvarwidth} & \begin{cellvarwidth}[t]
+\centering
+{\footnotesize +0.0037}\\
+{\footnotesize{[}+0.0030, +0.0044{]}}
+\end{cellvarwidth} & \begin{cellvarwidth}[t]
+\centering
+{\footnotesize +0.0022}\\
+{\footnotesize{[}+0.0018, +0.0026{]}}
+\end{cellvarwidth} & \begin{cellvarwidth}[t]
+\centering
+{\footnotesize +0.0008}\\
+{\footnotesize{[}+0.0007, +0.0010{]}}
+\end{cellvarwidth}\tabularnewline
+\hline 
+\end{tabular}
+\end{table}
 
 The behaviour of the predictors on the draw class is worth setting
 out directly. Table \ref{tab:predicted-class-distribution} gives
@@ -2124,17 +2219,17 @@ their counts are therefore identical in both designs.\label{tab:predicted-class-
 \end{cellvarwidth} & {\footnotesize\textbf{50,308}} & {\footnotesize\textbf{396}} & {\footnotesize\textbf{24,791}} & {\footnotesize\textbf{50,308}} & {\footnotesize\textbf{396}} & {\footnotesize\textbf{24,791}}\tabularnewline
 {\footnotesize FastTree} & {\footnotesize 52,180} & {\footnotesize 15} & {\footnotesize 23,300} & {\footnotesize 50,499} & {\footnotesize 607} & {\footnotesize 24,389}\tabularnewline
 {\footnotesize GAM} & {\footnotesize 51,671} & {\footnotesize 0} & {\footnotesize 23,824} & {\footnotesize 49,740} & {\footnotesize 211} & {\footnotesize 25,544}\tabularnewline
-{\footnotesize LogisticRegression} & {\footnotesize 51,116} & {\footnotesize 0} & {\footnotesize 24,379} & {\footnotesize 49,651} & {\footnotesize 728} & {\footnotesize 25,116}\tabularnewline
+{\footnotesize LogReg} & {\footnotesize 51,116} & {\footnotesize 0} & {\footnotesize 24,379} & {\footnotesize 49,651} & {\footnotesize 728} & {\footnotesize 25,116}\tabularnewline
 {\footnotesize MLP} & {\footnotesize 49,974} & {\footnotesize 14} & {\footnotesize 25,507} & {\footnotesize 50,307} & {\footnotesize 631} & {\footnotesize 24,557}\tabularnewline
-{\footnotesize RandomForest} & {\footnotesize 51,562} & {\footnotesize 0} & {\footnotesize 23,933} & {\footnotesize 50,732} & {\footnotesize 435} & {\footnotesize 24,328}\tabularnewline
+{\footnotesize RF} & {\footnotesize 51,562} & {\footnotesize 0} & {\footnotesize 23,933} & {\footnotesize 50,732} & {\footnotesize 435} & {\footnotesize 24,328}\tabularnewline
 {\footnotesize RBF} & {\footnotesize 52,203} & {\footnotesize 14} & {\footnotesize 23,278} & {\footnotesize 50,087} & {\footnotesize 683} & {\footnotesize 24,725}\tabularnewline
 \hline 
 \end{tabular}
 \end{table}
 
-\textbf{Because both formulations are estimated on the same features
-and the same chronological split, the difference between the numbers
-they report arises from the encoding of the outcome and from the evaluation
+Because both formulations are estimated on the same features and the
+same chronological split, the difference between the numbers they
+report arises from the encoding of the outcome and from the evaluation
 metric that goes with it, and not from the inputs. The binary tables
 report macro-averaged precision between 64.83\% and 65.16\% in the
 Home Win market, whereas the three-class table reports accuracies
@@ -2153,29 +2248,38 @@ accuracy, unless the encoding of the outcome is stated alongside them.
 Read on identical inputs, the two formulations support the same conclusion:
 neither provides evidence of an improvement over the de-vigged market
 on AUC or on the proper probabilistic scoring rules, and in neither
-is the ordering of the classifiers supported by the intervals.}
+is the ordering of the classifiers supported by the intervals.
 
-\subsection{\textbf{Feature importance and feature selection}}
+\subsection{Feature importance and feature selection}
 
-\textbf{To address the question of which engineered features actually
-contribute to predictive performance, permutation importance was computed
-for every model. Each feature is randomly permuted in the validation
-partition and the resulting decrease in AUC is recorded, averaged
-over three repetitions. The analysis is deliberately run on a wider
-set of nineteen candidate features, that is the fifteen non-market
-inputs together with the three ratio forms and SeasonPhase, because
-it is the evidence on which those four were excluded from the feature
-set used everywhere else. The validation partition is the final 20\%
-of the training set in chronological order; the test set is not used
-at this stage. Table \ref{tab:permutation-importance} reports the
-mean decrease across all six classifiers.}
+To address the question of which engineered features actually contribute
+to predictive performance, permutation importance was computed for
+every model. Each feature is randomly permuted in the validation partition
+and the resulting decrease in AUC is recorded, averaged over three
+repetitions.\textbf{ One limitation of the measure should be stated
+before the numbers are read. Several inputs are related by construction:
+the four rolling goal averages, and the difference forms computed
+from them, carry overlapping information. Permuting one of a set of
+related variables leaves the others able to supply part of the same
+signal, so an individual importance can understate the contribution
+of the underlying quantity or divide it between several columns. The
+values below are therefore informative about which quantities matter
+and in what order of magnitude, and are not an allocation of predictive
+credit among individual columns.} The analysis is deliberately run
+on a wider set of nineteen candidate features, that is the fifteen
+non-market inputs together with the three ratio forms and SeasonPhase,
+because it is the evidence on which those four were excluded from
+the feature set used everywhere else. The validation partition is
+the final 20\% of the training set in chronological order; the test
+set is not used at this stage. Table \ref{tab:permutation-importance}
+reports the mean decrease across all six classifiers.
 
 \begin{table}[H]
-\caption{\textbf{Permutation importance: mean decrease in validation AUC when
-each feature is permuted, averaged over the 6 classifiers and three
-repetitions, in the design without odds-based inputs. Features are
-ordered by their mean across the three markets. Values at or below
-zero indicate no contribution.}\label{tab:permutation-importance}}
+\caption{Permutation importance: mean decrease in validation AUC when each
+feature is permuted, averaged over the 6 classifiers and three repetitions,
+in the design without odds-based inputs. Features are ordered by their
+mean across the three markets. Values at or below zero indicate no
+contribution.\label{tab:permutation-importance}}
 
 \centering{}%
 \begin{tabular}{>{\centering}p{4cm}>{\centering}p{2.7cm}>{\centering}p{2.7cm}>{\centering}p{2.7cm}}
@@ -2205,11 +2309,15 @@ AttackVsDefense & 0.0001 & -0.0000 & -0.0002\tabularnewline
 \end{tabular}
 \end{table}
 
-\textbf{In the Home Win and Away Win markets EloDiff dominates by
-an order of magnitude, exceeding the next most important feature by
-factors of roughly twenty-four and twelve respectively. The features
-expressed as differences contribute consistently across all three
-markets, whereas none of the three ratio formulations does: AttackVsDefense,
+In the Home Win and Away Win markets EloDiff dominates by an order
+of magnitude, exceeding the next most important feature by factors
+of roughly twenty-four and twelve respectively. Given the overlap
+described above, however, the exact ratios should not be read as an
+allocation of predictive credit among the variables.\textbf{ Among
+the remaining inputs the individual magnitudes are close and are not
+interpreted further; the one distinction that holds across all three
+markets is that the features expressed as differences contribute,}
+whereas none of the three ratio formulations does: AttackVsDefense,
 DefenseVsAttack and TotalDefensiveWeakness all fall at or below zero
 in at least one market, as does SeasonPhase. This is consistent with
 a univariate comparison of the two functional forms, in which the
@@ -2218,61 +2326,61 @@ AvgHs/(AvgAc+e) and AvgHc/(AvgAs+e) attain 0.505 and 0.495 respectively,
 that is, essentially no discriminative power. Ratios become unstable
 when the denominator approaches zero, and the smoothing constant e
 = 0.01 produces values in the hundreds, which degrades the linear,
-additive and kernel-based models in particular.}
+additive and kernel-based models in particular.
 
-\textbf{The draw market behaves differently. There EloDiff exceeds
-the next feature by a factor of only about one and a half, and the
-four rolling goal averages occupy the second, third, seventh and eighth
-positions, with AvgHs alone reaching an importance of 0.0100 against
-0.0154 for EloDiff. Conversely the two counts of prior matches, which
-are among the four most important features in both win markets, fall
-to the eleventh and thirteenth positions. A plausible reading is that
-the identity of the winner depends mainly on the relative strength
-of the two teams, which Elo summarises efficiently, whereas whether
-a match ends level depends more on the absolute scoring level of the
+The draw market behaves differently. There EloDiff exceeds the next
+feature by a factor of only about one and a half, and the four rolling
+goal averages occupy the second, third, seventh and eighth positions,
+with AvgHs alone reaching an importance of 0.0100 against 0.0154 for
+EloDiff. Conversely the two counts of prior matches, which are among
+the four most important features in both win markets, fall to the
+eleventh and thirteenth positions. A plausible reading is that the
+identity of the winner depends mainly on the relative strength of
+the two teams, which Elo summarises efficiently, whereas whether a
+match ends level depends more on the absolute scoring level of the
 fixture, which the goal averages capture and a rating difference does
-not.}
+not.
 
-\textbf{Two features require an explicit caveat. The counts of prior
-matches available for each team, and the indicator recording whether
-the historical features of a match were imputed, are not properties
-of the match itself: they are indicators of data availability. They
-take non-default values for newly promoted teams, early in a season,
-and in competitions with sparse coverage. Their predictive contribution
-is real and is reported as measured, but it reflects the composition
-of the dataset rather than any footballing quantity, and it should
-not be interpreted as a substantive finding. We retain them because
-the alternative is worse: when imputation is applied and the indicator
-is withheld, a model can still infer the same information implicitly
-from the imputed values, and the analyst is then unaware of it.}
+Two features require an explicit caveat. The counts of prior matches
+available for each team, and the indicator recording whether the historical
+features of a match were imputed, are not properties of the match
+itself: they are indicators of data availability. They take non-default
+values for newly promoted teams, early in a season, and in competitions
+with sparse coverage. Their predictive contribution is real and is
+reported as measured, but it reflects the composition of the dataset
+rather than any footballing quantity, and it should not be interpreted
+as a substantive finding. We retain them because the alternative is
+worse: when imputation is applied and the indicator is withheld, a
+model can still infer the same information implicitly from the imputed
+values, and the analyst is then unaware of it.
 
-\textbf{Because these indicators describe the dataset rather than
-the match, we verified that the reported results do not depend on
-them. The three-class models were re-estimated with the three indicators
-removed for five of the six classifiers, the random-feature classifier
-excluded, and the two variants were compared on the same bootstrap
-resamples. In the design without odds-based inputs their removal has
-a small but consistent cost: accuracy falls by between 0.18 and 0.22
-percentage points across the five models, from 48.02\% to 47.81\%
-for the best of the five in this re-estimation, and log-loss, Brier
-score and RPS deteriorate correspondingly; all twenty comparisons
-are statistically significant. In the design that includes the market
-probabilities the indicators contribute nothing: no difference in
-accuracy is significant for any model, and only four of twenty comparisons
-reach significance, all of them of negligible magnitude}.
+Because these indicators describe the dataset rather than the match,
+we verified that the reported results do not depend on them. The three-class
+models were re-estimated with the three indicators removed for five
+of the six classifiers, the RBF classifier excluded, and the two variants
+were compared on the same bootstrap resamples. In the design without
+odds-based inputs their removal has a small but consistent cost: accuracy
+falls by between 0.18 and 0.22 percentage points across the five models,
+from 48.02\% to 47.81\% for the best of the five in this re-estimation,
+and log-loss, Brier score and RPS deteriorate correspondingly; all
+twenty comparisons are statistically significant. In the design that
+includes the market probabilities the indicators contribute nothing:
+no difference in accuracy is significant for any model, and only four
+of twenty comparisons reach significance, all of them of negligible
+magnitude.
 
-\textbf{The size of this effect should be kept in perspective. The
-distance between the trivial baseline and the market is 8.44 accuracy
-points. With the indicators the models recover 54\% of that distance
-and without them 52\%, so the central finding of this study - that
-models estimated without market information recover approximately
-half of the gap - holds in either case. The indicators therefore account
-for a measurable but minor part of the models' performance, and none
-of the conclusions rests on them.}
+The size of this effect should be kept in perspective. The distance
+between the trivial baseline and the market is 8.44 accuracy points.
+With the indicators the models recover 54\% of that distance and without
+them 52\%, so the central finding of this study - that models estimated
+without market information recover approximately half of the gap -
+holds in either case. The indicators therefore account for a measurable
+but minor part of the models' performance, and none of the conclusions
+rests on them.
 
-\textbf{Forward selection performed on the validation partition improves
-the RBF network in every market and in both feature designs, by up
-to 0.0043 AUC, while leaving the tree ensembles essentially unchanged.
+Forward selection performed on the validation partition improves the
+RBF network in every market and in both feature designs, by up to
+0.0043 AUC, while leaving the tree ensembles essentially unchanged.
  The gain is small in absolute terms and should be read together with
 the position of this classifier at the lower end of the range in Tables
 \ref{tab:Home-win-experimental} and \ref{tab:Away-win-experimental}.
@@ -2281,30 +2389,28 @@ analysis the validation AUC of this model ranges from 0.528 at a kernel
 scale of 0.868 to 0.709 at 0.0124 (correlation -0.992), a range of
 0.181, which is larger than the gain from feature selection by more
 than an order of magnitude. The behaviour of this model is therefore
-governed primarily by that one setting, and its earlier position as
-an outlier should not be attributed to the treatment of the features
-alone, since the implementation and the kernel scale changed at the
-same time. Feature selection does not change the comparison with the
-bookmaker: no model, with or without selection, improves upon the
-market.}
+governed primarily by that one setting rather than by the composition
+of the feature set. Feature selection does not change the comparison
+with the bookmaker: no model, with or without selection, improves
+upon the market.
 
 \subsection{Experiments with different parameters}
 
-\textbf{The sensitivity of the results to the hyperparameter settings
-is reported in Figure \ref{fig:tuning-sensitivity}. For each of the
-six classifiers, every configuration drawn in the random search is
-plotted against the validation AUC it obtained on the expanding-window
-folds described in the experimental-settings subsection, together
-with the de-vigged market forecast evaluated on the same folds. Two
-features are apparent. Five of the six classifiers show limited sensitivity
-over the sampled ranges, the widest of them varying by no more than
-0.014 in validation AUC, whereas the random-feature expansion varies
-by 0.181 and is therefore strongly dependent on its kernel scale.
-Nevertheless the best configuration attained by each classifier lies
-in a narrow band between 0.7061 and 0.7098, so the choice of configuration
-within these ranges does not change which predictors are comparable
-with which. The whole of that band lies below the market reference,
-which no configuration of any classifier reaches.}
+The sensitivity of the results to the hyperparameter settings is reported
+in Figure \ref{fig:tuning-sensitivity}. For each of the six classifiers,
+every configuration drawn in the random search is plotted against
+the validation AUC it obtained on the expanding-window folds described
+in the experimental-settings subsection, together with the de-vigged
+market forecast evaluated on the same folds. Two features are apparent.
+Five of the six classifiers show limited sensitivity over the sampled
+ranges, the widest of them varying by no more than 0.014 in validation
+AUC, whereas the RBF varies by 0.181 and is therefore strongly dependent
+on its kernel scale. Nevertheless the best configuration attained
+by each classifier lies in a narrow band between 0.7061 and 0.7098,
+so the choice of configuration within these ranges does not change
+which predictors are comparable with which. The whole of that band
+lies below the market reference, which no configuration of any classifier
+reaches.
 
 \begin{figure}[H]
 \begin{centering}
@@ -2322,12 +2428,12 @@ test set was not used at any stage.\label{fig:tuning-sensitivity}}
 
 \section{Conclusions\label{sec:Conclusions}}
 
-\textbf{This study presented a unified benchmarking study for football
-match outcome classification, evaluating six classifiers --- Logistic
-Regression, GAM, FastTree, RF, RBF, and MLP --- on a large-scale
-dataset of 225,474 matches spanning 2018--2026. Under strictly uniform
-experimental conditions the six classifiers performed almost identically.
-In the Home Win market error ranged from 34.50\% to 34.73\% and macro-averaged
+This study presented a unified benchmarking study for football match
+outcome classification, evaluating six classifiers - Logistic Regression,
+GAM, FastTree, RF, RBF, and MLP - on a large-scale dataset of 225,474
+matches spanning 2018--2026. Under strictly uniform experimental
+conditions the six classifiers performed almost identically. In the
+Home Win market error ranged from 34.50\% to 34.73\% and macro-averaged
 precision from 64.83\% to 65.16\%; in the Away Win market from 27.83\%
 to 27.98\% and from 68.05\% to 68.46\% respectively. In both markets
 the marginal bootstrap intervals overlap substantially, and the small
@@ -2335,51 +2441,53 @@ differences between the point estimates are not interpreted as evidence
 of a ranking. What does separate the predictors is the comparison
 with the two reference rows: every model improves clearly on the majority-class
 baseline, and every model coincides with the de-vigged bookmaker forecast
-to within a small fraction of a percentage point.}
+to within a small fraction of a percentage point.
 
-\textbf{These results indicate that under a common experimental protocol
-the choice among six established classifiers has a smaller effect
-on predictive performance than the information contained in the feature
-set: without odds-based inputs all six classifiers span only 0.08
-accuracy points, and 0.27 points when the odds are included. When
-market prices are included among the inputs, every model reproduces
-the bookmaker forecast; when market prices are excluded, the models
-recover approximately half of the distance from a trivial baseline
-to the market (43.4\% to 48.0\% against 51.9\% for the market). This
-is consistent with earlier evidence that odds-setters are competitive
-forecasters in their own right..}
+These results indicate that under a common experimental protocol the
+choice among six established classifiers has a smaller effect on predictive
+performance than the information contained in the feature set: without
+odds-based inputs all six classifiers span only 0.08 accuracy points,
+and 0.27 points when the odds are included. When market prices are
+included among the inputs, every model reproduces the bookmaker forecast;
+when market prices are excluded, the models recover approximately
+half of the distance from a trivial baseline to the market (43.4\%
+to 48.0\% against 51.9\% for the market). This is consistent with
+earlier evidence that odds-setters are competitive forecasters in
+their own right.
 
-\textbf{Several limitations should be stated. First, no model improves
-upon the de-vigged bookmaker forecast on any proper scoring rule;
-the additive model attains a small advantage in accuracy, which is
-not a proper scoring rule and which is not accompanied by any improvement
-in logarithmic loss, Brier score or the ranked probability score,
-so the comparison with the market should be read as a benchmark rather
-than as evidence of practical advantage. Second, only a single pre-match
-odds snapshot from one provider is available, so neither the movement
-of odds between opening and closing nor the dispersion of prices across
-providers --- the two signals most often associated with market inefficiency
---- can be examined. Third, player-level and lineup information is
-not available, which restricts the feature space to team-level aggregates.
-Fourth, the draw outcome is poorly predicted both by the models and
-by the market (AUC 0.584), and single-threshold measures are uninformative
-for it. Fifth, historical features must be imputed for 22.4\% of matches,
-mainly newly promoted teams and matches early in a season; the associated
-data-availability indicators carry measurable predictive signal, but
-that signal reflects the composition of the dataset rather than any
-footballing quantity, and a robustness check reported in the feature-importance
-subsection shows that removing them costs at most 0.22 accuracy points
-and leaves the conclusions unchanged. }Sixth, the analysis is confined
-to the pooled dataset: per-competition modelling and cross-competition
-transfer were not examined and are left for future work. Finally,
-probability calibration is not addressed in this study: applying an
-isotonic or Platt correction to the model outputs and testing whether
-it improves the probabilistic scores reported above is left for future
-work.
+Several limitations should be stated. First, no model improves upon
+the de-vigged bookmaker forecast on any proper scoring rule; the GAM
+attains a small advantage in accuracy, which is not a proper scoring
+rule and which is not accompanied by any improvement in logarithmic
+loss, Brier score or the RPS, so the comparison with the market should
+be read as a benchmark rather than as evidence of practical advantage.\textbf{
+That advantage is the only statistically distinguishable improvement
+over the market reported anywhere in this study, and it corresponds
+to about 65 additional correct predictions out of 75,495.} Second,
+only a single pre-match odds snapshot from one provider is available,
+so neither the movement of odds between opening and closing nor the
+dispersion of prices across providers - the two signals most often
+associated with market inefficiency - can be examined. Third, player-level
+and lineup information is not available, which restricts the feature
+space to team-level aggregates. Fourth, the draw outcome is poorly
+predicted both by the models and by the market (AUC 0.584), and single-threshold
+measures are uninformative for it. Fifth, historical features must
+be imputed for 22.4\% of matches, mainly newly promoted teams and
+matches early in a season; the associated data-availability indicators
+carry measurable predictive signal, but that signal reflects the composition
+of the dataset rather than any footballing quantity, and a robustness
+check reported in the feature-importance subsection shows that removing
+them costs at most 0.22 accuracy points and leaves the conclusions
+unchanged. Sixth, the analysis is confined to the pooled dataset:
+per-competition modelling and cross-competition transfer were not
+examined and are left for future work. Finally, probability calibration
+is not addressed in this study: applying an isotonic or Platt correction
+to the model outputs and testing whether it improves the probabilistic
+scores reported above is left for future work.
 
-\textbf{We have not added recurrent or attention-based baselines,
-and the reason is empirical rather than practical. The feature space
-consists of team-level attributes summarised per match, with no sequential
+We have not added recurrent or attention-based baselines, and the
+reason is empirical rather than practical. The feature space consists
+of team-level attributes summarised per match, with no sequential
 or relational structure of the kind these architectures exploit. As
 an additional diagnostic, a logistic regression was fitted on the
 training set with the de-vigged market log-odds entered as a fixed
@@ -2392,18 +2500,18 @@ applying substantially more complex architectures to the same inputs.
 We present this as an indication rather than a proof: six converging
 classifiers and a small offset correction constitute strong empirical
 evidence, not a demonstration that no more expressive architecture
-could help.}
+could help.
 
-\textbf{Future work will extend the analysis to competitions modelled
-individually, to the question of distribution shift between them,
-and to competitions beyond those currently available, and will investigate
-whether league-aware feature engineering or transfer-learning strategies
-are of use when a model is confined to a single, smaller competition.
-Two directions appear particularly promising: the use of odds movement
-and cross-provider price dispersion, which would allow the market
-benchmark to be tested rather than merely matched, and the incorporation
-of sequential match-event data, for which recurrent or attention-based
-architectures would be appropriate.}
+Future work will extend the analysis to competitions modelled individually,
+to the question of distribution shift between them, and to competitions
+beyond those currently available, and will investigate whether league-aware
+feature engineering or transfer-learning strategies are of use when
+a model is confined to a single, smaller competition. Two directions
+appear particularly promising: the use of odds movement and cross-provider
+price dispersion, which would allow the market benchmark to be tested
+rather than merely matched, and the incorporation of sequential match-event
+data, for which recurrent or attention-based architectures would be
+appropriate.
 
 \vspace{6pt}
 
@@ -2413,11 +2521,11 @@ and provided the comparative experiments. M.S. and G.G. performed
 the statistical analysis and prepared the manuscript. All authors
 have read and agreed to the published version of the manuscript.}
 
-\funding{This research has been financed by the European Union : Next Generation
+\funding{This research has been financed by the European Union: Next Generation
 EU through the Program Greece 2.0 National Recovery and Resilience
-Plan , under the call RESEARCH -- CREATE -- INNOVATE, project name
+Plan, under the call RESEARCH -- CREATE -- INNOVATE, project name
 “iCREW: Intelligent small craft simulator for advanced crew training
-using Virtual Reality techniques\textquotedbl{} (project code:TAEDK-06195).}
+using Virtual Reality techniques\textquotedbl{} (project code: TAEDK-06195).}
 
 \institutionalreview{Not applicable.}
 
@@ -2434,7 +2542,7 @@ may in addition attract the sui generis database right of Article
 45A of the same Law. The records are therefore not redistributed,
 and neither are the de-vigged probabilities, because they remain directly
 derived from the source market prices. No dataset and no code are
-deposited with this article. \textcolor{Yellow}{What the study offers
+deposited with this article. \textcolor{Black}{What the study offers
 in their place is a specification complete enough to be reimplemented
 against an independently obtained source of results and prices: Section
 2 states the point-in-time rule under which every historical feature
@@ -2490,7 +2598,7 @@ classification using machine learning, Computational Materials Science
 neural network based medical image classification for disease diagnosis.
 J Big Data \textbf{6}, 113, 2019.\url{https://doi.org/10.1186/s40537-019-0276-2}
 
-\bibitem{med_ml2} L. Qing, W. Linhong , D. Xuehai, A Novel Neural
+\bibitem{med_ml2} L. Qing, W. Linhong, D. Xuehai, A Novel Neural
 Network-Based Method for Medical Text Classification, Future Internet
 \textbf{11}, 255, 2019. \url{https://doi.org/10.3390/fi11120255}
 
@@ -2616,7 +2724,7 @@ of the American Statistical Association, 102(477), 359-378.\url{https://doi.org/
 
 \bibitem{wheatcroft2021}\textbf{Wheatcroft, E. (2021). Evaluating
 probabilistic forecasts of football matches: the case against the
-ranked probability score . Journal of Quantitative Analysis in Sports,
+ranked probability score. Journal of Quantitative Analysis in Sports,
 17(4), 273-287.\url{https://doi.org/10.1515/jqas-2019-0089}}
 
 \bibitem{constantinou2012}\textbf{Constantinou, A. C., \& Fenton,
